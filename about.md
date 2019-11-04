@@ -4,11 +4,11 @@ title: About
 permalink: /about/
 ---
 
-A Ordinary Cat 🐈
+🐈
 
 ### More Information
 
-2019.11.01: A Ordinary Cat.
+2019.11.01: An Ordinary Cat.
 
 ### Contact me
 
