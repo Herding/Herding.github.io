@@ -19,7 +19,7 @@ title: Gaussian Processes
 
 ### 训练过程
 
-<iframe width="450" height="400" frameborder="0" scrolling="no" src="//plot.ly/~HerdingCat/12.embed"> </iframe>
+<iframe width="900" height="800" frameborder="0" scrolling="no" src="//plot.ly/~HerdingCat/12.embed"> </iframe>
 
 什么？阿喵你不想看文字，那看图（加载时间可能较长）吧，转过来😊，更好看的可视化效果请看角标[^8]
 
@@ -170,7 +170,20 @@ $$
 >
 > 令$\alpha = (\mathbf K + \epsilon) ^{-1}y_{train} = \mathbf L^T \setminus \mathbf L \setminus y_{train}$,
 >
-> 令$v = \mathbf L^{-1}\mathbf K_*$，则$v^Tv = (\mathbf L^{-1} \mathbf K_*)^T(\mathbf L^{-1} \mathbf K_*) = \mathbf K^T_* \mathbf L^{-T} \mathbf L^{-1} \mathbf K_* = \mathbf K^T_* (\mathbf L \mathbf L^T)^{-1} \mathbf K_* = \mathbf K^T_* (\mathbf K + \epsilon)^{-1} \mathbf K_*$，
+> 令$v = \mathbf L^{-1}\mathbf K_*$，
+>
+> 则
+>
+> 
+> $$
+> v^Tv = (\mathbf L^{-1} \mathbf K_{*})^T(\mathbf L^{-1} \mathbf K_{*}) \\
+>  = \mathbf K^T_{*} \mathbf L^{-T} \mathbf L^{-1} \mathbf K_{*} \\
+>  = \mathbf K^T_{*} (\mathbf L \mathbf L^T)^{-1} \mathbf K_{*} \\
+>  = \mathbf K^T_{*} (\mathbf K + \epsilon)^{-1} \mathbf K_{*}
+> $$
+> 
+>
+> 
 >
 > 因此，
 >
