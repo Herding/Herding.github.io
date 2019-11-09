@@ -20,7 +20,6 @@ title: Gaussian Processes
 ### 训练过程
 
 <iframe width="900" height="800" frameborder="0" scrolling="no" src="//plot.ly/~HerdingCat/12.embed"> </iframe>
-
 什么？阿喵你不想看文字，那看图（加载时间可能较长）吧，转过来😊，更好看的可视化效果请看角标[^8]
 
 以上，针对目标函数$\sin(\cdot)$进行训练，四张子图从上到下分别是'未训练'，'一轮训练之后'，'二轮训练之后'，'三轮训练之后'。
@@ -139,8 +138,17 @@ plt.show()
 
 阿喵表示，这写的啥代码啊！
 
-程序中比较费解的大概是`for`循环部分和`GPs_post(xTest, xTrain, yTrain, kernel)`部分，其中`for`循环用于控制训练次数，此处训练3次，并随机输入3次训练数据对；`GPs_post(xTest, xTrain, yTrain, kernel)`则是求解$P(y_{test}|x_{test}, x_{train}, y_{train}) \sim \mathcal N(\vec \mu_*, \Sigma_*)$这样一个条件概率。具体求解过程可参考Gaussian Process - Machine Learning的附录A.2及A.3，可作为结论记住：
+程序中比较费解的大概是`for`循环部分和`GPs_post(xTest, xTrain, yTrain, kernel)`部分，其中`for`循环用于控制训练次数，此处训练3次，并随机输入3次训练数据对；`GPs_post(xTest, xTrain, yTrain, kernel)`则是求解
 
+
+$$
+P(y_{test}|x_{test}, x_{train}, y_{train}) \sim \mathcal N(\vec \mu_*, \Sigma_*)
+$$
+
+
+
+
+这样一个条件概率。具体求解过程可参考Gaussian Process - Machine Learning的附录A.2及A.3，可作为结论记住：
 
 $$
 \begin{aligned}
