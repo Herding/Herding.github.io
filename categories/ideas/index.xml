@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ideas on context</title>
+    <link>https://herding.github.io/categories/ideas/</link>
+    <description>Recent content in Ideas on context</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 23 Nov 2025 15:28:13 +0800</lastBuildDate><atom:link href="https://herding.github.io/categories/ideas/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Time Management With Apple&#39;s App</title>
+      <link>https://herding.github.io/posts/time_management_with_apples_app/</link>
+      <pubDate>Sun, 23 Nov 2025 15:28:13 +0800</pubDate>
+      
+      <guid>https://herding.github.io/posts/time_management_with_apples_app/</guid>
+      <description>&lt;p&gt;Have you ever been in a situation where you had so many things to do that you didn&amp;rsquo;t know how to get started? When I worked as a research assistant at a university, I struggled to balance preparing for the IELTS exam, managing interpersonal relationships, teaching and sharing skills with colleagues and students, and progressing my research and experiments while learning new concepts in biology. I often felt I needed a more efficient life. I tried many apps to reorganize my routines and read blogs, watched videos, and browsed social content for advice. Unfortunately, I felt overwhelmed and had little time to make real progress.&lt;/p&gt;
+&lt;p&gt;Gradually, I realized that focusing on the tasks themselves matters more than obsessing over time. If I keep experimenting with different ways to manage my limited time, I end up spending less time actually completing tasks. Now I want to share how I manage my time using only Apple Reminders and Apple Calendar.&lt;/p&gt;
+&lt;h1 id=&#34;list-your-current-tasks-and-allocate-time&#34;&gt;List Your Current Tasks and Allocate Time&lt;/h1&gt;
+&lt;p&gt;First, identify the tasks you need to handle.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;For example: building my personal blog, reading papers related to my research, continuing English study, and reviewing foundational knowledge (such as linear algebra). I write these tasks down on paper.
+Also, don&amp;rsquo;t forget daily routines like waking up, eating breakfast, doing laundry, or showering.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Second, I prefer to schedule routines first because these activities rarely change and take a short amount of time. After scheduling routines, I allocate time for flexible activities that require more attention. Based on the importance and urgency of each task, I assign different time blocks.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;For example, if I want to quickly build my website, I will allocate more time to it each day or week. Reading papers is important but not urgent, so I schedule shorter, regular sessions for it.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Finally, I add these tasks to Apple Reminders, setting specific times, alerts, and repeat rules. Creating lists is a good way to group similar tasks. I maintain multiple lists with different colors to indicate levels of effort; these can be viewed as tags in Apple Calendar (described later). In the figure below, red indicates tasks that require intense focus—this is my current allocation:&lt;/p&gt;
+&lt;!-- ![my current allocation](Today.jpeg) --&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure class=&#34;site-figure center&#34;&gt;
+  
+    
+    
+      
+      
+      
+      
+      
+        
+        
+      
+        
+        
+      
+      
+      
+      
+      
+      
+      &lt;img src=&#34;https://herding.github.io/posts/time_management_with_apples_app/Today_hu_9e348ad058fde9ca.jpeg&#34; srcset=&#34;https://herding.github.io/posts/time_management_with_apples_app/Today_hu_d043d73c13033d1e.jpeg 600w, https://herding.github.io/posts/time_management_with_apples_app/Today_hu_9e348ad058fde9ca.jpeg 1200w&#34; sizes=&#34;(max-width: 600px) 100vw, 600px&#34; alt=&#34;allocation&#34; ZgotmplZ&gt;
+    
+  
+    &lt;figcaption&gt;My current allocation&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Overall, Apple Reminders gives me a small nudge that helps me form habits and handle tasks regularly and in order.&lt;/p&gt;
+&lt;h1 id=&#34;do-review-and-plan-again&#34;&gt;Do, Review, and Plan Again&lt;/h1&gt;
+&lt;p&gt;At this stage, Apple Reminders acts like an assistant that tells me what to do. When I receive a reminder, I work through the tasks one by one and check them off as I finish. Another useful feature is that I can view reminders in Apple Calendar, which makes it convenient to review my daily schedule each evening.&lt;/p&gt;
+&lt;p&gt;Besides checking tasks in the morning and reviewing details, I assess my system based on completed and incomplete tasks to see whether it works for me. If a particular task repeatedly causes problems, I adjust the reminder settings. Similarly, when I reach a milestone, I update related tasks. This history helps me make better decisions, drive project progress, and improve my skills. The figure below shows tasks from a day when I was preparing for the IELTS test:&lt;/p&gt;
+&lt;!-- ![daily tasks](Daily.jpeg) --&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure class=&#34;site-figure center&#34;&gt;
+  
+    
+    
+      
+      
+      
+      
+      
+        
+        
+      
+        
+        
+      
+      
+      
+      
+      
+      
+      &lt;img src=&#34;https://herding.github.io/posts/time_management_with_apples_app/Daily_hu_a0841d49fc06744b.jpeg&#34; srcset=&#34;https://herding.github.io/posts/time_management_with_apples_app/Daily_hu_ed4ac0a4a8c8ffc8.jpeg 450w, https://herding.github.io/posts/time_management_with_apples_app/Daily_hu_a0841d49fc06744b.jpeg 900w&#34; sizes=&#34;(max-width: 450px) 100vw, 450px&#34; alt=&#34;&#34; ZgotmplZ&gt;
+    
+  
+    &lt;figcaption&gt;Daily tasks&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;In conclusion, I use Apple Reminders to tell me the next task and Apple Calendar to visualize when I do them; together they help me allocate time and handle activities more efficiently.&lt;/p&gt;
+&lt;h1 id=&#34;some-drawbacks-of-this-plan&#34;&gt;Some Drawbacks of This Plan&lt;/h1&gt;
+&lt;p&gt;Although I find Apple Reminders and Calendar better than other apps for my needs, there are drawbacks.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Sometimes I want to track how much time I spend on a specific activity, but I can&amp;rsquo;t because time spans are not recorded.&lt;/li&gt;
+&lt;li&gt;I cannot easily review the progress of a whole project that has been split into many tasks.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If you have a better plan, please share it with me. Thanks!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
