@@ -6,7 +6,67 @@
     <description>Recent content in Posts on context</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 30 Nov 2025 11:43:43 +0800</lastBuildDate><atom:link href="https://herding.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Dec 2025 13:43:13 +0800</lastBuildDate><atom:link href="https://herding.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Qualities of Researcher</title>
+      <link>https://herding.github.io/posts/qualities_of_researcher/</link>
+      <pubDate>Sun, 07 Dec 2025 13:43:13 +0800</pubDate>
+      
+      <guid>https://herding.github.io/posts/qualities_of_researcher/</guid>
+      <description>&lt;p&gt;As an undergraduate student, I was puzzled about many research-related activities, although I found research work fascinating. Later, I participated in several research projects while preparing for my master&amp;rsquo;s degree and joined a modern research center as a research assistant. From these experiences I have some answers to my earlier questions. If you are wondering what research is or how to become a researcher, this article offers a few insights I would like to share.&lt;/p&gt;
+&lt;h2 id=&#34;what-is-research&#34;&gt;What is research?&lt;/h2&gt;
+&lt;p&gt;I think solving problems is the core of research. For a question that interests you or one assigned by your supervisor, the goal of research is to provide a valuable solution that improves efficiency, reduces resource use, or corrects earlier methods.&lt;/p&gt;
+&lt;p&gt;Although solving is important, finding and defining problems often consumes the most time. One situation is that you start by surveying the literature and other materials related to your topic, and from that survey you identify a problem that interests you. Another situation is that you observe an unexpected phenomenon and abstract it into a research question or model. After you identify a research problem, you usually face a large challenge and must split it into smaller, manageable subproblems. Meanwhile, unexpected issues often emerge during the research, so you will need to consult new papers or resources to refine your problem formulation or update your methods.&lt;/p&gt;
+&lt;p&gt;When you work through a set of issues and obtain a meaningful solution for a subproblem, sharing your process is important. Communicating your results may bring recognition, but more commonly it reveals hidden or neglected issues that become your next challenge.&lt;/p&gt;
+&lt;h2 id=&#34;how-to-become-a-good-researcher&#34;&gt;How to become a good researcher&lt;/h2&gt;
+&lt;p&gt;In my opinion, some important qualities help you overcome difficult problems during research. When you identify problems in your research area, the following abilities can save time and energy.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Receive and filter information&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;To understand a problem, its formulas, or related concepts, you should read multiple sources and extract useful information from texts, videos, and talks. Some parts of this process can be assisted by AI tools.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Search for relevant literature&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Efficient literature search is a basic skill that lets you explore a topic deeply. It can also reveal alternative approaches for reframing or solving your current problem.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Critical thinking&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;This quality is vital: it helps you identify logical flaws in previous work, define important problems worth solving, or discover new ways to tackle existing problems.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;When you solve problems, the following two abilities are particularly useful:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Logical analysis&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Logical analysis involves applying rigorous methodologies, careful reasoning, and precise explanation to ensure you stay on the correct path.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Abstract modeling&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;As an engineering student, I often simplify problems using abstract models and omit unnecessary aspects to make the problem tractable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;When you share your solutions with peers or others interested in your research, communication skills matter:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Writing and speaking
+&lt;ul&gt;
+&lt;li&gt;These skills are essential across disciplines, but they are often neglected. Clear writing and oral presentation help you disseminate ideas widely. When you discuss your work with other researchers, you can collect valuable feedback and insights. Writing and speaking also help you organize your thinking.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Besides finding meaningful problems, solving them, and sharing your ideas clearly, you should reflect on your strengths and whether you enjoy your research topics. If you have a good problem and the necessary abilities, continue to concentrate on the problem and improve your skills—time is limited, so use it wisely.&lt;/p&gt;
+</description>
+    </item>
+    
     <item>
       <title>Insert Images in Hugo and Automatically Clear `public` Folder</title>
       <link>https://herding.github.io/posts/insert_images_in_hugo_and_automatically_clear_folders/</link>
