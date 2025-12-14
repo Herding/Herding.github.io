@@ -6,7 +6,58 @@
     <description>Recent content in Posts on context</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 07 Dec 2025 13:43:13 +0800</lastBuildDate><atom:link href="https://herding.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 14 Dec 2025 19:56:56 +0800</lastBuildDate><atom:link href="https://herding.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Managing Information Sources</title>
+      <link>https://herding.github.io/posts/managing_information_sources/</link>
+      <pubDate>Sun, 14 Dec 2025 19:56:56 +0800</pubDate>
+      
+      <guid>https://herding.github.io/posts/managing_information_sources/</guid>
+      <description>&lt;p&gt;This workflow helps you manage the flood of information you encounter when working on research projects.&lt;/p&gt;
+&lt;p&gt;First, recognize the different types and channels of information: videos, papers, books, social-media posts, web pages, recommendations from colleagues, and content from streaming platforms. Much of this arrives passively through subscriptions or RSS feeds, while other material is found actively via search engines or AI tools. The key is to select information based on your purpose instead of trying to consume everything that appears.&lt;/p&gt;
+&lt;p&gt;Second, consolidate relevant items in one place so they can support your projects and thinking. Web pages can be clipped, while papers and books are better stored as local files. I use Obsidian Web Clipper for web pages and Zotero for local files and references. Plugins can import metadata from local files into the same repository that holds clipped web pages. This consolidated library helps you focus on the most relevant material.&lt;/p&gt;
+&lt;p&gt;Finally, review the items you selected. I link each item to a project note and tag its review status (e.g., unread, reading, reviewed). This makes it easy to track progress and to see how much remains to be read. The figure below shows the review state for a particular project:
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure class=&#34;site-figure center&#34;&gt;
+  
+    
+    
+      
+      
+      
+      
+      
+        
+        
+      
+        
+        
+      
+      
+      
+      
+      
+      
+      &lt;img src=&#34;https://herding.github.io/posts/managing_information_sources/List_of_info_hu_74f06c1512d4546a.png&#34; srcset=&#34;https://herding.github.io/posts/managing_information_sources/List_of_info_hu_49af3f8e2c783c9c.png 450w, https://herding.github.io/posts/managing_information_sources/List_of_info_hu_74f06c1512d4546a.png 900w&#34; sizes=&#34;(max-width: 450px) 100vw, 450px&#34; alt=&#34;&#34; ZgotmplZ&gt;
+    
+  
+    &lt;figcaption&gt;The list of information&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;In conclusion, stay selective when you are surrounded by countless information: choose relevant web pages, messages, papers, books, and videos; consolidate them in one place; and set aside time to review them systematically.&lt;/p&gt;
+</description>
+    </item>
+    
     <item>
       <title>Qualities of Researcher</title>
       <link>https://herding.github.io/posts/qualities_of_researcher/</link>
