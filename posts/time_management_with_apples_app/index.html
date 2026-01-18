@@ -86,7 +86,7 @@
   
   
   
-    <link rel="stylesheet" href="/css/common.min.9c51168074872bfdde72047ba8460f44cb6693359aa5e78ce5fa0872e6989658.css" integrity="sha256-nFEWgHSHK/3ecgR7qEYPRMtmkzWapeeM5foIcuaYllg=" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/common.min.bdbe1ca2b5ee93566887404bd2897537bf939fe7866379537f7900b61d98da8d.css" integrity="sha256-vb4corXuk1Zoh0BL0ol1N7&#43;Tn&#43;eGY3lTf3kAth2Y2o0=" crossorigin="anonymous">
   
 
   
@@ -109,7 +109,7 @@
   
 
 
-  <link rel="stylesheet" href="/css/single.min.9e9553873a3fd63caecb0f3bb1d2f02aa767c7c995ed61fc1c831c29d84cd650.css" integrity="sha256-npVThzo/1jyuyw87sdLwKqdnx8mV7WH8HIMcKdhM1lA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/single.min.bbf470ff125e7c22c93abab8b69c4e83ffb62cbcc0b4230a077a2ba69b1eef3d.css" integrity="sha256-u/Rw/xJefCLJOrq4tpxOg/&#43;2LLzAtCMKB3orppse7z0=" crossorigin="anonymous">
 
 
   <link rel="stylesheet" href="/css/single.min.6aa59695fb5562d11273e07a9bcbd83975646ada48dc7724a1890e8fc72a0f20.css" integrity="sha256-aqWWlftVYtESc&#43;B6m8vYOXVkatpI3HckoYkOj8cqDyA=" crossorigin="anonymous">
@@ -126,7 +126,7 @@
   <h1>
     <a href="https://herding.github.io/">HerdingCat</a>
     <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle theme">
-        <svg width="2rem" height="2rem" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 496">
+        <svg class="dark-mode-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 496">
         <path fill="currentColor" d="M8,256C8,393,119,504,256,504S504,393,504,256,393,8,256,8,8,119,8,256ZM256,440V72a184,184,0,0,1,0,368Z" transform="translate(-8 -8)"/>
         </svg>
     </button>
@@ -163,6 +163,11 @@
     
   </nav>
 </header>
+
+
+    <script src="/js/graph.js" defer></script>
+
+
 <hr class="head-rule"></hr>
     
 <main id="main" class="post">
@@ -314,10 +319,32 @@ Also, don&rsquo;t forget daily routines like waking up, eating breakfast, doing 
 
     
   </article>
-
-  <button onclick="topFunction()" id="back-to-top" title="Go to top">Back to Top</button>
-
   
+  <hr>
+  
+  <div class="post-footer">
+    
+      
+<div class="backlinks-square-wrapper">
+  <div id="backlinks-container" class="backlinks-content">
+    <div class="backlinks-loading">Loading backlinks...</div>
+  </div>
+</div>
+
+<script src="/js/backlinks.js"></script>
+    
+
+    
+      <div class="graph-square" data-current-page="/posts/time_management_with_apples_app/" data-url="/search.json">
+    <canvas id="graph-canvas"></canvas>
+</div>
+
+<script src="/js/graph.js"></script>
+    
+  </div>
+
+  <div class="sharing-wrapper">
+    
 
 <div id="sharingbuttons">
     
@@ -380,6 +407,8 @@ Also, don&rsquo;t forget daily routines like waking up, eating breakfast, doing 
     
     
 </div>
+  </div>
+
   <div class="paginator">
     
     <a class="link" href="https://herding.github.io/posts/brew_install_local_files/" title="Brew Install Local Files">← prev</a>
@@ -421,7 +450,7 @@ Theme <a class=link href=https://github.com/michaelneuper/hugo-texify3 target=_b
 </span>
   </div>
   <div>
-    <span>Copyright © 2025 </span>
+    <span>Copyright © 2026 </span>
   </div>
 </footer>
 
