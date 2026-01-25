@@ -10,7 +10,7 @@
 
   
   
-  <meta name="description" content="When building a Hugo site, inserting images and managing the public folder can be tricky. Here are solutions to both challenges.">
+  <meta name="description" content="Understanding homogeneous transformation matrices for robotics: translating DH convention parameters into transformation matrices to determine end-effector position and orientation in 3D space through matrix composition.">
   
 
   
@@ -59,29 +59,29 @@
   
 
   
-  <meta property="og:url" content="https://herding.github.io/posts/insert_images_in_hugo_and_automatically_clear_folders/">
+  <meta property="og:url" content="https://herding.github.io/posts/homogeneous_transformation/">
   <meta property="og:site_name" content="context">
-  <meta property="og:title" content="Insert Images in Hugo and Automatically Clear `public` Folder">
-  <meta property="og:description" content="When building a Hugo site, inserting images and managing the public folder can be tricky. Here are solutions to both challenges.">
+  <meta property="og:title" content="Homogeneous Transformation Matrices">
+  <meta property="og:description" content="Understanding homogeneous transformation matrices for robotics: translating DH convention parameters into transformation matrices to determine end-effector position and orientation in 3D space through matrix composition.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2025-11-30T11:43:43+08:00">
-    <meta property="article:modified_time" content="2025-11-30T15:57:19+08:00">
+    <meta property="article:published_time" content="2026-01-25T11:51:56+08:00">
+    <meta property="article:modified_time" content="2026-01-25T18:54:41+08:00">
 
 
   
-  <link rel="canonical" href="https://herding.github.io/posts/insert_images_in_hugo_and_automatically_clear_folders/">
+  <link rel="canonical" href="https://herding.github.io/posts/homogeneous_transformation/">
 
   
   
   
-  <meta itemprop="name" content="Insert Images in Hugo and Automatically Clear `public` Folder">
-  <meta itemprop="description" content="When building a Hugo site, inserting images and managing the public folder can be tricky. Here are solutions to both challenges.">
-  <meta itemprop="datePublished" content="2025-11-30T11:43:43+08:00">
-  <meta itemprop="dateModified" content="2025-11-30T15:57:19+08:00">
-  <meta itemprop="wordCount" content="426">
-  <meta itemprop="keywords" content="Issues">
+  <meta itemprop="name" content="Homogeneous Transformation Matrices">
+  <meta itemprop="description" content="Understanding homogeneous transformation matrices for robotics: translating DH convention parameters into transformation matrices to determine end-effector position and orientation in 3D space through matrix composition.">
+  <meta itemprop="datePublished" content="2026-01-25T11:51:56+08:00">
+  <meta itemprop="dateModified" content="2026-01-25T18:54:41+08:00">
+  <meta itemprop="wordCount" content="653">
+  <meta itemprop="keywords" content="Concepts">
 
   
   
@@ -96,14 +96,14 @@
 
   
   
-  <title>Insert Images in Hugo and Automatically Clear `public` Folder - context</title>
+  <title>Homogeneous Transformation Matrices - context</title>
   
 
   
   
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Insert Images in Hugo and Automatically Clear `public` Folder">
-  <meta name="twitter:description" content="When building a Hugo site, inserting images and managing the public folder can be tricky. Here are solutions to both challenges.">
+  <meta name="twitter:title" content="Homogeneous Transformation Matrices">
+  <meta name="twitter:description" content="Understanding homogeneous transformation matrices for robotics: translating DH convention parameters into transformation matrices to determine end-effector position and orientation in 3D space through matrix composition.">
 
 
   
@@ -173,13 +173,13 @@
 <main id="main" class="post">
   
   <div class="post-heading">
-    <h1 class="post-title">Insert Images in Hugo and Automatically Clear `public` Folder</h1>
+    <h1 class="post-title">Homogeneous Transformation Matrices</h1>
     <div class="publish-metadata">
       
       <svg width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M3 9H21M7 3V5M17 3V5M6 13H8M6 17H8M11 13H13M11 17H13M16 13H18M16 17H18M6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      30 November 2025
+      25 January 2026
       
       
         &nbsp;
@@ -187,7 +187,7 @@
           <svg width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M15.4998 5.49994L18.3282 8.32837M3 20.9997L3.04745 20.6675C3.21536 19.4922 3.29932 18.9045 3.49029 18.3558C3.65975 17.8689 3.89124 17.4059 4.17906 16.9783C4.50341 16.4963 4.92319 16.0765 5.76274 15.237L17.4107 3.58896C18.1918 2.80791 19.4581 2.80791 20.2392 3.58896C21.0202 4.37001 21.0202 5.63634 20.2392 6.41739L8.37744 18.2791C7.61579 19.0408 7.23497 19.4216 6.8012 19.7244C6.41618 19.9932 6.00093 20.2159 5.56398 20.3879C5.07171 20.5817 4.54375 20.6882 3.48793 20.9012L3 20.9997Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          426 words
+          653 words
         </span>
       
       
@@ -200,7 +200,7 @@
           <svg width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 7V12L14.5 13.5M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          ~1 min
+          ~4 mins
         </span>
       
     </div>
@@ -214,55 +214,113 @@
   
   
   
+  <details>
+    <summary>
+      <b>Table of Contents</b>
+    </summary>
+    <div class="toc numbered-subtitles"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#translation-matrices">Translation Matrices</a></li>
+    <li><a href="#rotation-matrices">Rotation Matrices</a>
+      <ul>
+        <li><a href="#rotation-around-the-x-axis">Rotation around the X-axis</a></li>
+        <li><a href="#rotation-around-the-y-and-z-axes">Rotation around the Y and Z axes</a></li>
+      </ul>
+    </li>
+    <li><a href="#link-transformation-matrices">Link Transformation Matrices</a></li>
+    <li><a href="#forward-kinematics">Forward Kinematics</a></li>
+  </ul>
+</nav></div>
+  </details>
+  
   
   <article class="content numbered-subtitles">
     
-    <p>When I updated my website, I faced some technical issues: how to insert images into posts and how to automatically clear the <code>public</code> folder. Now I have solutions to both challenges and would like to share them with you.</p>
-<h1 id="insert-images">Insert Images</h1>
-<p>To insert images into posts, I researched online resources and found two important considerations: the correct location for images and the method to load them.</p>
-<p>First, there are two methods to store images in your project. The first method is to place images in the same folder as the post&rsquo;s <code>index.md</code> file, so they are only loaded by that post. For example:</p>
-<pre tabindex="0"><code>..
-|
-└───content
-    |   _index.md
-    |
-    └───posts
-        |   ...
-        |
-        └───time_management_with_Apple&#39;s_App
-            index.md
-            img1.png
-            img2.png
-</code></pre><p>The second method is to place images in the <code>static</code> folder, making them accessible to every page. For example: <code>/static/images/logo.png</code>.</p>
-<p>Second, after placing images in the correct location, you can load them using three methods:</p>
-<ol>
-<li>
-<p><strong>Markdown style</strong>: Use <code>![description](path/to/image)</code>. For a page bundle, write <code>![daily tasks](img1.png)</code>.</p>
-</li>
-<li>
-<p><strong>Figure shortcode</strong> (my preferred method): Hugo&rsquo;s built-in feature. Example: <code>{{ &lt; figure src=&quot;img1.png&quot; title=&quot;Daily tasks&quot; alt=&quot;&quot; width=&quot;600&quot; class=&quot;center&quot; &gt;}}</code>. (⚠️Please remove the blank between <code>{</code> and <code>&lt;</code> when you use it.) This method offers more control over styling through CSS or SCSS. I used an AI tool to create custom shortcode templates and stylesheets.</p>
-</li>
-<li>
-<p><strong>Page Resources</strong>: A more advanced method that I haven&rsquo;t explored yet.</p>
-</li>
-</ol>
-<p>I hope this helps you successfully display images in your posts. If you encounter problems, check your image paths and clear your cache using <code>hugo --gc</code>.</p>
-<h1 id="clean-the-public-folder">Clean The <code>public</code> Folder</h1>
-<p>After testing many methods for inserting images, I accumulated many outdated pages in the <code>public</code> folder. Rather than manually deleting them, I wanted an automatic solution. I found an elegant method from essesoul<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>: simply add one line to <code>hugo.toml</code>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">cleanDestinationDir</span> <span class="p">=</span> <span class="kc">true</span>
-</span></span></code></pre></div><p>Finally, I&rsquo;d like to thank the authors I referenced, especially Brain Build, who compiled helpful resources<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> about inserting images in Hugo.</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p><a href="https://www.essesoul.top/posts/hugo-auto-clean/">Hugo 自动清理 Public 目录下的文件</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p><a href="https://blog.aiwith.fun/posts/add-picture-in-hugo/">How to add picture in Hugo</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
+    <p>This article explains how to construct transformation matrices using the parameters obtained from the <a href="/posts/dh_convention">DH convention</a>, and how to determine the spatial position and orientation of the end-effector through algebraic calculations.</p>
+<h2 id="translation-matrices">Translation Matrices</h2>
+<p>First, consider a general spatial translation. The position after translation can be described as:
+</p>
+$$
+\begin{cases}
+x' = x + t_x \\
+y' = y + t_y \\
+z' = z + t_z
+\end{cases}
+$$<p>where $x, y, z$ represent the original position, and $t_x, t_y, t_z$ represent the translation distances along different directions. Using matrix notation, this becomes:
+</p>
+$$
+\begin{bmatrix}x' \\ y'\\ z'\\ 1\end{bmatrix} = \begin{bmatrix}1& 0& 0& t_x\\ 0& 1& 0& t_y\\ 0& 0& 1& t_z\\ 0& 0& 0& 1\end{bmatrix}\begin{bmatrix}x \\ y\\ z\\ 1\end{bmatrix}
+$$<p>The $4 \times 4$ matrix is the translation matrix $Trans(t_x, t_y, t_z)$, an augmented matrix representing affine transformation in homogeneous coordinates. Recall the translation matrices $Trans(0, 0, d_i)$ and $Trans(a_i, 0, 0)$ from the DH convention, which represent displacements of $d_i$ and $a_i$ along the $z$ and $x$ axes respectively.</p>
+<h2 id="rotation-matrices">Rotation Matrices</h2>
+<p>In addition to spatial translation, rotation of a point in space must also be described by matrices. Starting with rotation by $0°$ (no rotation), the rotation matrix is defined as:
+</p>
+$$
+Rot(x, 0) = \begin{bmatrix}
+\cos 0°& \cos 90°& \cos 90°& 0\\ \cos 90°& \cos 0°& \cos 90°& 0 \\ \cos 90°& \cos 90°& \cos 0°& 0\\ 0& 0& 0& 1
+\end{bmatrix}
+= \begin{bmatrix}1& 0& 0& 0\\ 0& 1& 0& 0\\ 0& 0& 1& 0\\ 0& 0& 0& 1\end{bmatrix}
+$$<p>The first three rows represent the $x, y, z$ axes, while the first three columns represent the transformed $x&rsquo;, y&rsquo;, z&rsquo;$ axes. The angle between $x$ and $x&rsquo;$ is $0°$, while the angles between $x$ and $y&rsquo;, z&rsquo;$ are both $90°$. Comparing translation and rotation matrices, we observe that the $3 \times 3$ submatrix (formed by the first three rows and columns) describes rotation, the first three elements of the fourth column describe translation, and the rest is the augmentation for computational consistency.</p>
+<h3 id="rotation-around-the-x-axis">Rotation around the X-axis</h3>
+<p>When a point rotates by angle $\alpha$ around the $x$-axis, the rotation is described as:
+</p>
+$$
+Rot(x, \alpha) = \begin{bmatrix}
+\cos 0°& \cos 90°& \cos 90°& 0\\ \cos 90°& \cos \alpha& \cos (90°+\alpha)& 0 \\ \cos 90°& \cos (90°- \alpha)& \cos \alpha& 0\\ 0& 0& 0& 1
+\end{bmatrix} = \begin{bmatrix}1& 0& 0& 0\\ 0& \cos \alpha& -\sin\alpha& 0 \\ 0& \sin\alpha& \cos \alpha& 0\\ 0& 0& 0& 1\end{bmatrix}
+$$<p>After rotation, the relationship between the $x$-axis and the $x&rsquo;, y&rsquo;, z&rsquo;$ axes remains unchanged. The angle between $y&rsquo;$ and the original $y$, and between $z$ and $z&rsquo;$, both rotate by $\alpha$. The angle between $y$ and $z&rsquo;$ becomes $90° + \alpha$, while the angle between $y&rsquo;$ and $z$ becomes $90° - \alpha$.</p>
 
+
+
+
+
+
+
+
+
+
+
+<figure class="site-figure center">
+  
+    
+    
+      
+      
+      
+      
+      
+        
+        
+      
+        
+        
+      
+      
+      
+      
+      
+      
+      <img src="/posts/homogeneous_transformation/Rotation_hu_fbe3a852d5993000.png" srcset="/posts/homogeneous_transformation/Rotation_hu_6cbb9efd39ef193e.png 600w, /posts/homogeneous_transformation/Rotation_hu_fbe3a852d5993000.png 1200w" sizes="(max-width: 600px) 100vw, 600px" alt="allocation" ZgotmplZ>
+    
+  
+    <figcaption>From Homogenous Transformation Matrices. Matjaž Mihelj and so on. 2019.</figcaption>
+</figure>
+
+<h3 id="rotation-around-the-y-and-z-axes">Rotation around the Y and Z axes</h3>
+<p>Similarly, rotation by $\beta$ around the $y$-axis and by $\gamma$ around the $z$-axis are expressed as:
+</p>
+$$
+Rot(y, \beta) = \begin{bmatrix}\cos \beta& 0& \sin\beta& 0\\ 0& 1& 0& 0 \\ -\sin\beta& 0& \cos \beta& 0\\ 0& 0& 0& 1\end{bmatrix}, \quad Rot(z, \gamma) = \begin{bmatrix}\cos \gamma& -\sin\gamma& 0& 0\\ \sin\gamma& \cos\gamma& 0& 0 \\ 0& 0& 1& 0\\ 0& 0& 0& 1\end{bmatrix}
+$$<h2 id="link-transformation-matrices">Link Transformation Matrices</h2>
+<p>The process described above shows how to convert basic translation and rotation operations into matrices, and how the spatial relationship between two rigid bodies can be represented through such transformations. Relative to link $i-1$, the position of link $i$ is transformed by:
+</p>
+$$
+A_{i - 1}^i = Rot(z, \theta_i)Trans(0, 0, d_i)Trans(a_i, 0, 0) Rot(x, \alpha_i)
+$$<h2 id="forward-kinematics">Forward Kinematics</h2>
+<p>Finally, based on the coordinate frames and parameters determined by the DH convention for each link, and the transformation matrices between links, we can obtain the position and orientation of the end-effector in the base space. This is achieved through matrix multiplication, mapping the end-effector information to the base frame:
+</p>
+$$
+T = A_0^1A_1^2\cdots A_{n - 1}^n
+$$
     
   </article>
   
@@ -281,7 +339,7 @@
     
 
     
-      <div class="graph-square" data-current-page="/posts/insert_images_in_hugo_and_automatically_clear_folders/" data-url="/search.json">
+      <div class="graph-square" data-current-page="/posts/homogeneous_transformation/" data-url="/search.json">
     <canvas id="graph-canvas"></canvas>
 </div>
 
@@ -295,7 +353,7 @@
 <div id="sharingbuttons">
     
     
-    <a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fherding.github.io%2fposts%2finsert_images_in_hugo_and_automatically_clear_folders%2f" target="_blank" rel="noopener" aria-label="">
+    <a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fherding.github.io%2fposts%2fhomogeneous_transformation%2f" target="_blank" rel="noopener" aria-label="">
       <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z"/></svg>
         </div>
@@ -305,7 +363,7 @@
 
     
     
-    <a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=Insert%20Images%20in%20Hugo%20and%20Automatically%20Clear%20%60public%60%20Folder&amp;url=https%3a%2f%2fherding.github.io%2fposts%2finsert_images_in_hugo_and_automatically_clear_folders%2f" target="_blank" rel="noopener" aria-label="">
+    <a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=Homogeneous%20Transformation%20Matrices&amp;url=https%3a%2f%2fherding.github.io%2fposts%2fhomogeneous_transformation%2f" target="_blank" rel="noopener" aria-label="">
       <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
         <svg t="1762686222605" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5506" width="256" height="256"><path d="M683.776 213.333333h91.605333l-200.106666 230.016L810.666667 756.352h-184.32l-144.384-189.824-165.205334 189.866667H225.152l214.016-246.058667L213.333333 213.333333h189.013334l130.474666 173.525334L683.776 213.333333z m-32.170667 487.893334h50.773334L374.784 265.6H320.298667l331.306666 435.626667z" p-id="5507" fill="black"></path></svg>
         
@@ -316,7 +374,7 @@
 
     
     
-    <a class="resp-sharing-button__link" href="mailto:?subject=Insert%20Images%20in%20Hugo%20and%20Automatically%20Clear%20%60public%60%20Folder&amp;body=https%3a%2f%2fherding.github.io%2fposts%2finsert_images_in_hugo_and_automatically_clear_folders%2f" target="_self" rel="noopener" aria-label="">
+    <a class="resp-sharing-button__link" href="mailto:?subject=Homogeneous%20Transformation%20Matrices&amp;body=https%3a%2f%2fherding.github.io%2fposts%2fhomogeneous_transformation%2f" target="_self" rel="noopener" aria-label="">
       <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 4H2C.9 4 0 4.9 0 6v12c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM7.25 14.43l-3.5 2c-.08.05-.17.07-.25.07-.17 0-.34-.1-.43-.25-.14-.24-.06-.55.18-.68l3.5-2c.24-.14.55-.06.68.18.14.24.06.55-.18.68zm4.75.07c-.1 0-.2-.03-.27-.08l-8.5-5.5c-.23-.15-.3-.46-.15-.7.15-.22.46-.3.7-.14L12 13.4l8.23-5.32c.23-.15.54-.08.7.15.14.23.07.54-.16.7l-8.5 5.5c-.08.04-.17.07-.27.07zm8.93 1.75c-.1.16-.26.25-.43.25-.08 0-.17-.02-.25-.07l-3.5-2c-.24-.13-.32-.44-.18-.68s.44-.32.68-.18l3.5 2c.24.13.32.44.18.68z"/></svg>
         </div>
@@ -326,7 +384,7 @@
 
     
     
-    <a class="resp-sharing-button__link" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2fherding.github.io%2fposts%2finsert_images_in_hugo_and_automatically_clear_folders%2f" target="_blank" rel="noopener" aria-label="">
+    <a class="resp-sharing-button__link" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2fherding.github.io%2fposts%2fhomogeneous_transformation%2f" target="_blank" rel="noopener" aria-label="">
       <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.5 21.5h-5v-13h5v13zM4 6.5C2.5 6.5 1.5 5.3 1.5 4s1-2.4 2.5-2.4c1.6 0 2.5 1 2.6 2.5 0 1.4-1 2.5-2.6 2.5zm11.5 6c-1 0-2 1-2 2v7h-5v-13h5V10s1.6-1.5 4-1.5c3 0 5 2.2 5 6.3v6.7h-5v-7c0-1-1-2-2-2z"/></svg>
         </div>
@@ -336,7 +394,7 @@
 
     
     
-    <a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=https%3a%2f%2fherding.github.io%2fposts%2finsert_images_in_hugo_and_automatically_clear_folders%2f&amp;resubmit=true&amp;title=Insert%20Images%20in%20Hugo%20and%20Automatically%20Clear%20%60public%60%20Folder" target="_blank" rel="noopener" aria-label="">
+    <a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=https%3a%2f%2fherding.github.io%2fposts%2fhomogeneous_transformation%2f&amp;resubmit=true&amp;title=Homogeneous%20Transformation%20Matrices" target="_blank" rel="noopener" aria-label="">
       <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 11.5c0-1.65-1.35-3-3-3-.96 0-1.86.48-2.42 1.24-1.64-1-3.75-1.64-6.07-1.72.08-1.1.4-3.05 1.52-3.7.72-.4 1.73-.24 3 .5C17.2 6.3 18.46 7.5 20 7.5c1.65 0 3-1.35 3-3s-1.35-3-3-3c-1.38 0-2.54.94-2.88 2.22-1.43-.72-2.64-.8-3.6-.25-1.64.94-1.95 3.47-2 4.55-2.33.08-4.45.7-6.1 1.72C4.86 8.98 3.96 8.5 3 8.5c-1.65 0-3 1.35-3 3 0 1.32.84 2.44 2.05 2.84-.03.22-.05.44-.05.66 0 3.86 4.5 7 10 7s10-3.14 10-7c0-.22-.02-.44-.05-.66 1.2-.4 2.05-1.54 2.05-2.84zM2.3 13.37C1.5 13.07 1 12.35 1 11.5c0-1.1.9-2 2-2 .64 0 1.22.32 1.6.82-1.1.85-1.92 1.9-2.3 3.05zm3.7.13c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9.8 4.8c-1.08.63-2.42.96-3.8.96-1.4 0-2.74-.34-3.8-.95-.24-.13-.32-.44-.2-.68.15-.24.46-.32.7-.18 1.83 1.06 4.76 1.06 6.6 0 .23-.13.53-.05.67.2.14.23.06.54-.18.67zm.2-2.8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm5.7-2.13c-.38-1.16-1.2-2.2-2.3-3.05.38-.5.97-.82 1.6-.82 1.1 0 2 .9 2 2 0 .84-.53 1.57-1.3 1.87z"/></svg>
         </div>
@@ -357,10 +415,10 @@
 
   <div class="paginator">
     
-    <a class="link" href="https://herding.github.io/posts/time_management_with_apples_app/" title="Time Management With Apple&#39;s App">← prev</a>
+    <a class="link" href="https://herding.github.io/posts/dh_convention/" title="DH Convention">← prev</a>
     
     
-    <a class="link" href="https://herding.github.io/posts/qualities_of_researcher/" title="Qualities of Researcher">next →</a>
+    <a></a>
     
   </div>
   <div class="comment">

@@ -6,7 +6,100 @@
     <description>Recent content in Posts on context</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 18 Jan 2026 19:07:32 +0800</lastBuildDate><atom:link href="https://herding.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 25 Jan 2026 11:51:56 +0800</lastBuildDate><atom:link href="https://herding.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Homogeneous Transformation Matrices</title>
+      <link>https://herding.github.io/posts/homogeneous_transformation/</link>
+      <pubDate>Sun, 25 Jan 2026 11:51:56 +0800</pubDate>
+      
+      <guid>https://herding.github.io/posts/homogeneous_transformation/</guid>
+      <description>&lt;p&gt;This article explains how to construct transformation matrices using the parameters obtained from the &lt;a href=&#34;https://herding.github.io/posts/dh_convention&#34;&gt;DH convention&lt;/a&gt;, and how to determine the spatial position and orientation of the end-effector through algebraic calculations.&lt;/p&gt;
+&lt;h2 id=&#34;translation-matrices&#34;&gt;Translation Matrices&lt;/h2&gt;
+&lt;p&gt;First, consider a general spatial translation. The position after translation can be described as:
+&lt;/p&gt;
+$$
+\begin{cases}
+x&#39; = x + t_x \\
+y&#39; = y + t_y \\
+z&#39; = z + t_z
+\end{cases}
+$$&lt;p&gt;where $x, y, z$ represent the original position, and $t_x, t_y, t_z$ represent the translation distances along different directions. Using matrix notation, this becomes:
+&lt;/p&gt;
+$$
+\begin{bmatrix}x&#39; \\ y&#39;\\ z&#39;\\ 1\end{bmatrix} = \begin{bmatrix}1&amp; 0&amp; 0&amp; t_x\\ 0&amp; 1&amp; 0&amp; t_y\\ 0&amp; 0&amp; 1&amp; t_z\\ 0&amp; 0&amp; 0&amp; 1\end{bmatrix}\begin{bmatrix}x \\ y\\ z\\ 1\end{bmatrix}
+$$&lt;p&gt;The $4 \times 4$ matrix is the translation matrix $Trans(t_x, t_y, t_z)$, an augmented matrix representing affine transformation in homogeneous coordinates. Recall the translation matrices $Trans(0, 0, d_i)$ and $Trans(a_i, 0, 0)$ from the DH convention, which represent displacements of $d_i$ and $a_i$ along the $z$ and $x$ axes respectively.&lt;/p&gt;
+&lt;h2 id=&#34;rotation-matrices&#34;&gt;Rotation Matrices&lt;/h2&gt;
+&lt;p&gt;In addition to spatial translation, rotation of a point in space must also be described by matrices. Starting with rotation by $0°$ (no rotation), the rotation matrix is defined as:
+&lt;/p&gt;
+$$
+Rot(x, 0) = \begin{bmatrix}
+\cos 0°&amp; \cos 90°&amp; \cos 90°&amp; 0\\ \cos 90°&amp; \cos 0°&amp; \cos 90°&amp; 0 \\ \cos 90°&amp; \cos 90°&amp; \cos 0°&amp; 0\\ 0&amp; 0&amp; 0&amp; 1
+\end{bmatrix}
+= \begin{bmatrix}1&amp; 0&amp; 0&amp; 0\\ 0&amp; 1&amp; 0&amp; 0\\ 0&amp; 0&amp; 1&amp; 0\\ 0&amp; 0&amp; 0&amp; 1\end{bmatrix}
+$$&lt;p&gt;The first three rows represent the $x, y, z$ axes, while the first three columns represent the transformed $x&amp;rsquo;, y&amp;rsquo;, z&amp;rsquo;$ axes. The angle between $x$ and $x&amp;rsquo;$ is $0°$, while the angles between $x$ and $y&amp;rsquo;, z&amp;rsquo;$ are both $90°$. Comparing translation and rotation matrices, we observe that the $3 \times 3$ submatrix (formed by the first three rows and columns) describes rotation, the first three elements of the fourth column describe translation, and the rest is the augmentation for computational consistency.&lt;/p&gt;
+&lt;h3 id=&#34;rotation-around-the-x-axis&#34;&gt;Rotation around the X-axis&lt;/h3&gt;
+&lt;p&gt;When a point rotates by angle $\alpha$ around the $x$-axis, the rotation is described as:
+&lt;/p&gt;
+$$
+Rot(x, \alpha) = \begin{bmatrix}
+\cos 0°&amp; \cos 90°&amp; \cos 90°&amp; 0\\ \cos 90°&amp; \cos \alpha&amp; \cos (90°+\alpha)&amp; 0 \\ \cos 90°&amp; \cos (90°- \alpha)&amp; \cos \alpha&amp; 0\\ 0&amp; 0&amp; 0&amp; 1
+\end{bmatrix} = \begin{bmatrix}1&amp; 0&amp; 0&amp; 0\\ 0&amp; \cos \alpha&amp; -\sin\alpha&amp; 0 \\ 0&amp; \sin\alpha&amp; \cos \alpha&amp; 0\\ 0&amp; 0&amp; 0&amp; 1\end{bmatrix}
+$$&lt;p&gt;After rotation, the relationship between the $x$-axis and the $x&amp;rsquo;, y&amp;rsquo;, z&amp;rsquo;$ axes remains unchanged. The angle between $y&amp;rsquo;$ and the original $y$, and between $z$ and $z&amp;rsquo;$, both rotate by $\alpha$. The angle between $y$ and $z&amp;rsquo;$ becomes $90° + \alpha$, while the angle between $y&amp;rsquo;$ and $z$ becomes $90° - \alpha$.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure class=&#34;site-figure center&#34;&gt;
+  
+    
+    
+      
+      
+      
+      
+      
+        
+        
+      
+        
+        
+      
+      
+      
+      
+      
+      
+      &lt;img src=&#34;https://herding.github.io/posts/homogeneous_transformation/Rotation_hu_fbe3a852d5993000.png&#34; srcset=&#34;https://herding.github.io/posts/homogeneous_transformation/Rotation_hu_6cbb9efd39ef193e.png 600w, https://herding.github.io/posts/homogeneous_transformation/Rotation_hu_fbe3a852d5993000.png 1200w&#34; sizes=&#34;(max-width: 600px) 100vw, 600px&#34; alt=&#34;allocation&#34; ZgotmplZ&gt;
+    
+  
+    &lt;figcaption&gt;From Homogenous Transformation Matrices. Matjaž Mihelj and so on. 2019.&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h3 id=&#34;rotation-around-the-y-and-z-axes&#34;&gt;Rotation around the Y and Z axes&lt;/h3&gt;
+&lt;p&gt;Similarly, rotation by $\beta$ around the $y$-axis and by $\gamma$ around the $z$-axis are expressed as:
+&lt;/p&gt;
+$$
+Rot(y, \beta) = \begin{bmatrix}\cos \beta&amp; 0&amp; \sin\beta&amp; 0\\ 0&amp; 1&amp; 0&amp; 0 \\ -\sin\beta&amp; 0&amp; \cos \beta&amp; 0\\ 0&amp; 0&amp; 0&amp; 1\end{bmatrix}, \quad Rot(z, \gamma) = \begin{bmatrix}\cos \gamma&amp; -\sin\gamma&amp; 0&amp; 0\\ \sin\gamma&amp; \cos\gamma&amp; 0&amp; 0 \\ 0&amp; 0&amp; 1&amp; 0\\ 0&amp; 0&amp; 0&amp; 1\end{bmatrix}
+$$&lt;h2 id=&#34;link-transformation-matrices&#34;&gt;Link Transformation Matrices&lt;/h2&gt;
+&lt;p&gt;The process described above shows how to convert basic translation and rotation operations into matrices, and how the spatial relationship between two rigid bodies can be represented through such transformations. Relative to link $i-1$, the position of link $i$ is transformed by:
+&lt;/p&gt;
+$$
+A_{i - 1}^i = Rot(z, \theta_i)Trans(0, 0, d_i)Trans(a_i, 0, 0) Rot(x, \alpha_i)
+$$&lt;h2 id=&#34;forward-kinematics&#34;&gt;Forward Kinematics&lt;/h2&gt;
+&lt;p&gt;Finally, based on the coordinate frames and parameters determined by the DH convention for each link, and the transformation matrices between links, we can obtain the position and orientation of the end-effector in the base space. This is achieved through matrix multiplication, mapping the end-effector information to the base frame:
+&lt;/p&gt;
+$$
+T = A_0^1A_1^2\cdots A_{n - 1}^n
+$$</description>
+    </item>
+    
     <item>
       <title>DH Convention</title>
       <link>https://herding.github.io/posts/dh_convention/</link>
@@ -77,10 +170,10 @@
 &lt;li&gt;Link twist angle $\alpha_i$: generally the angle formed between $z_{i-1}$ and $z_i$ after rotation along $x_i$.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Based on the collected parameters, the relationship between two rigid bodies can be expressed as a matrix operation:
+&lt;/p&gt;
 $$
 A_{i-1}^i = Rot(z, \theta_i)Trans(0, 0, d_i)Trans(a_i, 0, 0)Rot(x, \alpha_i)
-$$&lt;/p&gt;
-&lt;p&gt;where $Rot(z, \theta)$ and $Rot(x, \alpha_i)$ are rotation matrices, and $Trans(0, 0, d_i)$ and $Trans(a_i, 0, 0)$ are translation matrices. The construction and meaning of these two matrices will be detailed in the article on Homogenous Transformation Matrix.&lt;/p&gt;
+$$&lt;p&gt;where $Rot(z, \theta)$ and $Rot(x, \alpha_i)$ are rotation matrices, and $Trans(0, 0, d_i)$ and $Trans(a_i, 0, 0)$ are translation matrices. The construction and meaning of these two matrices will be detailed in the article on Homogenous Transformation Matrix.&lt;/p&gt;
 </description>
     </item>
     
@@ -355,34 +448,6 @@ Also, don&amp;rsquo;t forget daily routines like waking up, eating breakfast, do
 &lt;/ol&gt;
 &lt;p&gt;If you have a better plan, please share it with me. Thanks!&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>Brew Install Local Files</title>
-      <link>https://herding.github.io/posts/brew_install_local_files/</link>
-      <pubDate>Sun, 09 Nov 2025 20:10:49 +0800</pubDate>
-      
-      <guid>https://herding.github.io/posts/brew_install_local_files/</guid>
-      <description>&lt;h1 id=&#34;how-to-install-a-local-file-with-homebrew&#34;&gt;How to install a local file with Homebrew&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;Find the cache location&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-zsh&#34; data-lang=&#34;zsh&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brew --cache -s &amp;lt;your package name&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;For example, I want to install &lt;code&gt;dart-lang/dart/dart&lt;/code&gt; from &lt;code&gt;https://storage.googleapis.com/dart-archive/channels/stable/release/3.9.4/sdk/dartsdk-macos-arm64-release.zip&lt;/code&gt;, which may be inaccessible from within China. So I first downloaded it to my &lt;code&gt;Downloads&lt;/code&gt; folder, then I used the command above to find Homebrew&amp;rsquo;s cache directory for &lt;code&gt;dart&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Replace &lt;code&gt;&amp;lt;your package name&amp;gt;&lt;/code&gt; with the formula name (e.g. &lt;code&gt;dart-lang/dart/dart&lt;/code&gt;) and &lt;code&gt;&amp;lt;your file&amp;gt;&lt;/code&gt; with the downloaded file name (e.g. &lt;code&gt;dartsdk-macos-arm64-release.zip&lt;/code&gt;).&lt;/p&gt;
-&lt;p&gt;By the way, if you want to run &lt;code&gt;dart pub get&lt;/code&gt; quickly, you need to add &lt;code&gt;export PUB_HOSTED_URL=&amp;quot;https://mirrors.tuna.tsinghua.edu.cn/dart-pub&amp;quot;&lt;/code&gt; to &lt;code&gt;~/.bashrc&lt;/code&gt; or &lt;code&gt;~/.zshrc&lt;/code&gt;.&lt;/p&gt;
-&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;Move the local file&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-zsh&#34; data-lang=&#34;zsh&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mv ~/Downloads/&amp;lt;your file&amp;gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;brew --cache -s &amp;lt;your package name&amp;gt;&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;Reinstall&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;If your Homebrew version is greater than or equal to 4.0, you may need to add the following to &lt;code&gt;~/.bash_profile&lt;/code&gt; or &lt;code&gt;~/.zprofile&lt;/code&gt; before installing:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;export HOMEBREW_NO_INSTALL_FROM_API=1&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Then run:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-zsh&#34; data-lang=&#34;zsh&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brew install &amp;lt;your package&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
   </channel>

@@ -1,11 +1,11 @@
 {
-  "links": {},
-  "generated": "2026-01-18T19:27:55+08:00",
+  "links": {"/posts/dh_convention":[{"text":"DH convention","title":"Homogeneous Transformation Matrices","url":"/posts/homogeneous_transformation/"}]},
+  "generated": "2026-01-25T18:54:56+08:00",
   "stats": {
-    "totalPages": 6,
-    "processedPages": 6,
-    "pagesWithBacklinks": 0,
-    "totalBacklinks": 0,
+    "totalPages": 7,
+    "processedPages": 7,
+    "pagesWithBacklinks": 1,
+    "totalBacklinks": 1,
     "incremental": false
   }
 }
