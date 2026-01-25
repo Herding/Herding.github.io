@@ -460,25 +460,30 @@ if (typeof window.GraphWithLinkTexts === 'undefined') {
     
     // Replace or add this method to your existing graph.js
     showTooltip(text, x, y) {
-        // Get canvas position relative to viewport
-        const canvasRect = this.canvas.getBoundingClientRect();
-        
-        // Calculate tooltip position relative to canvas
-        // Add small offset from the mouse position
         const offsetX = 15;
         const offsetY = 15;
         
-        // Position tooltip relative to canvas
-        const tooltipX = x + offsetX;
-        const tooltipY = y + offsetY;
-        
-        // Ensure tooltip stays within viewport bounds
-        const maxX = window.innerWidth - this.tooltip.offsetWidth - 10;
-        const maxY = window.innerHeight - this.tooltip.offsetHeight - 10;
-        
+        // Set text first
         this.tooltip.textContent = text;
-        this.tooltip.style.left = Math.min(tooltipX, maxX) + 'px';
-        this.tooltip.style.top = Math.min(tooltipY, maxY) + 'px';
+        
+        // Use estimated dimensions instead of offsetWidth (which may be 0 initially)
+        const estimatedWidth = 220;
+        const estimatedHeight = 30;
+        
+        // Position tooltip relative to mouse
+        let tooltipX = x + offsetX;
+        let tooltipY = y + offsetY;
+        
+        // Keep within viewport bounds
+        if (tooltipX + estimatedWidth > window.innerWidth) {
+            tooltipX = window.innerWidth - estimatedWidth - 10;
+        }
+        if (tooltipY + estimatedHeight > window.innerHeight) {
+            tooltipY = window.innerHeight - estimatedHeight - 10;
+        }
+        
+        this.tooltip.style.left = tooltipX + 'px';
+        this.tooltip.style.top = tooltipY + 'px';
         this.tooltip.style.opacity = '1';
     }
 
