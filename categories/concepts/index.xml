@@ -2,26 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Concepts on context</title>
-    <link>http://localhost:1313/categories/concepts/</link>
+    <link>https://herding.github.io/categories/concepts/</link>
     <description>Recent content in Concepts on context</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 05 Feb 2026 09:48:33 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/concepts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 05 Feb 2026 09:48:33 +0800</lastBuildDate><atom:link href="https://herding.github.io/categories/concepts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Angular Velocity</title>
-      <link>http://localhost:1313/posts/angular_velocity/</link>
+      <link>https://herding.github.io/posts/angular_velocity/</link>
       <pubDate>Thu, 05 Feb 2026 09:48:33 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/angular_velocity/</guid>
-      <description>&lt;h2 id=&#34;draft-false&#34;&gt;title: &amp;ldquo;Angular Velocity&amp;rdquo;
-date: 2026-02-05T09:48:33+08:00
-description: Derivation of angular velocity and the time derivative of rotation matrices for robotic end-effectors
-categories: [concepts]
-tags: []
-toc: true
-math: true
-draft: false&lt;/h2&gt;
-&lt;p&gt;The relationship between the spatial pose of the end-effector and joint configurations is introduced in &lt;a href=&#34;http://localhost:1313/posts/homogeneous_transformation&#34;&gt;Homogeneous Transformation Matrix&lt;/a&gt;. Here we derive the relationships between the end-effector velocities and the joint velocities. When discussing end-effector velocities in Cartesian space, there are both linear velocities (translation) and angular velocities (rotation). This post introduces the definition of angular velocity and the time derivative of rotation matrices.&lt;/p&gt;
+      <guid>https://herding.github.io/posts/angular_velocity/</guid>
+      <description>&lt;p&gt;The relationship between the spatial pose of the end-effector and joint configurations is introduced in &lt;a href=&#34;https://herding.github.io/posts/homogeneous_transformation&#34;&gt;Homogeneous Transformation Matrix&lt;/a&gt;. Here we derive the relationships between the end-effector velocities and the joint velocities. When discussing end-effector velocities in Cartesian space, there are both linear velocities (translation) and angular velocities (rotation). This post introduces the definition of angular velocity and the time derivative of rotation matrices.&lt;/p&gt;
 &lt;h2 id=&#34;angular-velocities&#34;&gt;Angular Velocities&lt;/h2&gt;
 &lt;p&gt;Because the end-effector&amp;rsquo;s pose includes orientation, recall the definition of angular velocity $\omega = d\theta / dt \cdot \mathbf u$ when computing velocities. Angular velocity is a pseudovector as shown in the figure. Its direction depends on the unit vector $\mathbf u$ and is perpendicular to the plane swept by the position vector $\mathbf r$; it is parallel to the rotation axis with magnitude $d\theta / dt$ (radians per unit time).&lt;/p&gt;
 
@@ -55,7 +47,7 @@ draft: false&lt;/h2&gt;
       
       
       
-      &lt;img src=&#34;http://localhost:1313/posts/angular_velocity/Velocity_hu_ff18d2d2e8ba3884.png&#34; srcset=&#34;http://localhost:1313/posts/angular_velocity/Velocity_hu_f9a5f6b548e5db32.png 600w, http://localhost:1313/posts/angular_velocity/Velocity_hu_ff18d2d2e8ba3884.png 1200w&#34; sizes=&#34;(max-width: 600px) 100vw, 600px&#34; alt=&#34;allocation&#34; ZgotmplZ&gt;
+      &lt;img src=&#34;https://herding.github.io/posts/angular_velocity/Velocity_hu_57ffbb0825710b03.png&#34; srcset=&#34;https://herding.github.io/posts/angular_velocity/Velocity_hu_50699b98dbce63b3.png 420w, https://herding.github.io/posts/angular_velocity/Velocity_hu_57ffbb0825710b03.png 840w&#34; sizes=&#34;(max-width: 420px) 100vw, 420px&#34; alt=&#34;allocation&#34; ZgotmplZ&gt;
     
   
     &lt;figcaption&gt;From Wikipedia&lt;/figcaption&gt;
@@ -116,7 +108,7 @@ $$
 &amp;= S(\omega)R(x, \theta)
 \end{aligned}
 $$&lt;p&gt;
-where $\omega$ is the angular velocity. Similarly, derivatives of rotation matrices about the $y$- or $z$-axes satisfy $dR(y, \theta)/d\theta = S(\mathbf j)R(y, \theta)$ and $dR(z, \theta)/d\theta = S(\mathbf k)R(z, \theta)$, where $\mathbf j = [0,1,0]^T$ and $\mathbf k = [0,0,1]^T$. In this example the angular velocity vector points along the rotation axis with magnitude $d\theta/dt$. The orientation of the end-effector in the base frame for multiple frames is expressed below.&lt;/p&gt;
+where $\omega$ is the angular velocity. Similarly, derivatives of rotation matrices about the $y$- or $z$-axes satisfy $dR(y, \theta)/d\theta = S(\mathbf j)R(y, \theta)$ and $dR(z, \theta)/d\theta = S(\mathbf k)R(z, \theta)$, where $\mathbf j = [0,1,0]^T$ and $\mathbf k = [0,0,1]^T$. In this example the angular velocity vector points along the rotation axis with magnitude $d\theta/dt$.&lt;/p&gt;
 &lt;p&gt;More generally, the time derivative of a rotation matrix $R^2_0(\theta)$ for an end-effector with two intermediate frames is
 &lt;/p&gt;
 $$
@@ -145,11 +137,11 @@ where $\omega^n_0$ is the desired angular velocity of the end-effector.&lt;/p&gt
     
     <item>
       <title>Homogeneous Transformation Matrices</title>
-      <link>http://localhost:1313/posts/homogeneous_transformation/</link>
+      <link>https://herding.github.io/posts/homogeneous_transformation/</link>
       <pubDate>Sun, 25 Jan 2026 11:51:56 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/homogeneous_transformation/</guid>
-      <description>&lt;p&gt;This article explains how to construct transformation matrices using the parameters obtained from the &lt;a href=&#34;http://localhost:1313/posts/dh_convention&#34;&gt;DH convention&lt;/a&gt;, and how to determine the spatial position and orientation of the end-effector through algebraic calculations.&lt;/p&gt;
+      <guid>https://herding.github.io/posts/homogeneous_transformation/</guid>
+      <description>&lt;p&gt;This article explains how to construct transformation matrices using the parameters obtained from the &lt;a href=&#34;https://herding.github.io/posts/dh_convention&#34;&gt;DH convention&lt;/a&gt;, and how to determine the spatial position and orientation of the end-effector through algebraic calculations.&lt;/p&gt;
 &lt;h2 id=&#34;translation-matrices&#34;&gt;Translation Matrices&lt;/h2&gt;
 &lt;p&gt;First, consider a general spatial translation. The position after translation can be described as:
 &lt;/p&gt;
@@ -212,7 +204,7 @@ $$&lt;p&gt;After rotation, the relationship between the $x$-axis and the $x&amp;
       
       
       
-      &lt;img src=&#34;http://localhost:1313/posts/homogeneous_transformation/Rotation_hu_fbe3a852d5993000.png&#34; srcset=&#34;http://localhost:1313/posts/homogeneous_transformation/Rotation_hu_6cbb9efd39ef193e.png 600w, http://localhost:1313/posts/homogeneous_transformation/Rotation_hu_fbe3a852d5993000.png 1200w&#34; sizes=&#34;(max-width: 600px) 100vw, 600px&#34; alt=&#34;allocation&#34; ZgotmplZ&gt;
+      &lt;img src=&#34;https://herding.github.io/posts/homogeneous_transformation/Rotation_hu_fbe3a852d5993000.png&#34; srcset=&#34;https://herding.github.io/posts/homogeneous_transformation/Rotation_hu_6cbb9efd39ef193e.png 600w, https://herding.github.io/posts/homogeneous_transformation/Rotation_hu_fbe3a852d5993000.png 1200w&#34; sizes=&#34;(max-width: 600px) 100vw, 600px&#34; alt=&#34;allocation&#34; ZgotmplZ&gt;
     
   
     &lt;figcaption&gt;From Homogenous Transformation Matrices. Matjaž Mihelj and so on. 2019.&lt;/figcaption&gt;
@@ -238,10 +230,10 @@ $$</description>
     
     <item>
       <title>DH Convention</title>
-      <link>http://localhost:1313/posts/dh_convention/</link>
+      <link>https://herding.github.io/posts/dh_convention/</link>
       <pubDate>Sun, 18 Jan 2026 19:07:32 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/dh_convention/</guid>
+      <guid>https://herding.github.io/posts/dh_convention/</guid>
       <description>&lt;p&gt;To determine the position of a point in space, we typically construct a coordinate system (reference frame) and specify the point&amp;rsquo;s location using $(x, y, z)$ coordinates relative to the origin. However, for robots or robotic arms with multiple rigid bodies, directly using a single unified coordinate system becomes complex. After numerous joint movements, determining positions requires extensive geometric calculations. To address this, previous researchers developed clever methods, including the DH (Denavit-Hartenberg) convention introduced in this article. This method also has a modified version, but this article focuses solely on the Standard DH convention—a method for constructing reference coordinate systems for mechanical systems connected by joints. Its core principle involves establishing coordinate systems for each rigid body based on joint information, obtaining relevant parameters to construct transformation matrices (discussed below), and thereby determining the position information of each rigid body in the base coordinate system.&lt;/p&gt;
 &lt;p&gt;As mentioned above, the DH convention follows these steps to obtain coordinate systems for each rigid body in a mechanical system:&lt;/p&gt;
 &lt;ol&gt;
@@ -292,7 +284,7 @@ $$</description>
       
       
       
-      &lt;img src=&#34;http://localhost:1313/posts/dh_convention/example_hu_ebd321c8f9277533.png&#34; srcset=&#34;http://localhost:1313/posts/dh_convention/example_hu_f21edf5bff1a72fa.png 600w, http://localhost:1313/posts/dh_convention/example_hu_ebd321c8f9277533.png 1200w&#34; sizes=&#34;(max-width: 600px) 100vw, 600px&#34; alt=&#34;allocation&#34; ZgotmplZ&gt;
+      &lt;img src=&#34;https://herding.github.io/posts/dh_convention/example_hu_ebd321c8f9277533.png&#34; srcset=&#34;https://herding.github.io/posts/dh_convention/example_hu_f21edf5bff1a72fa.png 600w, https://herding.github.io/posts/dh_convention/example_hu_ebd321c8f9277533.png 1200w&#34; sizes=&#34;(max-width: 600px) 100vw, 600px&#34; alt=&#34;allocation&#34; ZgotmplZ&gt;
     
   
     &lt;figcaption&gt;Example: EEE 187 robotics. Summary 8: The denavit-Hartenberg convention&lt;/figcaption&gt;

@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on context</title>
-    <link>http://localhost:1313/posts/</link>
+    <link>https://herding.github.io/posts/</link>
     <description>Recent content in Posts on context</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 05 Feb 2026 09:48:33 +0800</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 05 Feb 2026 09:48:33 +0800</lastBuildDate><atom:link href="https://herding.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Angular Velocity</title>
-      <link>http://localhost:1313/posts/angular_velocity/</link>
+      <link>https://herding.github.io/posts/angular_velocity/</link>
       <pubDate>Thu, 05 Feb 2026 09:48:33 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/angular_velocity/</guid>
-      <description>&lt;p&gt;The relationship between the spatial pose of the end-effector and joint configurations is introduced in &lt;a href=&#34;http://localhost:1313/posts/homogeneous_transformation&#34;&gt;Homogeneous Transformation Matrix&lt;/a&gt;. Here we derive the relationships between the end-effector velocities and the joint velocities. When discussing end-effector velocities in Cartesian space, there are both linear velocities (translation) and angular velocities (rotation). This post introduces the definition of angular velocity and the time derivative of rotation matrices.&lt;/p&gt;
+      <guid>https://herding.github.io/posts/angular_velocity/</guid>
+      <description>&lt;p&gt;The relationship between the spatial pose of the end-effector and joint configurations is introduced in &lt;a href=&#34;https://herding.github.io/posts/homogeneous_transformation&#34;&gt;Homogeneous Transformation Matrix&lt;/a&gt;. Here we derive the relationships between the end-effector velocities and the joint velocities. When discussing end-effector velocities in Cartesian space, there are both linear velocities (translation) and angular velocities (rotation). This post introduces the definition of angular velocity and the time derivative of rotation matrices.&lt;/p&gt;
 &lt;h2 id=&#34;angular-velocities&#34;&gt;Angular Velocities&lt;/h2&gt;
 &lt;p&gt;Because the end-effector&amp;rsquo;s pose includes orientation, recall the definition of angular velocity $\omega = d\theta / dt \cdot \mathbf u$ when computing velocities. Angular velocity is a pseudovector as shown in the figure. Its direction depends on the unit vector $\mathbf u$ and is perpendicular to the plane swept by the position vector $\mathbf r$; it is parallel to the rotation axis with magnitude $d\theta / dt$ (radians per unit time).&lt;/p&gt;
 
@@ -47,7 +47,7 @@
       
       
       
-      &lt;img src=&#34;http://localhost:1313/posts/angular_velocity/Velocity_hu_57ffbb0825710b03.png&#34; srcset=&#34;http://localhost:1313/posts/angular_velocity/Velocity_hu_50699b98dbce63b3.png 420w, http://localhost:1313/posts/angular_velocity/Velocity_hu_57ffbb0825710b03.png 840w&#34; sizes=&#34;(max-width: 420px) 100vw, 420px&#34; alt=&#34;allocation&#34; ZgotmplZ&gt;
+      &lt;img src=&#34;https://herding.github.io/posts/angular_velocity/Velocity_hu_57ffbb0825710b03.png&#34; srcset=&#34;https://herding.github.io/posts/angular_velocity/Velocity_hu_50699b98dbce63b3.png 420w, https://herding.github.io/posts/angular_velocity/Velocity_hu_57ffbb0825710b03.png 840w&#34; sizes=&#34;(max-width: 420px) 100vw, 420px&#34; alt=&#34;allocation&#34; ZgotmplZ&gt;
     
   
     &lt;figcaption&gt;From Wikipedia&lt;/figcaption&gt;
@@ -137,11 +137,11 @@ where $\omega^n_0$ is the desired angular velocity of the end-effector.&lt;/p&gt
     
     <item>
       <title>Homogeneous Transformation Matrices</title>
-      <link>http://localhost:1313/posts/homogeneous_transformation/</link>
+      <link>https://herding.github.io/posts/homogeneous_transformation/</link>
       <pubDate>Sun, 25 Jan 2026 11:51:56 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/homogeneous_transformation/</guid>
-      <description>&lt;p&gt;This article explains how to construct transformation matrices using the parameters obtained from the &lt;a href=&#34;http://localhost:1313/posts/dh_convention&#34;&gt;DH convention&lt;/a&gt;, and how to determine the spatial position and orientation of the end-effector through algebraic calculations.&lt;/p&gt;
+      <guid>https://herding.github.io/posts/homogeneous_transformation/</guid>
+      <description>&lt;p&gt;This article explains how to construct transformation matrices using the parameters obtained from the &lt;a href=&#34;https://herding.github.io/posts/dh_convention&#34;&gt;DH convention&lt;/a&gt;, and how to determine the spatial position and orientation of the end-effector through algebraic calculations.&lt;/p&gt;
 &lt;h2 id=&#34;translation-matrices&#34;&gt;Translation Matrices&lt;/h2&gt;
 &lt;p&gt;First, consider a general spatial translation. The position after translation can be described as:
 &lt;/p&gt;
@@ -204,7 +204,7 @@ $$&lt;p&gt;After rotation, the relationship between the $x$-axis and the $x&amp;
       
       
       
-      &lt;img src=&#34;http://localhost:1313/posts/homogeneous_transformation/Rotation_hu_fbe3a852d5993000.png&#34; srcset=&#34;http://localhost:1313/posts/homogeneous_transformation/Rotation_hu_6cbb9efd39ef193e.png 600w, http://localhost:1313/posts/homogeneous_transformation/Rotation_hu_fbe3a852d5993000.png 1200w&#34; sizes=&#34;(max-width: 600px) 100vw, 600px&#34; alt=&#34;allocation&#34; ZgotmplZ&gt;
+      &lt;img src=&#34;https://herding.github.io/posts/homogeneous_transformation/Rotation_hu_fbe3a852d5993000.png&#34; srcset=&#34;https://herding.github.io/posts/homogeneous_transformation/Rotation_hu_6cbb9efd39ef193e.png 600w, https://herding.github.io/posts/homogeneous_transformation/Rotation_hu_fbe3a852d5993000.png 1200w&#34; sizes=&#34;(max-width: 600px) 100vw, 600px&#34; alt=&#34;allocation&#34; ZgotmplZ&gt;
     
   
     &lt;figcaption&gt;From Homogenous Transformation Matrices. Matjaž Mihelj and so on. 2019.&lt;/figcaption&gt;
@@ -230,10 +230,10 @@ $$</description>
     
     <item>
       <title>DH Convention</title>
-      <link>http://localhost:1313/posts/dh_convention/</link>
+      <link>https://herding.github.io/posts/dh_convention/</link>
       <pubDate>Sun, 18 Jan 2026 19:07:32 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/dh_convention/</guid>
+      <guid>https://herding.github.io/posts/dh_convention/</guid>
       <description>&lt;p&gt;To determine the position of a point in space, we typically construct a coordinate system (reference frame) and specify the point&amp;rsquo;s location using $(x, y, z)$ coordinates relative to the origin. However, for robots or robotic arms with multiple rigid bodies, directly using a single unified coordinate system becomes complex. After numerous joint movements, determining positions requires extensive geometric calculations. To address this, previous researchers developed clever methods, including the DH (Denavit-Hartenberg) convention introduced in this article. This method also has a modified version, but this article focuses solely on the Standard DH convention—a method for constructing reference coordinate systems for mechanical systems connected by joints. Its core principle involves establishing coordinate systems for each rigid body based on joint information, obtaining relevant parameters to construct transformation matrices (discussed below), and thereby determining the position information of each rigid body in the base coordinate system.&lt;/p&gt;
 &lt;p&gt;As mentioned above, the DH convention follows these steps to obtain coordinate systems for each rigid body in a mechanical system:&lt;/p&gt;
 &lt;ol&gt;
@@ -284,7 +284,7 @@ $$</description>
       
       
       
-      &lt;img src=&#34;http://localhost:1313/posts/dh_convention/example_hu_ebd321c8f9277533.png&#34; srcset=&#34;http://localhost:1313/posts/dh_convention/example_hu_f21edf5bff1a72fa.png 600w, http://localhost:1313/posts/dh_convention/example_hu_ebd321c8f9277533.png 1200w&#34; sizes=&#34;(max-width: 600px) 100vw, 600px&#34; alt=&#34;allocation&#34; ZgotmplZ&gt;
+      &lt;img src=&#34;https://herding.github.io/posts/dh_convention/example_hu_ebd321c8f9277533.png&#34; srcset=&#34;https://herding.github.io/posts/dh_convention/example_hu_f21edf5bff1a72fa.png 600w, https://herding.github.io/posts/dh_convention/example_hu_ebd321c8f9277533.png 1200w&#34; sizes=&#34;(max-width: 600px) 100vw, 600px&#34; alt=&#34;allocation&#34; ZgotmplZ&gt;
     
   
     &lt;figcaption&gt;Example: EEE 187 robotics. Summary 8: The denavit-Hartenberg convention&lt;/figcaption&gt;
@@ -307,10 +307,10 @@ $$&lt;p&gt;where $Rot(z, \theta)$ and $Rot(x, \alpha_i)$ are rotation matrices, 
     
     <item>
       <title>Managing Information Sources</title>
-      <link>http://localhost:1313/posts/managing_information_sources/</link>
+      <link>https://herding.github.io/posts/managing_information_sources/</link>
       <pubDate>Sun, 14 Dec 2025 19:56:56 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/managing_information_sources/</guid>
+      <guid>https://herding.github.io/posts/managing_information_sources/</guid>
       <description>&lt;p&gt;This workflow helps you manage the flood of information you encounter when working on research projects.&lt;/p&gt;
 &lt;p&gt;First, recognize the different types and channels of information: videos, papers, books, social-media posts, web pages, recommendations from colleagues, and content from streaming platforms. Much of this arrives passively through subscriptions or RSS feeds, while other material is found actively via search engines or AI tools. The key is to select information based on your purpose instead of trying to consume everything that appears.&lt;/p&gt;
 &lt;p&gt;Second, consolidate relevant items in one place so they can support your projects and thinking. Web pages can be clipped, while papers and books are better stored as local files. I use Obsidian Web Clipper for web pages and Zotero for local files and references. Plugins can import metadata from local files into the same repository that holds clipped web pages. This consolidated library helps you focus on the most relevant material.&lt;/p&gt;
@@ -346,7 +346,7 @@ $$&lt;p&gt;where $Rot(z, \theta)$ and $Rot(x, \alpha_i)$ are rotation matrices, 
       
       
       
-      &lt;img src=&#34;http://localhost:1313/posts/managing_information_sources/List_of_info_hu_74f06c1512d4546a.png&#34; srcset=&#34;http://localhost:1313/posts/managing_information_sources/List_of_info_hu_49af3f8e2c783c9c.png 450w, http://localhost:1313/posts/managing_information_sources/List_of_info_hu_74f06c1512d4546a.png 900w&#34; sizes=&#34;(max-width: 450px) 100vw, 450px&#34; alt=&#34;&#34; ZgotmplZ&gt;
+      &lt;img src=&#34;https://herding.github.io/posts/managing_information_sources/List_of_info_hu_74f06c1512d4546a.png&#34; srcset=&#34;https://herding.github.io/posts/managing_information_sources/List_of_info_hu_49af3f8e2c783c9c.png 450w, https://herding.github.io/posts/managing_information_sources/List_of_info_hu_74f06c1512d4546a.png 900w&#34; sizes=&#34;(max-width: 450px) 100vw, 450px&#34; alt=&#34;&#34; ZgotmplZ&gt;
     
   
     &lt;figcaption&gt;The list of information&lt;/figcaption&gt;
@@ -358,10 +358,10 @@ $$&lt;p&gt;where $Rot(z, \theta)$ and $Rot(x, \alpha_i)$ are rotation matrices, 
     
     <item>
       <title>Qualities of Researcher</title>
-      <link>http://localhost:1313/posts/qualities_of_researcher/</link>
+      <link>https://herding.github.io/posts/qualities_of_researcher/</link>
       <pubDate>Sun, 07 Dec 2025 13:43:13 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/qualities_of_researcher/</guid>
+      <guid>https://herding.github.io/posts/qualities_of_researcher/</guid>
       <description>&lt;p&gt;As an undergraduate student, I was puzzled about many research-related activities, although I found research work fascinating. Later, I participated in several research projects while preparing for my master&amp;rsquo;s degree and joined a modern research center as a research assistant. From these experiences I have some answers to my earlier questions. If you are wondering what research is or how to become a researcher, this article offers a few insights I would like to share.&lt;/p&gt;
 &lt;h2 id=&#34;what-is-research&#34;&gt;What is research?&lt;/h2&gt;
 &lt;p&gt;I think solving problems is the core of research. For a question that interests you or one assigned by your supervisor, the goal of research is to provide a valuable solution that improves efficiency, reduces resource use, or corrects earlier methods.&lt;/p&gt;
@@ -418,10 +418,10 @@ $$&lt;p&gt;where $Rot(z, \theta)$ and $Rot(x, \alpha_i)$ are rotation matrices, 
     
     <item>
       <title>Insert Images in Hugo and Automatically Clear `public` Folder</title>
-      <link>http://localhost:1313/posts/insert_images_in_hugo_and_automatically_clear_folders/</link>
+      <link>https://herding.github.io/posts/insert_images_in_hugo_and_automatically_clear_folders/</link>
       <pubDate>Sun, 30 Nov 2025 11:43:43 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/insert_images_in_hugo_and_automatically_clear_folders/</guid>
+      <guid>https://herding.github.io/posts/insert_images_in_hugo_and_automatically_clear_folders/</guid>
       <description>&lt;p&gt;When I updated my website, I faced some technical issues: how to insert images into posts and how to automatically clear the &lt;code&gt;public&lt;/code&gt; folder. Now I have solutions to both challenges and would like to share them with you.&lt;/p&gt;
 &lt;h1 id=&#34;insert-images&#34;&gt;Insert Images&lt;/h1&gt;
 &lt;p&gt;To insert images into posts, I researched online resources and found two important considerations: the correct location for images and the method to load them.&lt;/p&gt;
