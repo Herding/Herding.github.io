@@ -2,17 +2,145 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>context</title>
-    <link>https://herding.github.io/</link>
+    <link>http://localhost:1313/</link>
     <description>Recent content on context</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="https://herding.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Angular Velocity</title>
+      <link>http://localhost:1313/posts/angular_velocity/</link>
+      <pubDate>Thu, 05 Feb 2026 09:48:33 +0800</pubDate>
+      
+      <guid>http://localhost:1313/posts/angular_velocity/</guid>
+      <description>&lt;p&gt;The relationship between the spatial pose of the end-effector and joint configurations is introduced in &lt;a href=&#34;http://localhost:1313/posts/homogeneous_transformation&#34;&gt;Homogeneous Transformation Matrix&lt;/a&gt;. Here we derive the relationships between the end-effector velocities and the joint velocities. When discussing end-effector velocities in Cartesian space, there are both linear velocities (translation) and angular velocities (rotation). This post introduces the definition of angular velocity and the time derivative of rotation matrices.&lt;/p&gt;
+&lt;h2 id=&#34;angular-velocities&#34;&gt;Angular Velocities&lt;/h2&gt;
+&lt;p&gt;Because the end-effector&amp;rsquo;s pose includes orientation, recall the definition of angular velocity $\omega = d\theta / dt \cdot \mathbf u$ when computing velocities. Angular velocity is a pseudovector as shown in the figure. Its direction depends on the unit vector $\mathbf u$ and is perpendicular to the plane swept by the position vector $\mathbf r$; it is parallel to the rotation axis with magnitude $d\theta / dt$ (radians per unit time).&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure class=&#34;site-figure center&#34;&gt;
+  
+    
+    
+      
+      
+      
+      
+      
+        
+        
+      
+        
+        
+      
+      
+      
+      
+      
+      
+      &lt;img src=&#34;http://localhost:1313/posts/angular_velocity/Velocity_hu_57ffbb0825710b03.png&#34; srcset=&#34;http://localhost:1313/posts/angular_velocity/Velocity_hu_50699b98dbce63b3.png 420w, http://localhost:1313/posts/angular_velocity/Velocity_hu_57ffbb0825710b03.png 840w&#34; sizes=&#34;(max-width: 420px) 100vw, 420px&#34; alt=&#34;allocation&#34; ZgotmplZ&gt;
+    
+  
+    &lt;figcaption&gt;From Wikipedia&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;To fix the direction of angular velocity, we use the right-hand rule. Point the index finger along the position vector $\mathbf r$, the middle finger along the instantaneous linear velocity $\mathbf v_{\omega}$, and the thumb then points in the direction of the angular velocity. Viewed from the tip of $\mathbf u$, the rotation appears counter-clockwise.&lt;/p&gt;
+&lt;h2 id=&#34;the-derivative-of-rotation-matrix&#34;&gt;The Derivative of Rotation Matrix&lt;/h2&gt;
+&lt;p&gt;The orientation of the end-effector is expressed as a rotation matrix $R$ in forward kinematics; therefore angular velocity can be related to the time derivative of $R$ via
+&lt;/p&gt;
+$$
+\frac{dR^n_0(\theta)}{dt} = \frac{dR^n_0(\theta)}{d\theta} \frac{d\theta}{dt}
+$$&lt;p&gt;
+To obtain angular velocity from a rotation matrix, consider the simple case of a rotation about the $x$-axis and derive the derivative of the rotation matrix with respect to time:
+&lt;/p&gt;
+$$
+\frac{d R(x, \theta)}{dt} = \frac{dR(x, \theta)}{d \theta}\frac{d\theta}{dt}.
+$$&lt;p&gt;
+Now consider how to compute $dR(x, \theta)/d\theta$. Some properties of skew-symmetric matrices are useful; if you are already familiar with them you can skip this section.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;HINTS of Skew-Symmetric Matrices&lt;/p&gt;
+&lt;p&gt;Definition: A matrix $S$ is skew-symmetric if and only if $S + S^T = 0$, i.e. $s_{ij} = -s_{ji}$.&lt;/p&gt;
+&lt;p&gt;Properties:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$S(a \mathbf a + b \mathbf b) = aS(\mathbf a) + bS(\mathbf b), \forall \mathbf a, \mathbf b \in \mathbb R^3$;&lt;/li&gt;
+&lt;li&gt;$S(\mathbf a)\mathbf p = \mathbf a \times \mathbf p, \forall \mathbf p = [p_x, p_y, p_z]^T$, where $\times$ denotes the &lt;a href=&#34;https://en.wikipedia.org/wiki/Cross_product&#34;&gt;cross product&lt;/a&gt;;&lt;/li&gt;
+&lt;li&gt;$R(\mathbf a \times \mathbf b) = R\mathbf a \times R\mathbf b$ for $R\in SO(3)$ (the 3D rotation group);&lt;/li&gt;
+&lt;li&gt;$RS(\mathbf a)R^T\mathbf b = R(\mathbf a \times R^T \mathbf b) = (R\mathbf a) \times \mathbf b = S(R\mathbf a)\mathbf b$;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;where $\mathbf a = [a_x, a_y, a_z]^T$ is a vector. The skew-symmetric matrix $S(\mathbf a)$ is defined as
+&lt;/p&gt;
+$$ S(\mathbf a) = \begin{bmatrix}0&amp; -a_z&amp; a_y \\\ a_z&amp; 0&amp; -a_x\\ -a_y&amp; a_x&amp; 0\end{bmatrix}. $$&lt;/blockquote&gt;
+&lt;p&gt;Because $R(x, \theta)$ belongs to the 3D rotation group $SO(3)$, it is orthogonal, so
+&lt;/p&gt;
+$$
+R(x, \theta)R^T(x, \theta) = I.
+$$&lt;p&gt;
+Using the product rule, the derivative of the above equation is
+&lt;/p&gt;
+$$
+\frac{dR(x, \theta)}{d\theta}R^T(x, \theta) + R(x, \theta)\frac{dR^T(x, \theta)}{d\theta} = 0
+$$&lt;p&gt;
+According to the definition of a skew-symmetric matrix, let $S = R^T(x, \theta) \cdot dR(x, \theta) / d\theta$. It can be simplified using the derivative and transpose of $R(x, \theta)$ as shown in the homogeneous transformation matrix:
+&lt;/p&gt;
+$$
+\begin{aligned}
+S = \frac{dR(x, \theta)}{d\theta}R(x, \theta)^T &amp;= \begin{bmatrix}0&amp; 0&amp; 0\\ 0&amp; -\sin \theta&amp; -\cos\theta\\ 0&amp; \cos\theta&amp; -\sin\theta\end{bmatrix} \begin{bmatrix}1&amp; 0&amp; 0\\ 0&amp; \cos\theta&amp; \sin\theta\\ 0&amp; -\sin\theta&amp; \cos\theta\end{bmatrix} \\\ 
+&amp;= \begin{bmatrix}0&amp; 0&amp; 0\\ 0&amp; 0&amp; -1\\ 0&amp; 1&amp; 0\end{bmatrix} \\\ 
+&amp;= S(\mathbf i)
+\end{aligned}
+$$&lt;p&gt;
+where $\mathbf i = [1, 0, 0]^T$ is the unit vector along the $x$-axis. Thus $dR(x, \theta)/d\theta = S(\mathbf i)R(x, \theta)$. The time derivative $dR(x, \theta)/dt$ can then be expressed as
+&lt;/p&gt;
+$$
+\begin{aligned}
+\frac{d R(x, \theta)}{dt} &amp;= \frac{d R(x, \theta)}{d\theta}\frac{d\theta}{dt} \\\ 
+&amp;= \frac{d\theta}{dt} S(\mathbf i)R(x, \theta) \\\ 
+&amp;= S\Big(\frac{d\theta}{dt} \mathbf i\Big)R(x, \theta) \\\ 
+&amp;= S(\omega)R(x, \theta)
+\end{aligned}
+$$&lt;p&gt;
+where $\omega$ is the angular velocity. Similarly, derivatives of rotation matrices about the $y$- or $z$-axes satisfy $dR(y, \theta)/d\theta = S(\mathbf j)R(y, \theta)$ and $dR(z, \theta)/d\theta = S(\mathbf k)R(z, \theta)$, where $\mathbf j = [0,1,0]^T$ and $\mathbf k = [0,0,1]^T$. In this example the angular velocity vector points along the rotation axis with magnitude $d\theta/dt$.&lt;/p&gt;
+&lt;p&gt;More generally, the time derivative of a rotation matrix $R^2_0(\theta)$ for an end-effector with two intermediate frames is
+&lt;/p&gt;
+$$
+\begin{aligned}
+\dot{R}^2_0 &amp;= \dot{R}^1_0 R^2_1 + R^1_0\dot{R}^2_1 \\\ 
+&amp;= S(\omega^1_0)R^1_0R^2_1 + R^1_0S(\omega^2_1)R^2_1 \\\ 
+&amp;= S(\omega^1_0)R^1_0R^2_1 + R^1_0 S(\omega^2_1) {R^1_0}^T R^1_0 R^2_1(t) \\\ 
+&amp;= S(\omega^1_0)R^1_0R^2_1 + S(R^1_0(t)\omega^2_1(t))R^1_0(t)R^2_1(t) \\\ 
+&amp;= S(\omega^1_0 + R^1_0 \omega^2_1) \cdot R^2_0 \\\ 
+&amp;= S(\omega^2_0) R^2_0
+\end{aligned}
+$$&lt;p&gt;
+by using the first and fourth properties of skew-symmetric matrices. The combined angular velocity results from the individual frame rotations. Similarly, we obtain
+&lt;/p&gt;
+$$
+\begin{aligned}
+\dot R^n_0 &amp;= S\big(\omega^n_0\big)R^n_0 \\\ 
+\\
+\omega^n_0 &amp;= \omega^1_0 + R^1_0\omega^2_1 + R^2_0\omega^3_2 + \cdots + R^{n - 1}_0\omega^n_{n - 1}
+\end{aligned}
+$$&lt;p&gt;
+where $\omega^n_0$ is the desired angular velocity of the end-effector.&lt;/p&gt;
+&lt;p&gt;In conclusion, the time derivative of a rotation matrix can be expressed using skew-symmetric matrices and the angular velocities of individual frames. This relationship is commonly used when deriving the Jacobian matrix based on $\omega^n_0$.&lt;/p&gt;
+</description>
+    </item>
+    
     <item>
       <title>Homogeneous Transformation Matrices</title>
-      <link>https://herding.github.io/posts/homogeneous_transformation/</link>
+      <link>http://localhost:1313/posts/homogeneous_transformation/</link>
       <pubDate>Sun, 25 Jan 2026 11:51:56 +0800</pubDate>
       
-      <guid>https://herding.github.io/posts/homogeneous_transformation/</guid>
-      <description>&lt;p&gt;This article explains how to construct transformation matrices using the parameters obtained from the &lt;a href=&#34;https://herding.github.io/posts/dh_convention&#34;&gt;DH convention&lt;/a&gt;, and how to determine the spatial position and orientation of the end-effector through algebraic calculations.&lt;/p&gt;
+      <guid>http://localhost:1313/posts/homogeneous_transformation/</guid>
+      <description>&lt;p&gt;This article explains how to construct transformation matrices using the parameters obtained from the &lt;a href=&#34;http://localhost:1313/posts/dh_convention&#34;&gt;DH convention&lt;/a&gt;, and how to determine the spatial position and orientation of the end-effector through algebraic calculations.&lt;/p&gt;
 &lt;h2 id=&#34;translation-matrices&#34;&gt;Translation Matrices&lt;/h2&gt;
 &lt;p&gt;First, consider a general spatial translation. The position after translation can be described as:
 &lt;/p&gt;
@@ -75,7 +203,7 @@ $$&lt;p&gt;After rotation, the relationship between the $x$-axis and the $x&amp;
       
       
       
-      &lt;img src=&#34;https://herding.github.io/posts/homogeneous_transformation/Rotation_hu_fbe3a852d5993000.png&#34; srcset=&#34;https://herding.github.io/posts/homogeneous_transformation/Rotation_hu_6cbb9efd39ef193e.png 600w, https://herding.github.io/posts/homogeneous_transformation/Rotation_hu_fbe3a852d5993000.png 1200w&#34; sizes=&#34;(max-width: 600px) 100vw, 600px&#34; alt=&#34;allocation&#34; ZgotmplZ&gt;
+      &lt;img src=&#34;http://localhost:1313/posts/homogeneous_transformation/Rotation_hu_fbe3a852d5993000.png&#34; srcset=&#34;http://localhost:1313/posts/homogeneous_transformation/Rotation_hu_6cbb9efd39ef193e.png 600w, http://localhost:1313/posts/homogeneous_transformation/Rotation_hu_fbe3a852d5993000.png 1200w&#34; sizes=&#34;(max-width: 600px) 100vw, 600px&#34; alt=&#34;allocation&#34; ZgotmplZ&gt;
     
   
     &lt;figcaption&gt;From Homogenous Transformation Matrices. Matjaž Mihelj and so on. 2019.&lt;/figcaption&gt;
@@ -101,10 +229,10 @@ $$</description>
     
     <item>
       <title>DH Convention</title>
-      <link>https://herding.github.io/posts/dh_convention/</link>
+      <link>http://localhost:1313/posts/dh_convention/</link>
       <pubDate>Sun, 18 Jan 2026 19:07:32 +0800</pubDate>
       
-      <guid>https://herding.github.io/posts/dh_convention/</guid>
+      <guid>http://localhost:1313/posts/dh_convention/</guid>
       <description>&lt;p&gt;To determine the position of a point in space, we typically construct a coordinate system (reference frame) and specify the point&amp;rsquo;s location using $(x, y, z)$ coordinates relative to the origin. However, for robots or robotic arms with multiple rigid bodies, directly using a single unified coordinate system becomes complex. After numerous joint movements, determining positions requires extensive geometric calculations. To address this, previous researchers developed clever methods, including the DH (Denavit-Hartenberg) convention introduced in this article. This method also has a modified version, but this article focuses solely on the Standard DH convention—a method for constructing reference coordinate systems for mechanical systems connected by joints. Its core principle involves establishing coordinate systems for each rigid body based on joint information, obtaining relevant parameters to construct transformation matrices (discussed below), and thereby determining the position information of each rigid body in the base coordinate system.&lt;/p&gt;
 &lt;p&gt;As mentioned above, the DH convention follows these steps to obtain coordinate systems for each rigid body in a mechanical system:&lt;/p&gt;
 &lt;ol&gt;
@@ -155,7 +283,7 @@ $$</description>
       
       
       
-      &lt;img src=&#34;https://herding.github.io/posts/dh_convention/example_hu_ebd321c8f9277533.png&#34; srcset=&#34;https://herding.github.io/posts/dh_convention/example_hu_f21edf5bff1a72fa.png 600w, https://herding.github.io/posts/dh_convention/example_hu_ebd321c8f9277533.png 1200w&#34; sizes=&#34;(max-width: 600px) 100vw, 600px&#34; alt=&#34;allocation&#34; ZgotmplZ&gt;
+      &lt;img src=&#34;http://localhost:1313/posts/dh_convention/example_hu_ebd321c8f9277533.png&#34; srcset=&#34;http://localhost:1313/posts/dh_convention/example_hu_f21edf5bff1a72fa.png 600w, http://localhost:1313/posts/dh_convention/example_hu_ebd321c8f9277533.png 1200w&#34; sizes=&#34;(max-width: 600px) 100vw, 600px&#34; alt=&#34;allocation&#34; ZgotmplZ&gt;
     
   
     &lt;figcaption&gt;Example: EEE 187 robotics. Summary 8: The denavit-Hartenberg convention&lt;/figcaption&gt;
@@ -178,10 +306,10 @@ $$&lt;p&gt;where $Rot(z, \theta)$ and $Rot(x, \alpha_i)$ are rotation matrices, 
     
     <item>
       <title>Managing Information Sources</title>
-      <link>https://herding.github.io/posts/managing_information_sources/</link>
+      <link>http://localhost:1313/posts/managing_information_sources/</link>
       <pubDate>Sun, 14 Dec 2025 19:56:56 +0800</pubDate>
       
-      <guid>https://herding.github.io/posts/managing_information_sources/</guid>
+      <guid>http://localhost:1313/posts/managing_information_sources/</guid>
       <description>&lt;p&gt;This workflow helps you manage the flood of information you encounter when working on research projects.&lt;/p&gt;
 &lt;p&gt;First, recognize the different types and channels of information: videos, papers, books, social-media posts, web pages, recommendations from colleagues, and content from streaming platforms. Much of this arrives passively through subscriptions or RSS feeds, while other material is found actively via search engines or AI tools. The key is to select information based on your purpose instead of trying to consume everything that appears.&lt;/p&gt;
 &lt;p&gt;Second, consolidate relevant items in one place so they can support your projects and thinking. Web pages can be clipped, while papers and books are better stored as local files. I use Obsidian Web Clipper for web pages and Zotero for local files and references. Plugins can import metadata from local files into the same repository that holds clipped web pages. This consolidated library helps you focus on the most relevant material.&lt;/p&gt;
@@ -217,7 +345,7 @@ $$&lt;p&gt;where $Rot(z, \theta)$ and $Rot(x, \alpha_i)$ are rotation matrices, 
       
       
       
-      &lt;img src=&#34;https://herding.github.io/posts/managing_information_sources/List_of_info_hu_74f06c1512d4546a.png&#34; srcset=&#34;https://herding.github.io/posts/managing_information_sources/List_of_info_hu_49af3f8e2c783c9c.png 450w, https://herding.github.io/posts/managing_information_sources/List_of_info_hu_74f06c1512d4546a.png 900w&#34; sizes=&#34;(max-width: 450px) 100vw, 450px&#34; alt=&#34;&#34; ZgotmplZ&gt;
+      &lt;img src=&#34;http://localhost:1313/posts/managing_information_sources/List_of_info_hu_74f06c1512d4546a.png&#34; srcset=&#34;http://localhost:1313/posts/managing_information_sources/List_of_info_hu_49af3f8e2c783c9c.png 450w, http://localhost:1313/posts/managing_information_sources/List_of_info_hu_74f06c1512d4546a.png 900w&#34; sizes=&#34;(max-width: 450px) 100vw, 450px&#34; alt=&#34;&#34; ZgotmplZ&gt;
     
   
     &lt;figcaption&gt;The list of information&lt;/figcaption&gt;
@@ -229,10 +357,10 @@ $$&lt;p&gt;where $Rot(z, \theta)$ and $Rot(x, \alpha_i)$ are rotation matrices, 
     
     <item>
       <title>Qualities of Researcher</title>
-      <link>https://herding.github.io/posts/qualities_of_researcher/</link>
+      <link>http://localhost:1313/posts/qualities_of_researcher/</link>
       <pubDate>Sun, 07 Dec 2025 13:43:13 +0800</pubDate>
       
-      <guid>https://herding.github.io/posts/qualities_of_researcher/</guid>
+      <guid>http://localhost:1313/posts/qualities_of_researcher/</guid>
       <description>&lt;p&gt;As an undergraduate student, I was puzzled about many research-related activities, although I found research work fascinating. Later, I participated in several research projects while preparing for my master&amp;rsquo;s degree and joined a modern research center as a research assistant. From these experiences I have some answers to my earlier questions. If you are wondering what research is or how to become a researcher, this article offers a few insights I would like to share.&lt;/p&gt;
 &lt;h2 id=&#34;what-is-research&#34;&gt;What is research?&lt;/h2&gt;
 &lt;p&gt;I think solving problems is the core of research. For a question that interests you or one assigned by your supervisor, the goal of research is to provide a valuable solution that improves efficiency, reduces resource use, or corrects earlier methods.&lt;/p&gt;
@@ -289,10 +417,10 @@ $$&lt;p&gt;where $Rot(z, \theta)$ and $Rot(x, \alpha_i)$ are rotation matrices, 
     
     <item>
       <title>Insert Images in Hugo and Automatically Clear `public` Folder</title>
-      <link>https://herding.github.io/posts/insert_images_in_hugo_and_automatically_clear_folders/</link>
+      <link>http://localhost:1313/posts/insert_images_in_hugo_and_automatically_clear_folders/</link>
       <pubDate>Sun, 30 Nov 2025 11:43:43 +0800</pubDate>
       
-      <guid>https://herding.github.io/posts/insert_images_in_hugo_and_automatically_clear_folders/</guid>
+      <guid>http://localhost:1313/posts/insert_images_in_hugo_and_automatically_clear_folders/</guid>
       <description>&lt;p&gt;When I updated my website, I faced some technical issues: how to insert images into posts and how to automatically clear the &lt;code&gt;public&lt;/code&gt; folder. Now I have solutions to both challenges and would like to share them with you.&lt;/p&gt;
 &lt;h1 id=&#34;insert-images&#34;&gt;Insert Images&lt;/h1&gt;
 &lt;p&gt;To insert images into posts, I researched online resources and found two important considerations: the correct location for images and the method to load them.&lt;/p&gt;
@@ -338,114 +466,6 @@ $$&lt;p&gt;where $Rot(z, \theta)$ and $Rot(x, \alpha_i)$ are rotation matrices, 
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Time Management With Apple&#39;s App</title>
-      <link>https://herding.github.io/posts/time_management_with_apples_app/</link>
-      <pubDate>Sun, 23 Nov 2025 15:28:13 +0800</pubDate>
-      
-      <guid>https://herding.github.io/posts/time_management_with_apples_app/</guid>
-      <description>&lt;p&gt;Have you ever been in a situation where you had so many things to do that you didn&amp;rsquo;t know how to get started? When I worked as a research assistant at a university, I struggled to balance preparing for the IELTS exam, managing interpersonal relationships, teaching and sharing skills with colleagues and students, and progressing my research and experiments while learning new concepts in biology. I often felt I needed a more efficient life. I tried many apps to reorganize my routines and read blogs, watched videos, and browsed social content for advice. Unfortunately, I felt overwhelmed and had little time to make real progress.&lt;/p&gt;
-&lt;p&gt;Gradually, I realized that focusing on the tasks themselves matters more than obsessing over time. If I keep experimenting with different ways to manage my limited time, I end up spending less time actually completing tasks. Now I want to share how I manage my time using only Apple Reminders and Apple Calendar.&lt;/p&gt;
-&lt;h1 id=&#34;list-your-current-tasks-and-allocate-time&#34;&gt;List Your Current Tasks and Allocate Time&lt;/h1&gt;
-&lt;p&gt;First, identify the tasks you need to handle.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;For example: building my personal blog, reading papers related to my research, continuing English study, and reviewing foundational knowledge (such as linear algebra). I write these tasks down on paper.
-Also, don&amp;rsquo;t forget daily routines like waking up, eating breakfast, doing laundry, or showering.&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;Second, I prefer to schedule routines first because these activities rarely change and take a short amount of time. After scheduling routines, I allocate time for flexible activities that require more attention. Based on the importance and urgency of each task, I assign different time blocks.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;For example, if I want to quickly build my website, I will allocate more time to it each day or week. Reading papers is important but not urgent, so I schedule shorter, regular sessions for it.&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;Finally, I add these tasks to Apple Reminders, setting specific times, alerts, and repeat rules. Creating lists is a good way to group similar tasks. I maintain multiple lists with different colors to indicate levels of effort; these can be viewed as tags in Apple Calendar (described later). In the figure below, red indicates tasks that require intense focus—this is my current allocation:&lt;/p&gt;
-&lt;!-- ![my current allocation](Today.jpeg) --&gt;
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure class=&#34;site-figure center&#34;&gt;
-  
-    
-    
-      
-      
-      
-      
-      
-        
-        
-      
-        
-        
-      
-      
-      
-      
-      
-      
-      &lt;img src=&#34;https://herding.github.io/posts/time_management_with_apples_app/Today_hu_9e348ad058fde9ca.jpeg&#34; srcset=&#34;https://herding.github.io/posts/time_management_with_apples_app/Today_hu_d043d73c13033d1e.jpeg 600w, https://herding.github.io/posts/time_management_with_apples_app/Today_hu_9e348ad058fde9ca.jpeg 1200w&#34; sizes=&#34;(max-width: 600px) 100vw, 600px&#34; alt=&#34;allocation&#34; ZgotmplZ&gt;
-    
-  
-    &lt;figcaption&gt;My current allocation&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;Overall, Apple Reminders gives me a small nudge that helps me form habits and handle tasks regularly and in order.&lt;/p&gt;
-&lt;h1 id=&#34;do-review-and-plan-again&#34;&gt;Do, Review, and Plan Again&lt;/h1&gt;
-&lt;p&gt;At this stage, Apple Reminders acts like an assistant that tells me what to do. When I receive a reminder, I work through the tasks one by one and check them off as I finish. Another useful feature is that I can view reminders in Apple Calendar, which makes it convenient to review my daily schedule each evening.&lt;/p&gt;
-&lt;p&gt;Besides checking tasks in the morning and reviewing details, I assess my system based on completed and incomplete tasks to see whether it works for me. If a particular task repeatedly causes problems, I adjust the reminder settings. Similarly, when I reach a milestone, I update related tasks. This history helps me make better decisions, drive project progress, and improve my skills. The figure below shows tasks from a day when I was preparing for the IELTS test:&lt;/p&gt;
-&lt;!-- ![daily tasks](Daily.jpeg) --&gt;
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure class=&#34;site-figure center&#34;&gt;
-  
-    
-    
-      
-      
-      
-      
-      
-        
-        
-      
-        
-        
-      
-      
-      
-      
-      
-      
-      &lt;img src=&#34;https://herding.github.io/posts/time_management_with_apples_app/Daily_hu_a0841d49fc06744b.jpeg&#34; srcset=&#34;https://herding.github.io/posts/time_management_with_apples_app/Daily_hu_ed4ac0a4a8c8ffc8.jpeg 450w, https://herding.github.io/posts/time_management_with_apples_app/Daily_hu_a0841d49fc06744b.jpeg 900w&#34; sizes=&#34;(max-width: 450px) 100vw, 450px&#34; alt=&#34;&#34; ZgotmplZ&gt;
-    
-  
-    &lt;figcaption&gt;Daily tasks&lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;In conclusion, I use Apple Reminders to tell me the next task and Apple Calendar to visualize when I do them; together they help me allocate time and handle activities more efficiently.&lt;/p&gt;
-&lt;h1 id=&#34;some-drawbacks-of-this-plan&#34;&gt;Some Drawbacks of This Plan&lt;/h1&gt;
-&lt;p&gt;Although I find Apple Reminders and Calendar better than other apps for my needs, there are drawbacks.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Sometimes I want to track how much time I spend on a specific activity, but I can&amp;rsquo;t because time spans are not recorded.&lt;/li&gt;
-&lt;li&gt;I cannot easily review the progress of a whole project that has been split into many tasks.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;If you have a better plan, please share it with me. Thanks!&lt;/p&gt;
 </description>
     </item>
     

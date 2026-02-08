@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://herding.github.io/sitemap.xml
+Sitemap: http://localhost:1313/sitemap.xml
