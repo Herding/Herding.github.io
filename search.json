@@ -1,11 +1,11 @@
 {
-  "links": {"/posts/dh_convention":[{"text":"DH convention","title":"Homogeneous Transformation Matrices","url":"/posts/homogeneous_transformation/"}],"/posts/homogeneous_transformation":[{"text":"Homogeneous Transformation Matrix","title":"Angular Velocity","url":"/posts/angular_velocity/"}]},
-  "generated": "2026-02-08T22:07:28+08:00",
+  "links": {"/posts/angular_velocity":[{"text":"Angular Velocity","title":"Jacobian Matrix","url":"/posts/jacobian_matrix/"}],"/posts/dh_convention":[{"text":"DH convention","title":"Homogeneous Transformation Matrices","url":"/posts/homogeneous_transformation/"}],"/posts/homogeneous_transformation":[{"text":"Homogeneous Transformation Matrices","title":"Jacobian Matrix","url":"/posts/jacobian_matrix/"},{"text":"Homogeneous Transformation Matrix","title":"Angular Velocity","url":"/posts/angular_velocity/"}]},
+  "generated": "2026-03-01T18:12:12+08:00",
   "stats": {
-    "totalPages": 8,
-    "processedPages": 8,
-    "pagesWithBacklinks": 2,
-    "totalBacklinks": 2,
+    "totalPages": 9,
+    "processedPages": 9,
+    "pagesWithBacklinks": 3,
+    "totalBacklinks": 4,
     "incremental": false
   }
 }

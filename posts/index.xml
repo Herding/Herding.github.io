@@ -6,7 +6,196 @@
     <description>Recent content in Posts on context</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 05 Feb 2026 09:48:33 +0800</lastBuildDate><atom:link href="https://herding.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 Feb 2026 22:09:25 +0800</lastBuildDate><atom:link href="https://herding.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Jacobian Matrix</title>
+      <link>https://herding.github.io/posts/jacobian_matrix/</link>
+      <pubDate>Sun, 08 Feb 2026 22:09:25 +0800</pubDate>
+      
+      <guid>https://herding.github.io/posts/jacobian_matrix/</guid>
+      <description>&lt;p&gt;As shown in &lt;a href=&#34;https://herding.github.io/posts/homogeneous_transformation&#34;&gt;Homogeneous Transformation Matrices&lt;/a&gt;, the spatial configuration of the end effector can be expressed as
+&lt;/p&gt;
+$$
+T = \begin{bmatrix}R^n_0&amp; \mathbf p^n_0\\ \mathbf 0&amp; 1\end{bmatrix} = A^1_0A^2_1\cdots A^n_{n - 1}.
+$$&lt;p&gt;
+Hence, angular velocity can be obtained from the time derivative of $R^n_0$&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; (see &lt;a href=&#34;https://herding.github.io/posts/angular_velocity&#34;&gt;Angular Velocity&lt;/a&gt;), giving
+&lt;/p&gt;
+$$
+\begin{aligned}
+\omega^n_0 &amp;= \omega^1_0 + R^1_0\omega^2_1 + R^2_0\omega^3_2 + \cdots R^{n - 1}_0 \omega^n_{n-1}\\
+&amp;= \mathbf k \frac{d \theta_1}{d t} + R^1_0 \mathbf k \frac{d\theta_2}{dt} + R^2_0\mathbf k \frac{d\theta_3}{d t} + \cdots R^{n - 1}_0 \mathbf k \frac{d\theta_n}{dt} \\
+&amp;= \begin{bmatrix}\mathbf \rho_1k,&amp; \rho_2R^1_0\mathbf k,&amp; \rho_3R^2_0\mathbf k,&amp; \cdots,&amp; \rho_nR^{n - 1}_0\mathbf k \end{bmatrix}\dot{\mathbf q}
+\end{aligned}
+$$&lt;p&gt;
+where $\dot {\mathbf q} = \begin{bmatrix}\frac{d\theta_1}{dt},&amp;amp; \frac{d\theta_2}{dt},&amp;amp; \frac{d\theta_3}{dt},&amp;amp; \cdots,&amp;amp; \frac{d\theta_n}{dt}\end{bmatrix}^T$. $\rho_i = 1$ if the $i$th joint is revolute, otherwise $\rho_i = 0$.&lt;/p&gt;
+&lt;p&gt;In the following, linear velocity is derived from the time derivative of $\mathbf p^n_0$&lt;sup id=&#34;fnref1:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;, and the Jacobian matrix is constructed from the angular and linear velocities.&lt;/p&gt;
+&lt;h2 id=&#34;linear-velocity&#34;&gt;Linear velocity&lt;/h2&gt;
+&lt;p&gt;Using the chain rule, the end effector&amp;rsquo;s linear velocity can be expressed as
+&lt;/p&gt;
+$$
+\begin{aligned}
+\dot {\mathbf p}^n_0 &amp;= \sum^n_{i = 1} \frac{\partial {\mathbf p}^n_0}{\partial q_i}\dot q_i \\
+&amp;= \begin{bmatrix}\frac{\partial \mathbf p^n_0}{\partial q_1},&amp; \frac{\partial \mathbf p^n_0}{\partial q_2},&amp; \frac{\partial \mathbf p^n_0}{\partial q_3},&amp; \cdots,&amp;\frac{\partial \mathbf p^n_0}{\partial q_n}\end{bmatrix}\dot{\mathbf q}
+\end{aligned}
+$$&lt;p&gt;
+where $\dot {\mathbf q}$ depends on the joint types. We therefore start from the general expression
+&lt;/p&gt;
+$$\mathbf p^n_0 = R^i_0\mathbf p^n_i + R^{i-1}_0 {\mathbf p}^i_{i-1} + {\mathbf p}^{i - 1}_0$$&lt;p&gt;
+with motion produced by prismatic or revolute joints, derived from
+&lt;/p&gt;
+$$
+\begin{aligned}
+T &amp;= A^{i - 1}_0A^{i}_{i - 1}A^n_{i} \\
+&amp;= \begin{bmatrix}R^{i-1}_0&amp; \mathbf p^{i - 1}_0 \\ \mathbf 0&amp; 1\end{bmatrix} \begin{bmatrix}R^{i}_{i - 1}&amp; \mathbf p^{i}_{i - 1} \\ \mathbf 0&amp; 1\end{bmatrix} \begin{bmatrix}R^{n}_{i}&amp; \mathbf p^{n}_{i} \\ \mathbf 0&amp; 1\end{bmatrix} \\
+&amp;= \begin{bmatrix}R^{i}_0&amp; R^{i-1}_0\mathbf p^i_{i-1} + \mathbf p^{i - 1}_0 \\ \mathbf 0&amp; 1\end{bmatrix}\begin{bmatrix}R^{n}_{i}&amp; \mathbf p^{n}_{i} \\ \mathbf 0&amp; 1\end{bmatrix}  \\
+&amp;= \begin{bmatrix}R^n_0&amp; R^i_0\mathbf p^n_i + R^{i-1}_0\mathbf p^i_{i-1} + \mathbf p^{i - 1}_0 \\ \mathbf 0&amp; 1\end{bmatrix}.
+\end{aligned}
+$$&lt;p&gt;
+First, consider the $i$th joint to be prismatic. The rotation matrix and position vector of the $(i-1)$th frame are:
+&lt;/p&gt;
+$$
+\begin{aligned}
+&amp;R^i_{i - 1} = \begin{bmatrix}
+1&amp; 0&amp; 0\\ 0&amp; 1&amp; 0 \\ 0&amp; 0&amp; 1
+\end{bmatrix}, \\
+&amp;
+\mathbf p^i_{i - 1} = \begin{bmatrix}a_i \\0\\ d_i\end{bmatrix}.
+\end{aligned}
+$$&lt;blockquote&gt;
+&lt;p&gt;HINT:&lt;/p&gt;
+&lt;p&gt;According to the definition of homogeneous transformation matrix, $A^i_{i -1}$ is
+&lt;/p&gt;
+$$ \begin{aligned} A^{i}_{i - 1}  &amp;= Rot(z, 0)Trans(0, 0,d_i)Trans(a_i, 0, 0)Rot(x, 0) \\ &amp;= \begin{bmatrix}1&amp; 0&amp; 0&amp; 0\\ 0&amp; 1&amp; 0&amp; 0 \\ 0&amp; 0&amp; 1&amp; 0\\ 0&amp; 0&amp; 0&amp; 1\end{bmatrix} \begin{bmatrix}1&amp; 0&amp; 0&amp; 0 \\ 0&amp; 1&amp; 0&amp; 0\\ 0&amp; 0&amp; 1&amp; d_i\\ 0&amp; 0&amp; 0&amp; 1\end{bmatrix} \begin{bmatrix}1&amp; 0&amp; 0&amp; a_i \\ 0&amp; 1&amp; 0&amp; 0\\ 0&amp; 0&amp; 1&amp; 0\\ 0&amp; 0&amp; 0&amp; 1\end{bmatrix} \begin{bmatrix}1&amp; 0&amp; 0&amp; 0\\ 0&amp; 1&amp; 0&amp; 0 \\ 0&amp; 0&amp; 1&amp; 0\\ 0&amp; 0&amp; 0&amp; 1\end{bmatrix} \\ &amp;= \begin{bmatrix} 1&amp; 0&amp; 0&amp; a_i \\0&amp; 1&amp; 0&amp; 0 \\ 0&amp; 0&amp; 1&amp; d_i \\ 0&amp; 0&amp; 0&amp; 1 \end{bmatrix} = \begin{bmatrix}R^i_{i - 1}&amp; \mathbf p^i_{i - 1} \\ \mathbf 0&amp; 1\end{bmatrix}. \end{aligned} $$&lt;/blockquote&gt;
+&lt;p&gt;Let $q_i = d_i$. The partial derivative of $\mathbf p^n_0$ can then be written as
+&lt;/p&gt;
+$$
+\begin{aligned}
+\frac{\partial \mathbf p^n_0}{\partial q_i} &amp;= \frac{\partial R^i_0\mathbf p^n_i}{\partial q_i} + \frac{\partial R^{i - 1}_0\mathbf p^i_{i - 1}}{\partial q_i} + \frac{\partial \mathbf p^{i - 1}_0}{\partial q_i} \\
+&amp;= R^{i - 1}_0 \frac{\partial \mathbf p^i_{i - 1}}{\partial q_i} \\
+&amp;= R^{i - 1}_0 \begin{bmatrix}0 \\ 0 \\ \dot q_i\end{bmatrix} \\
+&amp;= R^{i - 1}_0 \mathbf k \dot q_i
+\end{aligned}
+$$&lt;p&gt;
+where the partial derivatives of $R^i_0\mathbf p^n_i$ and $\mathbf p^{i - 1}_0$ vanish because these quantities are constant and not affected by $q_i$.&lt;/p&gt;
+&lt;p&gt;Next, consider the $i$th joint to be revolute, which yields
+&lt;/p&gt;
+$$
+\begin{aligned}
+&amp;R^i_{i - 1} = \begin{bmatrix}
+\cos\theta_i&amp; -\sin\theta_i&amp; 0\\ \sin\theta_i&amp; \cos\theta_i&amp; 0 \\ 0&amp; 0&amp; 1
+\end{bmatrix},
+\\
+&amp;\mathbf p^i_{i - 1} = \begin{bmatrix}a_i \cos \theta_i \\ a_i \sin \theta_i \\ 0\end{bmatrix}.
+\end{aligned}
+$$&lt;blockquote&gt;
+&lt;p&gt;HINT:&lt;/p&gt;
+&lt;p&gt;$A^i_{i - 1}$ is
+&lt;/p&gt;
+$$ \begin{aligned} A^{i}_{i - 1}  &amp;= Rot(z, \theta_i)Trans(0, 0, 0)Trans(a_i, 0, 0)Rot(x, 0) \\ &amp;= \begin{bmatrix}\cos \theta_i&amp; -\sin\theta_i&amp; 0&amp; 0\\ \sin \theta_i&amp; \cos \theta_i&amp; 0&amp; 0 \\ 0&amp; 0&amp; 1&amp; 0\\ 0&amp; 0&amp; 0&amp; 1\end{bmatrix} \begin{bmatrix}1&amp; 0&amp; 0&amp; 0 \\ 0&amp; 1&amp; 0&amp; 0\\ 0&amp; 0&amp; 1&amp; 0\\ 0&amp; 0&amp; 0&amp; 1\end{bmatrix} \begin{bmatrix}1&amp; 0&amp; 0&amp; a_i \\ 0&amp; 1&amp; 0&amp; 0\\ 0&amp; 0&amp; 1&amp; 0\\ 0&amp; 0&amp; 0&amp; 1\end{bmatrix} \begin{bmatrix}1&amp; 0&amp; 0&amp; 0\\ 0&amp; 1&amp; 0&amp; 0 \\ 0&amp; 0&amp; 1&amp; 0\\ 0&amp; 0&amp; 0&amp; 1\end{bmatrix} \\ &amp;= \begin{bmatrix} \cos\theta_i&amp; -\sin\theta_i&amp; 0&amp; a_i\cos\theta_i \\ \sin\theta_i&amp; \cos\theta_i&amp; 0&amp; a_i\sin\theta_i \\ 0&amp; 0&amp; 1&amp; 0 \\ 0&amp; 0&amp; 0&amp; 1 \end{bmatrix}. \end{aligned} $$&lt;/blockquote&gt;
+&lt;p&gt;Thus, setting $q_i = \theta_i$ leads to:
+&lt;/p&gt;
+$$
+\begin{aligned}
+\frac{\partial \mathbf p^n_0}{\partial q_i} &amp;= \frac{\partial R^i_0\mathbf p^n_i}{\partial q_i} + \frac{\partial R^{i - 1}_0\mathbf p^i_{i - 1}}{\partial q_i} + \frac{\partial \mathbf p^{i - 1}_0}{\partial q_i} \\
+&amp;= \frac{\partial R^i_0\mathbf p^n_i}{\partial q_i} + \frac{\partial R^{i - 1}_0\mathbf p^i_{i - 1}}{\partial q_i}.
+\end{aligned}
+$$&lt;p&gt;
+Using the definition of angular velocity for the $i$th link, the first term becomes
+&lt;/p&gt;
+$$
+\frac{\partial R^i_0\mathbf p^n_i}{\partial q_i} = S(R^{i - 1}_0 \dot q_i \mathbf k)R^i_0 \mathbf p^n_i.
+$$&lt;p&gt;
+The second term is
+&lt;/p&gt;
+$$
+\begin{aligned}
+\frac{\partial R^{i - 1}_0 \mathbf p^i_{i - 1}}{\partial q_i} &amp;= R^{i - 1}_0 \frac{\partial }{\partial q_i}\begin{bmatrix}a_i\cos\theta_i \\ a_i\sin \theta_i \\ 0 \end{bmatrix}\\
+&amp;= R^{i - 1}_0\begin{bmatrix}-a_i\sin\theta_i \\ a_i\cos \theta_i \\ 0 \end{bmatrix} \dot q_i \\
+&amp;= R^{i - 1}_0 \dot q_i (\mathbf k \times \mathbf p^i_{i -1})\\
+&amp;= R^{i - 1}_0 (\dot q_i \mathbf k \times \mathbf p^i_{i -1}) \\
+&amp;= R^{i - 1}_0 S(\dot q_i \mathbf k)\mathbf p^i_{i - 1} \\
+&amp;= S(R^{i - 1}_0\dot q_i \mathbf k)R^{i - 1}_0 \mathbf p^i_{i - 1}.
+\end{aligned}
+$$&lt;blockquote&gt;
+&lt;p&gt;HINTs:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$[-a_i \sin \theta_i,\ a_i \cos\theta_i,\ 0]^T$ is the result of the cross product.&lt;/li&gt;
+&lt;/ol&gt;
+$$ \begin{aligned} \mathbf k \times \mathbf p^i_{i - 1} &amp;= \begin{bmatrix}0 \\ 0\\ 1\end{bmatrix} \times \begin{bmatrix}a_i \cos \theta_i \\ a_i \sin \theta_i \\ 0\end{bmatrix} \\ &amp;= \begin{bmatrix}0 * 0 - 1 * a_i\sin\theta_i \\ 1 * a_i \cos\theta_i - 0 * 0 \\ 0 * a_i \sin \theta_i - 0 * a_i \cos\theta_i \end{bmatrix} \\ &amp;= \begin{bmatrix}-a_i \sin \theta_i \\ a_i \cos\theta_i \\ 0\end{bmatrix}. \end{aligned} $$&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;According to the property of skew symmetric matrix, $S(\mathbf a)\mathbf p = \mathbf a \times \mathbf p, \forall \mathbf p = [p_x, p_y, p_z]$ where $\times$ means the cross product, we have  $\dot q_i \mathbf k \times \mathbf p^i_{i - 1} = S(\dot q_i \mathbf k) \mathbf p^i_{i - 1}$.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;By using the property of skew symmetric matrix again, that is $RS(\mathbf a)R^T\mathbf b = S(R\mathbf a)\mathbf b$, we have
+&lt;/p&gt;
+$$ \begin{aligned}R^{i - 1}_0 S(\dot q_i \mathbf k)\mathbf p^i_{i - 1} &amp;= R^{i - 1}_0 S(\dot q_i \mathbf k) {R^{i - 1}_0}^TR^{i - 1}_0\mathbf p^i_{i - 1} \\ &amp;= S(R^{i - 1}_0\dot q_i \mathbf k)R^{i - 1}_0 \mathbf p^i_{i - 1}. \end{aligned}$$&lt;/li&gt;
+&lt;/ol&gt;&lt;/blockquote&gt;
+&lt;p&gt;Combining the two terms gives
+&lt;/p&gt;
+$$
+\begin{aligned}
+\frac{\partial \mathbf p^n_0}{\partial q_i} &amp;= \frac{\partial R^i_0\mathbf p^n_i}{\partial q_i} + \frac{\partial R^{i - 1}_0\mathbf p^i_{i - 1}}{\partial q_i} \\
+&amp;= S(R^{i - 1}_0 \dot q_i \mathbf k) R^i_0 \mathbf p^n_i + S(R^{i - 1}_0\dot q_i \mathbf k)R^{i - 1}_0 \mathbf p^i_{i - 1} \\
+&amp;= S(R^{i - 1}_0\dot q_i \mathbf k) (R^i_0 \mathbf p^n_i + R^{i - 1}_0 \mathbf p^i_{i - 1}) \\
+&amp;= \dot q_i R^{i - 1}_0 \mathbf k \times (\mathbf p^n_0 - \mathbf p^{i - 1}_0)
+\end{aligned}
+$$&lt;p&gt;
+based on the skew-symmetric property $S(\mathbf a)\mathbf p = \mathbf a \times \mathbf p$.&lt;/p&gt;
+&lt;p&gt;In summary, the linear velocity is given by
+&lt;/p&gt;
+$$
+\begin{aligned}
+\dot {\mathbf p}^n_0 &amp;= \begin{bmatrix}\frac{\partial \mathbf p^n_0}{\partial q_1},&amp; \frac{\partial \mathbf p^n_0}{\partial q_2},&amp; \frac{\partial \mathbf p^n_0}{\partial q_3},&amp; \cdots,&amp;\frac{\partial \mathbf p^n_0}{\partial q_n}\end{bmatrix}\dot{\mathbf q}, \\
+\frac{\partial \mathbf p^n_0}{\partial q_i}&amp;= \begin{cases}
+R^{i - 1}_0\mathbf k \times (\mathbf p^n_0 - \mathbf p^{i - 1}_0)&amp; \text{revolute joint,} \\
+R^{i - 1}_0\mathbf k&amp; \text{prismatic}.
+\end{cases}
+\end{aligned}
+$$&lt;h2 id=&#34;jacobian-matrix&#34;&gt;Jacobian Matrix&lt;/h2&gt;
+&lt;p&gt;The Jacobian matrix maps joint velocities to the end effector&amp;rsquo;s velocities and is denoted by $J$. From the angular and linear velocity expressions, the relationship between the two spaces becomes
+&lt;/p&gt;
+$$
+\begin{aligned}
+\begin{bmatrix}
+\mathbf v^n_0 \\
+\mathbf \omega^n_0
+\end{bmatrix} &amp;= 
+\begin{bmatrix}
+J_{\mathbf v} \\
+J_{\mathbf \omega}
+\end{bmatrix} \dot {\mathbf q}, \\
+J_{\mathbf v} &amp;= \begin{bmatrix}\frac{\partial \mathbf p^n_0}{\partial q_1},&amp; \frac{\partial \mathbf p^n_0}{\partial q_2},&amp; \frac{\partial \mathbf p^n_0}{\partial q_3},&amp; \cdots,&amp;\frac{\partial \mathbf p^n_0}{\partial q_n}\end{bmatrix}, \\
+J_{\omega} &amp;= \begin{bmatrix}\rho_1\mathbf k,&amp; \rho_2R^1_0\mathbf k,&amp; \rho_3R^2_0\mathbf k,&amp; \cdots,&amp; \rho_nR^{n - 1}_0\mathbf k \end{bmatrix}.
+\end{aligned}
+$$&lt;p&gt;
+For a revolute $i$th joint,
+&lt;/p&gt;
+$$
+\begin{aligned}
+J_{\mathbf v_i} &amp;= R^{i - 1}_0\mathbf k \times (\mathbf p^n_0 - \mathbf p^{i - 1}_0), \\
+J_{\omega_i} &amp;= R^{i - 1}_0\mathbf k.
+\end{aligned}
+$$&lt;p&gt;
+For a prismatic $i$th joint,
+&lt;/p&gt;
+$$
+\begin{aligned}
+J_{\mathbf v_i} &amp;= R^{i - 1}_0\mathbf k, \\
+J_{\omega_i} &amp;= 0.
+\end{aligned}
+$$&lt;p&gt;
+In principle, given a desired change in end‑effector position and orientation one could compute a corresponding change in joint configuration by inverting $J$, i.e. $J^{-1}[\Delta \mathbf v^n_0, \Delta \omega^n_0]^T$. However, in practice this inversion is often difficult for various reasons.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://thydzik.com/academic/robotics-315/chap5.pdf&#34;&gt;https://thydzik.com/academic/robotics-315/chap5.pdf&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref1:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
     <item>
       <title>Angular Velocity</title>
       <link>https://herding.github.io/posts/angular_velocity/</link>
@@ -413,60 +602,6 @@ $$&lt;p&gt;where $Rot(z, \theta)$ and $Rot(x, \alpha_i)$ are rotation matrices, 
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Besides finding meaningful problems, solving them, and sharing your ideas clearly, you should reflect on your strengths and whether you enjoy your research topics. If you have a good problem and the necessary abilities, continue to concentrate on the problem and improve your skills—time is limited, so use it wisely.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Insert Images in Hugo and Automatically Clear `public` Folder</title>
-      <link>https://herding.github.io/posts/insert_images_in_hugo_and_automatically_clear_folders/</link>
-      <pubDate>Sun, 30 Nov 2025 11:43:43 +0800</pubDate>
-      
-      <guid>https://herding.github.io/posts/insert_images_in_hugo_and_automatically_clear_folders/</guid>
-      <description>&lt;p&gt;When I updated my website, I faced some technical issues: how to insert images into posts and how to automatically clear the &lt;code&gt;public&lt;/code&gt; folder. Now I have solutions to both challenges and would like to share them with you.&lt;/p&gt;
-&lt;h1 id=&#34;insert-images&#34;&gt;Insert Images&lt;/h1&gt;
-&lt;p&gt;To insert images into posts, I researched online resources and found two important considerations: the correct location for images and the method to load them.&lt;/p&gt;
-&lt;p&gt;First, there are two methods to store images in your project. The first method is to place images in the same folder as the post&amp;rsquo;s &lt;code&gt;index.md&lt;/code&gt; file, so they are only loaded by that post. For example:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;..
-|
-└───content
-    |   _index.md
-    |
-    └───posts
-        |   ...
-        |
-        └───time_management_with_Apple&amp;#39;s_App
-            index.md
-            img1.png
-            img2.png
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The second method is to place images in the &lt;code&gt;static&lt;/code&gt; folder, making them accessible to every page. For example: &lt;code&gt;/static/images/logo.png&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Second, after placing images in the correct location, you can load them using three methods:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Markdown style&lt;/strong&gt;: Use &lt;code&gt;![description](path/to/image)&lt;/code&gt;. For a page bundle, write &lt;code&gt;![daily tasks](img1.png)&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Figure shortcode&lt;/strong&gt; (my preferred method): Hugo&amp;rsquo;s built-in feature. Example: &lt;code&gt;{{ &amp;lt; figure src=&amp;quot;img1.png&amp;quot; title=&amp;quot;Daily tasks&amp;quot; alt=&amp;quot;&amp;quot; width=&amp;quot;600&amp;quot; class=&amp;quot;center&amp;quot; &amp;gt;}}&lt;/code&gt;. (⚠️Please remove the blank between &lt;code&gt;{&lt;/code&gt; and &lt;code&gt;&amp;lt;&lt;/code&gt; when you use it.) This method offers more control over styling through CSS or SCSS. I used an AI tool to create custom shortcode templates and stylesheets.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Page Resources&lt;/strong&gt;: A more advanced method that I haven&amp;rsquo;t explored yet.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;I hope this helps you successfully display images in your posts. If you encounter problems, check your image paths and clear your cache using &lt;code&gt;hugo --gc&lt;/code&gt;.&lt;/p&gt;
-&lt;h1 id=&#34;clean-the-public-folder&#34;&gt;Clean The &lt;code&gt;public&lt;/code&gt; Folder&lt;/h1&gt;
-&lt;p&gt;After testing many methods for inserting images, I accumulated many outdated pages in the &lt;code&gt;public&lt;/code&gt; folder. Rather than manually deleting them, I wanted an automatic solution. I found an elegant method from essesoul&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;: simply add one line to &lt;code&gt;hugo.toml&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-toml&#34; data-lang=&#34;toml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;cleanDestinationDir&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Finally, I&amp;rsquo;d like to thank the authors I referenced, especially Brain Build, who compiled helpful resources&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; about inserting images in Hugo.&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
-&lt;hr&gt;
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.essesoul.top/posts/hugo-auto-clean/&#34;&gt;Hugo 自动清理 Public 目录下的文件&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id=&#34;fn:2&#34;&gt;
-&lt;p&gt;&lt;a href=&#34;https://blog.aiwith.fun/posts/add-picture-in-hugo/&#34;&gt;How to add picture in Hugo&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
 </description>
     </item>
     

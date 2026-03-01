@@ -10,7 +10,7 @@
 
   
   
-  <meta name="description" content="Derivation of angular velocity and the time derivative of rotation matrices for robotic end-effectors">
+  <meta name="description" content="Derivation of linear velocity and the Jacobian matrix for a manipulator, covering both prismatic and revolute joints and their relation to angular velocity.">
   
 
   
@@ -59,28 +59,28 @@
   
 
   
-  <meta property="og:url" content="https://herding.github.io/posts/angular_velocity/">
+  <meta property="og:url" content="https://herding.github.io/posts/jacobian_matrix/">
   <meta property="og:site_name" content="context">
-  <meta property="og:title" content="Angular Velocity">
-  <meta property="og:description" content="Derivation of angular velocity and the time derivative of rotation matrices for robotic end-effectors">
+  <meta property="og:title" content="Jacobian Matrix">
+  <meta property="og:description" content="Derivation of linear velocity and the Jacobian matrix for a manipulator, covering both prismatic and revolute joints and their relation to angular velocity.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2026-02-05T09:48:33+08:00">
-    <meta property="article:modified_time" content="2026-02-08T22:06:09+08:00">
+    <meta property="article:published_time" content="2026-02-08T22:09:25+08:00">
+    <meta property="article:modified_time" content="2026-02-08T22:09:25+08:00">
 
 
   
-  <link rel="canonical" href="https://herding.github.io/posts/angular_velocity/">
+  <link rel="canonical" href="https://herding.github.io/posts/jacobian_matrix/">
 
   
   
   
-  <meta itemprop="name" content="Angular Velocity">
-  <meta itemprop="description" content="Derivation of angular velocity and the time derivative of rotation matrices for robotic end-effectors">
-  <meta itemprop="datePublished" content="2026-02-05T09:48:33+08:00">
-  <meta itemprop="dateModified" content="2026-02-08T22:06:09+08:00">
-  <meta itemprop="wordCount" content="824">
+  <meta itemprop="name" content="Jacobian Matrix">
+  <meta itemprop="description" content="Derivation of linear velocity and the Jacobian matrix for a manipulator, covering both prismatic and revolute joints and their relation to angular velocity.">
+  <meta itemprop="datePublished" content="2026-02-08T22:09:25+08:00">
+  <meta itemprop="dateModified" content="2026-02-08T22:09:25+08:00">
+  <meta itemprop="wordCount" content="1466">
   <meta itemprop="keywords" content="Concepts">
 
   
@@ -96,14 +96,14 @@
 
   
   
-  <title>Angular Velocity - context</title>
+  <title>Jacobian Matrix - context</title>
   
 
   
   
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Angular Velocity">
-  <meta name="twitter:description" content="Derivation of angular velocity and the time derivative of rotation matrices for robotic end-effectors">
+  <meta name="twitter:title" content="Jacobian Matrix">
+  <meta name="twitter:description" content="Derivation of linear velocity and the Jacobian matrix for a manipulator, covering both prismatic and revolute joints and their relation to angular velocity.">
 
 
   
@@ -173,13 +173,13 @@
 <main id="main" class="post">
   
   <div class="post-heading">
-    <h1 class="post-title">Angular Velocity</h1>
+    <h1 class="post-title">Jacobian Matrix</h1>
     <div class="publish-metadata">
       
       <svg width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M3 9H21M7 3V5M17 3V5M6 13H8M6 17H8M11 13H13M11 17H13M16 13H18M16 17H18M6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      5 February 2026
+      8 February 2026
       
       
         &nbsp;
@@ -187,7 +187,7 @@
           <svg width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M15.4998 5.49994L18.3282 8.32837M3 20.9997L3.04745 20.6675C3.21536 19.4922 3.29932 18.9045 3.49029 18.3558C3.65975 17.8689 3.89124 17.4059 4.17906 16.9783C4.50341 16.4963 4.92319 16.0765 5.76274 15.237L17.4107 3.58896C18.1918 2.80791 19.4581 2.80791 20.2392 3.58896C21.0202 4.37001 21.0202 5.63634 20.2392 6.41739L8.37744 18.2791C7.61579 19.0408 7.23497 19.4216 6.8012 19.7244C6.41618 19.9932 6.00093 20.2159 5.56398 20.3879C5.07171 20.5817 4.54375 20.6882 3.48793 20.9012L3 20.9997Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          824 words
+          1466 words
         </span>
       
       
@@ -200,7 +200,7 @@
           <svg width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 7V12L14.5 13.5M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          ~4 mins
+          ~7 mins
         </span>
       
     </div>
@@ -220,8 +220,8 @@
     </summary>
     <div class="toc numbered-subtitles"><nav id="TableOfContents">
   <ul>
-    <li><a href="#angular-velocities">Angular Velocities</a></li>
-    <li><a href="#the-derivative-of-rotation-matrix">The Derivative of Rotation Matrix</a></li>
+    <li><a href="#linear-velocity">Linear velocity</a></li>
+    <li><a href="#jacobian-matrix">Jacobian Matrix</a></li>
   </ul>
 </nav></div>
   </details>
@@ -229,125 +229,186 @@
   
   <article class="content numbered-subtitles">
     
-    <p>The relationship between the spatial pose of the end-effector and joint configurations is introduced in <a href="/posts/homogeneous_transformation">Homogeneous Transformation Matrix</a>. Here we derive the relationships between the end-effector velocities and the joint velocities. When discussing end-effector velocities in Cartesian space, there are both linear velocities (translation) and angular velocities (rotation). This post introduces the definition of angular velocity and the time derivative of rotation matrices.</p>
-<h2 id="angular-velocities">Angular Velocities</h2>
-<p>Because the end-effector&rsquo;s pose includes orientation, recall the definition of angular velocity $\omega = d\theta / dt \cdot \mathbf u$ when computing velocities. Angular velocity is a pseudovector as shown in the figure. Its direction depends on the unit vector $\mathbf u$ and is perpendicular to the plane swept by the position vector $\mathbf r$; it is parallel to the rotation axis with magnitude $d\theta / dt$ (radians per unit time).</p>
-
-
-
-
-
-
-
-
-
-
-
-<figure class="site-figure center">
-  
-    
-    
-      
-      
-      
-      
-      
-        
-        
-      
-        
-        
-      
-      
-      
-      
-      
-      
-      <img src="/posts/angular_velocity/Velocity_hu_57ffbb0825710b03.png" srcset="/posts/angular_velocity/Velocity_hu_50699b98dbce63b3.png 420w, /posts/angular_velocity/Velocity_hu_57ffbb0825710b03.png 840w" sizes="(max-width: 420px) 100vw, 420px" alt="allocation" ZgotmplZ>
-    
-  
-    <figcaption>From Wikipedia</figcaption>
-</figure>
-
-<p>To fix the direction of angular velocity, we use the right-hand rule. Point the index finger along the position vector $\mathbf r$, the middle finger along the instantaneous linear velocity $\mathbf v_{\omega}$, and the thumb then points in the direction of the angular velocity. Viewed from the tip of $\mathbf u$, the rotation appears counter-clockwise.</p>
-<h2 id="the-derivative-of-rotation-matrix">The Derivative of Rotation Matrix</h2>
-<p>The orientation of the end-effector is expressed as a rotation matrix $R$ in forward kinematics; therefore angular velocity can be related to the time derivative of $R$ via
+    <p>As shown in <a href="/posts/homogeneous_transformation">Homogeneous Transformation Matrices</a>, the spatial configuration of the end effector can be expressed as
 </p>
 $$
-\frac{dR^n_0(\theta)}{dt} = \frac{dR^n_0(\theta)}{d\theta} \frac{d\theta}{dt}
+T = \begin{bmatrix}R^n_0& \mathbf p^n_0\\ \mathbf 0& 1\end{bmatrix} = A^1_0A^2_1\cdots A^n_{n - 1}.
 $$<p>
-To obtain angular velocity from a rotation matrix, consider the simple case of a rotation about the $x$-axis and derive the derivative of the rotation matrix with respect to time:
-</p>
-$$
-\frac{d R(x, \theta)}{dt} = \frac{dR(x, \theta)}{d \theta}\frac{d\theta}{dt}.
-$$<p>
-Now consider how to compute $dR(x, \theta)/d\theta$. Some properties of skew-symmetric matrices are useful; if you are already familiar with them you can skip this section.</p>
-<blockquote>
-<p>HINTS of Skew-Symmetric Matrices</p>
-<p>Definition: A matrix $S$ is skew-symmetric if and only if $S + S^T = 0$, i.e. $s_{ij} = -s_{ji}$.</p>
-<p>Properties:</p>
-<ol>
-<li>$S(a \mathbf a + b \mathbf b) = aS(\mathbf a) + bS(\mathbf b), \forall \mathbf a, \mathbf b \in \mathbb R^3$;</li>
-<li>$S(\mathbf a)\mathbf p = \mathbf a \times \mathbf p, \forall \mathbf p = [p_x, p_y, p_z]^T$, where $\times$ denotes the <a href="https://en.wikipedia.org/wiki/Cross_product">cross product</a>;</li>
-<li>$R(\mathbf a \times \mathbf b) = R\mathbf a \times R\mathbf b$ for $R\in SO(3)$ (the 3D rotation group);</li>
-<li>$RS(\mathbf a)R^T\mathbf b = R(\mathbf a \times R^T \mathbf b) = (R\mathbf a) \times \mathbf b = S(R\mathbf a)\mathbf b$;</li>
-</ol>
-<p>where $\mathbf a = [a_x, a_y, a_z]^T$ is a vector. The skew-symmetric matrix $S(\mathbf a)$ is defined as
-</p>
-$$ S(\mathbf a) = \begin{bmatrix}0& -a_z& a_y \\\ a_z& 0& -a_x\\ -a_y& a_x& 0\end{bmatrix}. $$</blockquote>
-<p>Because $R(x, \theta)$ belongs to the 3D rotation group $SO(3)$, it is orthogonal, so
-</p>
-$$
-R(x, \theta)R^T(x, \theta) = I.
-$$<p>
-Using the product rule, the derivative of the above equation is
-</p>
-$$
-\frac{dR(x, \theta)}{d\theta}R^T(x, \theta) + R(x, \theta)\frac{dR^T(x, \theta)}{d\theta} = 0
-$$<p>
-According to the definition of a skew-symmetric matrix, let $S = R^T(x, \theta) \cdot dR(x, \theta) / d\theta$. It can be simplified using the derivative and transpose of $R(x, \theta)$ as shown in the homogeneous transformation matrix:
+Hence, angular velocity can be obtained from the time derivative of $R^n_0$<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> (see <a href="/posts/angular_velocity">Angular Velocity</a>), giving
 </p>
 $$
 \begin{aligned}
-S = \frac{dR(x, \theta)}{d\theta}R(x, \theta)^T &= \begin{bmatrix}0& 0& 0\\ 0& -\sin \theta& -\cos\theta\\ 0& \cos\theta& -\sin\theta\end{bmatrix} \begin{bmatrix}1& 0& 0\\ 0& \cos\theta& \sin\theta\\ 0& -\sin\theta& \cos\theta\end{bmatrix} \\\ 
-&= \begin{bmatrix}0& 0& 0\\ 0& 0& -1\\ 0& 1& 0\end{bmatrix} \\\ 
-&= S(\mathbf i)
+\omega^n_0 &= \omega^1_0 + R^1_0\omega^2_1 + R^2_0\omega^3_2 + \cdots R^{n - 1}_0 \omega^n_{n-1}\\
+&= \mathbf k \frac{d \theta_1}{d t} + R^1_0 \mathbf k \frac{d\theta_2}{dt} + R^2_0\mathbf k \frac{d\theta_3}{d t} + \cdots R^{n - 1}_0 \mathbf k \frac{d\theta_n}{dt} \\
+&= \begin{bmatrix}\mathbf \rho_1k,& \rho_2R^1_0\mathbf k,& \rho_3R^2_0\mathbf k,& \cdots,& \rho_nR^{n - 1}_0\mathbf k \end{bmatrix}\dot{\mathbf q}
 \end{aligned}
 $$<p>
-where $\mathbf i = [1, 0, 0]^T$ is the unit vector along the $x$-axis. Thus $dR(x, \theta)/d\theta = S(\mathbf i)R(x, \theta)$. The time derivative $dR(x, \theta)/dt$ can then be expressed as
+where $\dot {\mathbf q} = \begin{bmatrix}\frac{d\theta_1}{dt},&amp; \frac{d\theta_2}{dt},&amp; \frac{d\theta_3}{dt},&amp; \cdots,&amp; \frac{d\theta_n}{dt}\end{bmatrix}^T$. $\rho_i = 1$ if the $i$th joint is revolute, otherwise $\rho_i = 0$.</p>
+<p>In the following, linear velocity is derived from the time derivative of $\mathbf p^n_0$<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, and the Jacobian matrix is constructed from the angular and linear velocities.</p>
+<h2 id="linear-velocity">Linear velocity</h2>
+<p>Using the chain rule, the end effector&rsquo;s linear velocity can be expressed as
 </p>
 $$
 \begin{aligned}
-\frac{d R(x, \theta)}{dt} &= \frac{d R(x, \theta)}{d\theta}\frac{d\theta}{dt} \\\ 
-&= \frac{d\theta}{dt} S(\mathbf i)R(x, \theta) \\\ 
-&= S\Big(\frac{d\theta}{dt} \mathbf i\Big)R(x, \theta) \\\ 
-&= S(\omega)R(x, \theta)
+\dot {\mathbf p}^n_0 &= \sum^n_{i = 1} \frac{\partial {\mathbf p}^n_0}{\partial q_i}\dot q_i \\
+&= \begin{bmatrix}\frac{\partial \mathbf p^n_0}{\partial q_1},& \frac{\partial \mathbf p^n_0}{\partial q_2},& \frac{\partial \mathbf p^n_0}{\partial q_3},& \cdots,&\frac{\partial \mathbf p^n_0}{\partial q_n}\end{bmatrix}\dot{\mathbf q}
 \end{aligned}
 $$<p>
-where $\omega$ is the angular velocity. Similarly, derivatives of rotation matrices about the $y$- or $z$-axes satisfy $dR(y, \theta)/d\theta = S(\mathbf j)R(y, \theta)$ and $dR(z, \theta)/d\theta = S(\mathbf k)R(z, \theta)$, where $\mathbf j = [0,1,0]^T$ and $\mathbf k = [0,0,1]^T$. In this example the angular velocity vector points along the rotation axis with magnitude $d\theta/dt$.</p>
-<p>More generally, the time derivative of a rotation matrix $R^2_0(\theta)$ for an end-effector with two intermediate frames is
+where $\dot {\mathbf q}$ depends on the joint types. We therefore start from the general expression
+</p>
+$$\mathbf p^n_0 = R^i_0\mathbf p^n_i + R^{i-1}_0 {\mathbf p}^i_{i-1} + {\mathbf p}^{i - 1}_0$$<p>
+with motion produced by prismatic or revolute joints, derived from
 </p>
 $$
 \begin{aligned}
-\dot{R}^2_0 &= \dot{R}^1_0 R^2_1 + R^1_0\dot{R}^2_1 \\\ 
-&= S(\omega^1_0)R^1_0R^2_1 + R^1_0S(\omega^2_1)R^2_1 \\\ 
-&= S(\omega^1_0)R^1_0R^2_1 + R^1_0 S(\omega^2_1) {R^1_0}^T R^1_0 R^2_1(t) \\\ 
-&= S(\omega^1_0)R^1_0R^2_1 + S(R^1_0(t)\omega^2_1(t))R^1_0(t)R^2_1(t) \\\ 
-&= S(\omega^1_0 + R^1_0 \omega^2_1) \cdot R^2_0 \\\ 
-&= S(\omega^2_0) R^2_0
+T &= A^{i - 1}_0A^{i}_{i - 1}A^n_{i} \\
+&= \begin{bmatrix}R^{i-1}_0& \mathbf p^{i - 1}_0 \\ \mathbf 0& 1\end{bmatrix} \begin{bmatrix}R^{i}_{i - 1}& \mathbf p^{i}_{i - 1} \\ \mathbf 0& 1\end{bmatrix} \begin{bmatrix}R^{n}_{i}& \mathbf p^{n}_{i} \\ \mathbf 0& 1\end{bmatrix} \\
+&= \begin{bmatrix}R^{i}_0& R^{i-1}_0\mathbf p^i_{i-1} + \mathbf p^{i - 1}_0 \\ \mathbf 0& 1\end{bmatrix}\begin{bmatrix}R^{n}_{i}& \mathbf p^{n}_{i} \\ \mathbf 0& 1\end{bmatrix}  \\
+&= \begin{bmatrix}R^n_0& R^i_0\mathbf p^n_i + R^{i-1}_0\mathbf p^i_{i-1} + \mathbf p^{i - 1}_0 \\ \mathbf 0& 1\end{bmatrix}.
 \end{aligned}
 $$<p>
-by using the first and fourth properties of skew-symmetric matrices. The combined angular velocity results from the individual frame rotations. Similarly, we obtain
+First, consider the $i$th joint to be prismatic. The rotation matrix and position vector of the $(i-1)$th frame are:
 </p>
 $$
 \begin{aligned}
-\dot R^n_0 &= S\big(\omega^n_0\big)R^n_0 \\\ 
+&R^i_{i - 1} = \begin{bmatrix}
+1& 0& 0\\ 0& 1& 0 \\ 0& 0& 1
+\end{bmatrix}, \\
+&
+\mathbf p^i_{i - 1} = \begin{bmatrix}a_i \\0\\ d_i\end{bmatrix}.
+\end{aligned}
+$$<blockquote>
+<p>HINT:</p>
+<p>According to the definition of homogeneous transformation matrix, $A^i_{i -1}$ is
+</p>
+$$ \begin{aligned} A^{i}_{i - 1}  &= Rot(z, 0)Trans(0, 0,d_i)Trans(a_i, 0, 0)Rot(x, 0) \\ &= \begin{bmatrix}1& 0& 0& 0\\ 0& 1& 0& 0 \\ 0& 0& 1& 0\\ 0& 0& 0& 1\end{bmatrix} \begin{bmatrix}1& 0& 0& 0 \\ 0& 1& 0& 0\\ 0& 0& 1& d_i\\ 0& 0& 0& 1\end{bmatrix} \begin{bmatrix}1& 0& 0& a_i \\ 0& 1& 0& 0\\ 0& 0& 1& 0\\ 0& 0& 0& 1\end{bmatrix} \begin{bmatrix}1& 0& 0& 0\\ 0& 1& 0& 0 \\ 0& 0& 1& 0\\ 0& 0& 0& 1\end{bmatrix} \\ &= \begin{bmatrix} 1& 0& 0& a_i \\0& 1& 0& 0 \\ 0& 0& 1& d_i \\ 0& 0& 0& 1 \end{bmatrix} = \begin{bmatrix}R^i_{i - 1}& \mathbf p^i_{i - 1} \\ \mathbf 0& 1\end{bmatrix}. \end{aligned} $$</blockquote>
+<p>Let $q_i = d_i$. The partial derivative of $\mathbf p^n_0$ can then be written as
+</p>
+$$
+\begin{aligned}
+\frac{\partial \mathbf p^n_0}{\partial q_i} &= \frac{\partial R^i_0\mathbf p^n_i}{\partial q_i} + \frac{\partial R^{i - 1}_0\mathbf p^i_{i - 1}}{\partial q_i} + \frac{\partial \mathbf p^{i - 1}_0}{\partial q_i} \\
+&= R^{i - 1}_0 \frac{\partial \mathbf p^i_{i - 1}}{\partial q_i} \\
+&= R^{i - 1}_0 \begin{bmatrix}0 \\ 0 \\ \dot q_i\end{bmatrix} \\
+&= R^{i - 1}_0 \mathbf k \dot q_i
+\end{aligned}
+$$<p>
+where the partial derivatives of $R^i_0\mathbf p^n_i$ and $\mathbf p^{i - 1}_0$ vanish because these quantities are constant and not affected by $q_i$.</p>
+<p>Next, consider the $i$th joint to be revolute, which yields
+</p>
+$$
+\begin{aligned}
+&R^i_{i - 1} = \begin{bmatrix}
+\cos\theta_i& -\sin\theta_i& 0\\ \sin\theta_i& \cos\theta_i& 0 \\ 0& 0& 1
+\end{bmatrix},
 \\
-\omega^n_0 &= \omega^1_0 + R^1_0\omega^2_1 + R^2_0\omega^3_2 + \cdots + R^{n - 1}_0\omega^n_{n - 1}
+&\mathbf p^i_{i - 1} = \begin{bmatrix}a_i \cos \theta_i \\ a_i \sin \theta_i \\ 0\end{bmatrix}.
+\end{aligned}
+$$<blockquote>
+<p>HINT:</p>
+<p>$A^i_{i - 1}$ is
+</p>
+$$ \begin{aligned} A^{i}_{i - 1}  &= Rot(z, \theta_i)Trans(0, 0, 0)Trans(a_i, 0, 0)Rot(x, 0) \\ &= \begin{bmatrix}\cos \theta_i& -\sin\theta_i& 0& 0\\ \sin \theta_i& \cos \theta_i& 0& 0 \\ 0& 0& 1& 0\\ 0& 0& 0& 1\end{bmatrix} \begin{bmatrix}1& 0& 0& 0 \\ 0& 1& 0& 0\\ 0& 0& 1& 0\\ 0& 0& 0& 1\end{bmatrix} \begin{bmatrix}1& 0& 0& a_i \\ 0& 1& 0& 0\\ 0& 0& 1& 0\\ 0& 0& 0& 1\end{bmatrix} \begin{bmatrix}1& 0& 0& 0\\ 0& 1& 0& 0 \\ 0& 0& 1& 0\\ 0& 0& 0& 1\end{bmatrix} \\ &= \begin{bmatrix} \cos\theta_i& -\sin\theta_i& 0& a_i\cos\theta_i \\ \sin\theta_i& \cos\theta_i& 0& a_i\sin\theta_i \\ 0& 0& 1& 0 \\ 0& 0& 0& 1 \end{bmatrix}. \end{aligned} $$</blockquote>
+<p>Thus, setting $q_i = \theta_i$ leads to:
+</p>
+$$
+\begin{aligned}
+\frac{\partial \mathbf p^n_0}{\partial q_i} &= \frac{\partial R^i_0\mathbf p^n_i}{\partial q_i} + \frac{\partial R^{i - 1}_0\mathbf p^i_{i - 1}}{\partial q_i} + \frac{\partial \mathbf p^{i - 1}_0}{\partial q_i} \\
+&= \frac{\partial R^i_0\mathbf p^n_i}{\partial q_i} + \frac{\partial R^{i - 1}_0\mathbf p^i_{i - 1}}{\partial q_i}.
 \end{aligned}
 $$<p>
-where $\omega^n_0$ is the desired angular velocity of the end-effector.</p>
-<p>In conclusion, the time derivative of a rotation matrix can be expressed using skew-symmetric matrices and the angular velocities of individual frames. This relationship is commonly used when deriving the Jacobian matrix based on $\omega^n_0$.</p>
+Using the definition of angular velocity for the $i$th link, the first term becomes
+</p>
+$$
+\frac{\partial R^i_0\mathbf p^n_i}{\partial q_i} = S(R^{i - 1}_0 \dot q_i \mathbf k)R^i_0 \mathbf p^n_i.
+$$<p>
+The second term is
+</p>
+$$
+\begin{aligned}
+\frac{\partial R^{i - 1}_0 \mathbf p^i_{i - 1}}{\partial q_i} &= R^{i - 1}_0 \frac{\partial }{\partial q_i}\begin{bmatrix}a_i\cos\theta_i \\ a_i\sin \theta_i \\ 0 \end{bmatrix}\\
+&= R^{i - 1}_0\begin{bmatrix}-a_i\sin\theta_i \\ a_i\cos \theta_i \\ 0 \end{bmatrix} \dot q_i \\
+&= R^{i - 1}_0 \dot q_i (\mathbf k \times \mathbf p^i_{i -1})\\
+&= R^{i - 1}_0 (\dot q_i \mathbf k \times \mathbf p^i_{i -1}) \\
+&= R^{i - 1}_0 S(\dot q_i \mathbf k)\mathbf p^i_{i - 1} \\
+&= S(R^{i - 1}_0\dot q_i \mathbf k)R^{i - 1}_0 \mathbf p^i_{i - 1}.
+\end{aligned}
+$$<blockquote>
+<p>HINTs:</p>
+<ol>
+<li>$[-a_i \sin \theta_i,\ a_i \cos\theta_i,\ 0]^T$ is the result of the cross product.</li>
+</ol>
+$$ \begin{aligned} \mathbf k \times \mathbf p^i_{i - 1} &= \begin{bmatrix}0 \\ 0\\ 1\end{bmatrix} \times \begin{bmatrix}a_i \cos \theta_i \\ a_i \sin \theta_i \\ 0\end{bmatrix} \\ &= \begin{bmatrix}0 * 0 - 1 * a_i\sin\theta_i \\ 1 * a_i \cos\theta_i - 0 * 0 \\ 0 * a_i \sin \theta_i - 0 * a_i \cos\theta_i \end{bmatrix} \\ &= \begin{bmatrix}-a_i \sin \theta_i \\ a_i \cos\theta_i \\ 0\end{bmatrix}. \end{aligned} $$<ol start="2">
+<li>
+<p>According to the property of skew symmetric matrix, $S(\mathbf a)\mathbf p = \mathbf a \times \mathbf p, \forall \mathbf p = [p_x, p_y, p_z]$ where $\times$ means the cross product, we have  $\dot q_i \mathbf k \times \mathbf p^i_{i - 1} = S(\dot q_i \mathbf k) \mathbf p^i_{i - 1}$.</p>
+</li>
+<li>
+<p>By using the property of skew symmetric matrix again, that is $RS(\mathbf a)R^T\mathbf b = S(R\mathbf a)\mathbf b$, we have
+</p>
+$$ \begin{aligned}R^{i - 1}_0 S(\dot q_i \mathbf k)\mathbf p^i_{i - 1} &= R^{i - 1}_0 S(\dot q_i \mathbf k) {R^{i - 1}_0}^TR^{i - 1}_0\mathbf p^i_{i - 1} \\ &= S(R^{i - 1}_0\dot q_i \mathbf k)R^{i - 1}_0 \mathbf p^i_{i - 1}. \end{aligned}$$</li>
+</ol></blockquote>
+<p>Combining the two terms gives
+</p>
+$$
+\begin{aligned}
+\frac{\partial \mathbf p^n_0}{\partial q_i} &= \frac{\partial R^i_0\mathbf p^n_i}{\partial q_i} + \frac{\partial R^{i - 1}_0\mathbf p^i_{i - 1}}{\partial q_i} \\
+&= S(R^{i - 1}_0 \dot q_i \mathbf k) R^i_0 \mathbf p^n_i + S(R^{i - 1}_0\dot q_i \mathbf k)R^{i - 1}_0 \mathbf p^i_{i - 1} \\
+&= S(R^{i - 1}_0\dot q_i \mathbf k) (R^i_0 \mathbf p^n_i + R^{i - 1}_0 \mathbf p^i_{i - 1}) \\
+&= \dot q_i R^{i - 1}_0 \mathbf k \times (\mathbf p^n_0 - \mathbf p^{i - 1}_0)
+\end{aligned}
+$$<p>
+based on the skew-symmetric property $S(\mathbf a)\mathbf p = \mathbf a \times \mathbf p$.</p>
+<p>In summary, the linear velocity is given by
+</p>
+$$
+\begin{aligned}
+\dot {\mathbf p}^n_0 &= \begin{bmatrix}\frac{\partial \mathbf p^n_0}{\partial q_1},& \frac{\partial \mathbf p^n_0}{\partial q_2},& \frac{\partial \mathbf p^n_0}{\partial q_3},& \cdots,&\frac{\partial \mathbf p^n_0}{\partial q_n}\end{bmatrix}\dot{\mathbf q}, \\
+\frac{\partial \mathbf p^n_0}{\partial q_i}&= \begin{cases}
+R^{i - 1}_0\mathbf k \times (\mathbf p^n_0 - \mathbf p^{i - 1}_0)& \text{revolute joint,} \\
+R^{i - 1}_0\mathbf k& \text{prismatic}.
+\end{cases}
+\end{aligned}
+$$<h2 id="jacobian-matrix">Jacobian Matrix</h2>
+<p>The Jacobian matrix maps joint velocities to the end effector&rsquo;s velocities and is denoted by $J$. From the angular and linear velocity expressions, the relationship between the two spaces becomes
+</p>
+$$
+\begin{aligned}
+\begin{bmatrix}
+\mathbf v^n_0 \\
+\mathbf \omega^n_0
+\end{bmatrix} &= 
+\begin{bmatrix}
+J_{\mathbf v} \\
+J_{\mathbf \omega}
+\end{bmatrix} \dot {\mathbf q}, \\
+J_{\mathbf v} &= \begin{bmatrix}\frac{\partial \mathbf p^n_0}{\partial q_1},& \frac{\partial \mathbf p^n_0}{\partial q_2},& \frac{\partial \mathbf p^n_0}{\partial q_3},& \cdots,&\frac{\partial \mathbf p^n_0}{\partial q_n}\end{bmatrix}, \\
+J_{\omega} &= \begin{bmatrix}\rho_1\mathbf k,& \rho_2R^1_0\mathbf k,& \rho_3R^2_0\mathbf k,& \cdots,& \rho_nR^{n - 1}_0\mathbf k \end{bmatrix}.
+\end{aligned}
+$$<p>
+For a revolute $i$th joint,
+</p>
+$$
+\begin{aligned}
+J_{\mathbf v_i} &= R^{i - 1}_0\mathbf k \times (\mathbf p^n_0 - \mathbf p^{i - 1}_0), \\
+J_{\omega_i} &= R^{i - 1}_0\mathbf k.
+\end{aligned}
+$$<p>
+For a prismatic $i$th joint,
+</p>
+$$
+\begin{aligned}
+J_{\mathbf v_i} &= R^{i - 1}_0\mathbf k, \\
+J_{\omega_i} &= 0.
+\end{aligned}
+$$<p>
+In principle, given a desired change in end‑effector position and orientation one could compute a corresponding change in joint configuration by inverting $J$, i.e. $J^{-1}[\Delta \mathbf v^n_0, \Delta \omega^n_0]^T$. However, in practice this inversion is often difficult for various reasons.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://thydzik.com/academic/robotics-315/chap5.pdf">https://thydzik.com/academic/robotics-315/chap5.pdf</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
 
     
   </article>
@@ -367,7 +428,7 @@ where $\omega^n_0$ is the desired angular velocity of the end-effector.</p>
     
 
     
-      <div class="graph-square" data-current-page="/posts/angular_velocity/" data-url="/search.json">
+      <div class="graph-square" data-current-page="/posts/jacobian_matrix/" data-url="/search.json">
     <canvas id="graph-canvas"></canvas>
 </div>
 
@@ -381,7 +442,7 @@ where $\omega^n_0$ is the desired angular velocity of the end-effector.</p>
 <div id="sharingbuttons">
     
     
-    <a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fherding.github.io%2fposts%2fangular_velocity%2f" target="_blank" rel="noopener" aria-label="">
+    <a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fherding.github.io%2fposts%2fjacobian_matrix%2f" target="_blank" rel="noopener" aria-label="">
       <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z"/></svg>
         </div>
@@ -391,7 +452,7 @@ where $\omega^n_0$ is the desired angular velocity of the end-effector.</p>
 
     
     
-    <a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=Angular%20Velocity&amp;url=https%3a%2f%2fherding.github.io%2fposts%2fangular_velocity%2f" target="_blank" rel="noopener" aria-label="">
+    <a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=Jacobian%20Matrix&amp;url=https%3a%2f%2fherding.github.io%2fposts%2fjacobian_matrix%2f" target="_blank" rel="noopener" aria-label="">
       <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
         <svg t="1762686222605" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5506" width="256" height="256"><path d="M683.776 213.333333h91.605333l-200.106666 230.016L810.666667 756.352h-184.32l-144.384-189.824-165.205334 189.866667H225.152l214.016-246.058667L213.333333 213.333333h189.013334l130.474666 173.525334L683.776 213.333333z m-32.170667 487.893334h50.773334L374.784 265.6H320.298667l331.306666 435.626667z" p-id="5507" fill="black"></path></svg>
         
@@ -402,7 +463,7 @@ where $\omega^n_0$ is the desired angular velocity of the end-effector.</p>
 
     
     
-    <a class="resp-sharing-button__link" href="mailto:?subject=Angular%20Velocity&amp;body=https%3a%2f%2fherding.github.io%2fposts%2fangular_velocity%2f" target="_self" rel="noopener" aria-label="">
+    <a class="resp-sharing-button__link" href="mailto:?subject=Jacobian%20Matrix&amp;body=https%3a%2f%2fherding.github.io%2fposts%2fjacobian_matrix%2f" target="_self" rel="noopener" aria-label="">
       <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 4H2C.9 4 0 4.9 0 6v12c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM7.25 14.43l-3.5 2c-.08.05-.17.07-.25.07-.17 0-.34-.1-.43-.25-.14-.24-.06-.55.18-.68l3.5-2c.24-.14.55-.06.68.18.14.24.06.55-.18.68zm4.75.07c-.1 0-.2-.03-.27-.08l-8.5-5.5c-.23-.15-.3-.46-.15-.7.15-.22.46-.3.7-.14L12 13.4l8.23-5.32c.23-.15.54-.08.7.15.14.23.07.54-.16.7l-8.5 5.5c-.08.04-.17.07-.27.07zm8.93 1.75c-.1.16-.26.25-.43.25-.08 0-.17-.02-.25-.07l-3.5-2c-.24-.13-.32-.44-.18-.68s.44-.32.68-.18l3.5 2c.24.13.32.44.18.68z"/></svg>
         </div>
@@ -412,7 +473,7 @@ where $\omega^n_0$ is the desired angular velocity of the end-effector.</p>
 
     
     
-    <a class="resp-sharing-button__link" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2fherding.github.io%2fposts%2fangular_velocity%2f" target="_blank" rel="noopener" aria-label="">
+    <a class="resp-sharing-button__link" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2fherding.github.io%2fposts%2fjacobian_matrix%2f" target="_blank" rel="noopener" aria-label="">
       <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.5 21.5h-5v-13h5v13zM4 6.5C2.5 6.5 1.5 5.3 1.5 4s1-2.4 2.5-2.4c1.6 0 2.5 1 2.6 2.5 0 1.4-1 2.5-2.6 2.5zm11.5 6c-1 0-2 1-2 2v7h-5v-13h5V10s1.6-1.5 4-1.5c3 0 5 2.2 5 6.3v6.7h-5v-7c0-1-1-2-2-2z"/></svg>
         </div>
@@ -422,7 +483,7 @@ where $\omega^n_0$ is the desired angular velocity of the end-effector.</p>
 
     
     
-    <a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=https%3a%2f%2fherding.github.io%2fposts%2fangular_velocity%2f&amp;resubmit=true&amp;title=Angular%20Velocity" target="_blank" rel="noopener" aria-label="">
+    <a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=https%3a%2f%2fherding.github.io%2fposts%2fjacobian_matrix%2f&amp;resubmit=true&amp;title=Jacobian%20Matrix" target="_blank" rel="noopener" aria-label="">
       <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 11.5c0-1.65-1.35-3-3-3-.96 0-1.86.48-2.42 1.24-1.64-1-3.75-1.64-6.07-1.72.08-1.1.4-3.05 1.52-3.7.72-.4 1.73-.24 3 .5C17.2 6.3 18.46 7.5 20 7.5c1.65 0 3-1.35 3-3s-1.35-3-3-3c-1.38 0-2.54.94-2.88 2.22-1.43-.72-2.64-.8-3.6-.25-1.64.94-1.95 3.47-2 4.55-2.33.08-4.45.7-6.1 1.72C4.86 8.98 3.96 8.5 3 8.5c-1.65 0-3 1.35-3 3 0 1.32.84 2.44 2.05 2.84-.03.22-.05.44-.05.66 0 3.86 4.5 7 10 7s10-3.14 10-7c0-.22-.02-.44-.05-.66 1.2-.4 2.05-1.54 2.05-2.84zM2.3 13.37C1.5 13.07 1 12.35 1 11.5c0-1.1.9-2 2-2 .64 0 1.22.32 1.6.82-1.1.85-1.92 1.9-2.3 3.05zm3.7.13c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9.8 4.8c-1.08.63-2.42.96-3.8.96-1.4 0-2.74-.34-3.8-.95-.24-.13-.32-.44-.2-.68.15-.24.46-.32.7-.18 1.83 1.06 4.76 1.06 6.6 0 .23-.13.53-.05.67.2.14.23.06.54-.18.67zm.2-2.8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm5.7-2.13c-.38-1.16-1.2-2.2-2.3-3.05.38-.5.97-.82 1.6-.82 1.1 0 2 .9 2 2 0 .84-.53 1.57-1.3 1.87z"/></svg>
         </div>
@@ -443,10 +504,10 @@ where $\omega^n_0$ is the desired angular velocity of the end-effector.</p>
 
   <div class="paginator">
     
-    <a class="link" href="https://herding.github.io/posts/homogeneous_transformation/" title="Homogeneous Transformation Matrices">← prev</a>
+    <a class="link" href="https://herding.github.io/posts/angular_velocity/" title="Angular Velocity">← prev</a>
     
     
-    <a class="link" href="https://herding.github.io/posts/jacobian_matrix/" title="Jacobian Matrix">next →</a>
+    <a></a>
     
   </div>
   <div class="comment">
