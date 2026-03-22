@@ -7,6 +7,97 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language><atom:link href="https://herding.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Inverse Kinematics</title>
+      <link>https://herding.github.io/posts/ik/</link>
+      <pubDate>Sun, 22 Mar 2026 19:35:32 +0800</pubDate>
+      
+      <guid>https://herding.github.io/posts/ik/</guid>
+      <description>&lt;p&gt;Forward kinematics is a problem that, given a set of joint configurations of a robot, infers the position and orientation of the end-effector. On the contrary, given the desired position and orientation of the end-effector to infer an acceptable joint configuration is another problem called the Inverse Kinematics (IK) problem. In this essay, a simple approach will be introduced based on the position and orientation error between the target pose and the initial pose.&lt;/p&gt;
+&lt;p&gt;There are many approaches proposed for solving the IK problem over the decades, which can be split into two classical categories: analytical IK and numerical IK.&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; Although analytical IK provides a closed-form expression that is really fast to compute without the initial joint configuration $\mathbf q_0$, it depends on the specific robot that has distinct kinematic structures and is often tedious or difficult to derive using sine and cosine, especially for robots with a high degree of freedom.&lt;/p&gt;
+&lt;h2 id=&#34;error-function-in-ik&#34;&gt;error function in IK&lt;/h2&gt;
+&lt;p&gt;Thus, numerical IK approaches are widely studied and used, which also have many particular methods. The main part of numerical IK is Differential Inverse Kinematics (DIK), sometimes called Closed-Loop Inverse Kinematics (CLIK). At first, DIK was proposed for solving the following equation,
+&lt;/p&gt;
+$$
+\mathbf e(\mathbf q) = \mathbf 0
+$$&lt;p&gt;
+where $\mathbf e(\cdot)$ is an error function that is defined as
+&lt;/p&gt;
+$$
+\mathbf e(\mathbf q) = \begin{cases}^d\mathbf p - \mathbf p(\mathbf q),&amp;\text{for position}, \\
+a(^dRR^T(\mathbf q)),&amp; \text{for orientation}.
+\end{cases}
+$$&lt;p&gt;
+The desired position and the position are represented as $^d\mathbf p$ and $\mathbf p(\mathbf q)$, respectively. In addition, $R(\mathbf q)$ and $^dR$ are the orientation and its desired value of the link of interest. The result of $^dRR^T(\mathbf q)$ means transforming the pose rotated by $R$ into the desired pose.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;HINT:&lt;/p&gt;
+&lt;p&gt;The current pose is $\mathbf o = R \mathbf p_{base}$ after rotation in the base frame, while the target pose is $^dR \mathbf p_{base}$. Thus, the target pose can be expressed as $^dR R^{-1} \mathbf o = ^dR R^T \mathbf o$ where $^dR R^T$ is also a rotation matrix transforming from $\mathbf o$ to the target pose.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;relative-error-of-rotation&#34;&gt;relative error of rotation&lt;/h2&gt;
+&lt;p&gt;In order to calculate the error $\mathbf e(\mathbf q)$, the position error can be directly calculated, while calculating the orientation error $^dR R^T(\mathbf q)$ depends on the $a(\cdot)$ that maps the rotation matrix to a rotation vector. As shown in &lt;a href=&#34;https://herding.github.io/posts/angular_velocity&#34;&gt;angular velocity&lt;/a&gt;, rotation vector $\phi$ is presented as a product of  an axis $\mathbf u$ and its magnitude $\theta$ (radians per unit time).&lt;/p&gt;
+&lt;p&gt;The rotation axis is expressed as a vector $\mathbf u$ that is expressed using these elements of the rotation matrix
+&lt;/p&gt;
+$$
+\begin{aligned}\Delta R =\ ^dRR^T(\mathbf q) &amp;= \begin{bmatrix}r_{11}&amp; r_{12}&amp; r_{13} \\ r_{21}&amp; r_{22}&amp; r_{23} \\ r_{31}&amp; r_{32}&amp; r_{33}\end{bmatrix} \\ \mathbf u &amp;= \begin{bmatrix}r_{32} - r_{23} \\ r_{13} - r_{31} \\ r_{21} - r_{12}\end{bmatrix}\end{aligned}$$&lt;blockquote&gt;
+&lt;p&gt;HINT&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
+&lt;p&gt;Since the vector $\mathbf u$ after rotation is itself, there is $\Delta R \mathbf u = \mathbf u = I\mathbf u$ that implies $(\Delta R - I)\mathbf u = 0$. Then, we have
+&lt;/p&gt;
+$$\begin{aligned}\Delta R^T(\Delta R - I)\mathbf u + (\Delta R - I)\mathbf u &amp;= (\Delta R^T \Delta R - \Delta R^T)\mathbf u + (\Delta R - I)\mathbf u \\&amp;= (I - \Delta R^T) \mathbf u + (\Delta R - I)\mathbf u \\&amp;= (\Delta R - \Delta R^T)\mathbf u \\&amp; = 0\end{aligned}$$&lt;p&gt;
+In addition, a cross product of a vector with itself is equal to $0$, that is $\mathbf u \times \mathbf u = 0$, while the cross product can becomes the product for a vector $\mathbf u$ and its skew-symmetric matrix $S(\mathbf u)$ as shown in angular velocity. So we have
+&lt;/p&gt;
+$$(\Delta R - \Delta R^T)\mathbf u = S(\mathbf u)\mathbf u = \mathbf u \times \mathbf u = 0$$&lt;p&gt;
+and $\mathbf u$ is derived from $S(\mathbf u)$ that is $\mathbf u = [r_{32} - r_{23}, r_{13} - r_{31}, r_{21} - r_{12}]^T$.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;While there are some special cases when $\Delta R$ is a diagonal matrix. Thus, for example, the rotation vector is calculated in a published paper&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;, that is
+&lt;/p&gt;
+$$
+a(\Delta R) = \begin{cases}
+\frac{\pi}{2} \begin{bmatrix}r_{11} + 1 \\ r_{22} + 1 \\ r_{33} + 1 \end{bmatrix},&amp; (r_{11}, r_{22}, r_{33}) = (1, -1, -1) \text{ or }(-1, 1, -1)\text{ or }(-1, -1, 1) \\
+\mathbf 0,&amp; (r_{11}, r_{22}, r_{33}) = (1, 1, 1) \\
+\frac{atan2(\|\mathbf u\|, r_{11} + r_{22} + r_{33} - 1)}{\|\mathbf u\|} \mathbf u,&amp; \text{otherwise}
+\end{cases}
+$$&lt;p&gt;But, we should also notice that the position and orientation are commonly expressed using quaternions in computer programming, so the definition of $a(\cdot)$ may be different, like &lt;a href=&#34;https://math.stackexchange.com/questions/3572459/how-to-compute-the-orientation-error-between-two-3d-coordinate-frames&#34;&gt;this&lt;/a&gt;. Also, using some predefined tools is an alternative way to calculate the rotation vector, like &lt;code&gt;Rotation&lt;/code&gt; in &lt;code&gt;scipy.spatial.transform&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;newton-raphson-method-for-dik&#34;&gt;Newton-Raphson method for DIK&lt;/h2&gt;
+&lt;p&gt;After defining $\mathbf e(\mathbf q)$, solving the equation $\mathbf e(\mathbf q) = 0$ is viewed as a root finding problem. Thus, &lt;a href=&#34;https://personal.math.ubc.ca/~anstee/math104/104newtonmethod.pdf&#34;&gt;Newton-Raphson method&lt;/a&gt; can be used. As the initial joint configuration is known, the error function can be expressed as
+&lt;/p&gt;
+$$
+\begin{aligned}
+\mathbf 0 &amp;= \mathbf e(\mathbf q) \\
+&amp;= \mathbf e(\mathbf q_0 + \Delta \mathbf q)\\
+&amp;\approx  \mathbf e(\mathbf q_0) +\nabla \mathbf e(\mathbf q_0)\Delta \mathbf q
+\end{aligned}
+$$&lt;p&gt;
+by using the Taylor series expansion. The first derivative $\nabla \mathbf e(\mathbf q_0)$ is the Jacobian matrix $J(\mathbf q_0)$ with respect to the joint configuration&lt;sup id=&#34;fnref1:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;. So we have the $\Delta q = J^{-1}(\mathbf q_0)\mathbf e(\mathbf q_0)$ and the solution of $\mathbf q$ is&lt;/p&gt;
+$$
+\begin{aligned}
+\mathbf q &amp;\approx \mathbf q_0 + \Delta \mathbf q \\
+&amp;= \mathbf q_0 + J^{-1}(\mathbf q_0)\mathbf e(\mathbf q_0)
+\end{aligned}
+$$&lt;p&gt;
+Actually, we widely use the Newton-Raphson iteration $\mathbf q_{k + 1} = \mathbf q_k + J^{-1}(\mathbf q_k)\mathbf e(\mathbf q_k)$ to find the desired joint configuration until $\mathbf e(q_{k + 1}) \le \epsilon$ where $\epsilon$ is a small positive constant.&lt;/p&gt;
+&lt;p&gt;Obviously, there are some drawbacks, for example,&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The Jacobian matrix is not always nonsingular.&lt;/li&gt;
+&lt;li&gt;The error $\mathbf e(\mathbf q)$ is not always equal to $\mathbf 0$, because the robot cannot reach the target pose.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.rosroboticslearning.com/inverse-kinematics&#34;&gt;Inverse kinematics&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://motion.cs.illinois.edu/RoboticSystems/InverseKinematics.html&#34;&gt;Different approaches for solving inverse kinematics&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Rotation_matrix#Determining_the_angle&#34;&gt;Rotation Matrix determining the angle&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34;&gt;
+&lt;p&gt;Solvability-Unconcerned Inverse Kinematics by the Levenberg–Marquardt Method. Tomomichi Sugihara.&amp;#160;&lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref1:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Jacobian Matrix</title>
       <link>https://herding.github.io/posts/jacobian_matrix/</link>
       <pubDate>Sun, 08 Feb 2026 22:09:25 +0800</pubDate>
@@ -541,66 +632,6 @@ $$&lt;p&gt;where $Rot(z, \theta)$ and $Rot(x, \alpha_i)$ are rotation matrices, 
 &lt;/figure&gt;
 &lt;/p&gt;
 &lt;p&gt;In conclusion, stay selective when you are surrounded by countless information: choose relevant web pages, messages, papers, books, and videos; consolidate them in one place; and set aside time to review them systematically.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Qualities of Researcher</title>
-      <link>https://herding.github.io/posts/qualities_of_researcher/</link>
-      <pubDate>Sun, 07 Dec 2025 13:43:13 +0800</pubDate>
-      
-      <guid>https://herding.github.io/posts/qualities_of_researcher/</guid>
-      <description>&lt;p&gt;As an undergraduate student, I was puzzled about many research-related activities, although I found research work fascinating. Later, I participated in several research projects while preparing for my master&amp;rsquo;s degree and joined a modern research center as a research assistant. From these experiences I have some answers to my earlier questions. If you are wondering what research is or how to become a researcher, this article offers a few insights I would like to share.&lt;/p&gt;
-&lt;h2 id=&#34;what-is-research&#34;&gt;What is research?&lt;/h2&gt;
-&lt;p&gt;I think solving problems is the core of research. For a question that interests you or one assigned by your supervisor, the goal of research is to provide a valuable solution that improves efficiency, reduces resource use, or corrects earlier methods.&lt;/p&gt;
-&lt;p&gt;Although solving is important, finding and defining problems often consumes the most time. One situation is that you start by surveying the literature and other materials related to your topic, and from that survey you identify a problem that interests you. Another situation is that you observe an unexpected phenomenon and abstract it into a research question or model. After you identify a research problem, you usually face a large challenge and must split it into smaller, manageable subproblems. Meanwhile, unexpected issues often emerge during the research, so you will need to consult new papers or resources to refine your problem formulation or update your methods.&lt;/p&gt;
-&lt;p&gt;When you work through a set of issues and obtain a meaningful solution for a subproblem, sharing your process is important. Communicating your results may bring recognition, but more commonly it reveals hidden or neglected issues that become your next challenge.&lt;/p&gt;
-&lt;h2 id=&#34;how-to-become-a-good-researcher&#34;&gt;How to become a good researcher&lt;/h2&gt;
-&lt;p&gt;In my opinion, some important qualities help you overcome difficult problems during research. When you identify problems in your research area, the following abilities can save time and energy.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Receive and filter information&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;To understand a problem, its formulas, or related concepts, you should read multiple sources and extract useful information from texts, videos, and talks. Some parts of this process can be assisted by AI tools.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Search for relevant literature&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Efficient literature search is a basic skill that lets you explore a topic deeply. It can also reveal alternative approaches for reframing or solving your current problem.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Critical thinking&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;This quality is vital: it helps you identify logical flaws in previous work, define important problems worth solving, or discover new ways to tackle existing problems.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;When you solve problems, the following two abilities are particularly useful:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Logical analysis&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Logical analysis involves applying rigorous methodologies, careful reasoning, and precise explanation to ensure you stay on the correct path.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Abstract modeling&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;As an engineering student, I often simplify problems using abstract models and omit unnecessary aspects to make the problem tractable.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;When you share your solutions with peers or others interested in your research, communication skills matter:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Writing and speaking
-&lt;ul&gt;
-&lt;li&gt;These skills are essential across disciplines, but they are often neglected. Clear writing and oral presentation help you disseminate ideas widely. When you discuss your work with other researchers, you can collect valuable feedback and insights. Writing and speaking also help you organize your thinking.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Besides finding meaningful problems, solving them, and sharing your ideas clearly, you should reflect on your strengths and whether you enjoy your research topics. If you have a good problem and the necessary abilities, continue to concentrate on the problem and improve your skills—time is limited, so use it wisely.&lt;/p&gt;
 </description>
     </item>
     

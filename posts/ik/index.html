@@ -10,7 +10,7 @@
 
   
   
-  <meta name="description" content="Derivation of linear velocity and the Jacobian matrix for a manipulator, covering both prismatic and revolute joints and their relation to angular velocity.">
+  <meta name="description" content="This post explores inverse kinematics (IK), contrasting it with forward kinematics, and delves into numerical methods like Differential Inverse Kinematics (DIK) using error functions, rotation vectors, and the Newton-Raphson iteration to solve for joint configurations.">
   
 
   
@@ -59,28 +59,28 @@
   
 
   
-  <meta property="og:url" content="https://herding.github.io/posts/jacobian_matrix/">
+  <meta property="og:url" content="https://herding.github.io/posts/ik/">
   <meta property="og:site_name" content="context">
-  <meta property="og:title" content="Jacobian Matrix">
-  <meta property="og:description" content="Derivation of linear velocity and the Jacobian matrix for a manipulator, covering both prismatic and revolute joints and their relation to angular velocity.">
+  <meta property="og:title" content="Inverse Kinematics">
+  <meta property="og:description" content="This post explores inverse kinematics (IK), contrasting it with forward kinematics, and delves into numerical methods like Differential Inverse Kinematics (DIK) using error functions, rotation vectors, and the Newton-Raphson iteration to solve for joint configurations.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2026-02-08T22:09:25+08:00">
-    <meta property="article:modified_time" content="2026-03-01T18:12:36+08:00">
+    <meta property="article:published_time" content="2026-03-22T19:35:32+08:00">
+    <meta property="article:modified_time" content="2026-03-22T19:35:32+08:00">
 
 
   
-  <link rel="canonical" href="https://herding.github.io/posts/jacobian_matrix/">
+  <link rel="canonical" href="https://herding.github.io/posts/ik/">
 
   
   
   
-  <meta itemprop="name" content="Jacobian Matrix">
-  <meta itemprop="description" content="Derivation of linear velocity and the Jacobian matrix for a manipulator, covering both prismatic and revolute joints and their relation to angular velocity.">
-  <meta itemprop="datePublished" content="2026-02-08T22:09:25+08:00">
-  <meta itemprop="dateModified" content="2026-03-01T18:12:36+08:00">
-  <meta itemprop="wordCount" content="1466">
+  <meta itemprop="name" content="Inverse Kinematics">
+  <meta itemprop="description" content="This post explores inverse kinematics (IK), contrasting it with forward kinematics, and delves into numerical methods like Differential Inverse Kinematics (DIK) using error functions, rotation vectors, and the Newton-Raphson iteration to solve for joint configurations.">
+  <meta itemprop="datePublished" content="2026-03-22T19:35:32+08:00">
+  <meta itemprop="dateModified" content="2026-03-22T19:35:32+08:00">
+  <meta itemprop="wordCount" content="1003">
   <meta itemprop="keywords" content="Concepts">
 
   
@@ -96,14 +96,14 @@
 
   
   
-  <title>Jacobian Matrix - context</title>
+  <title>Inverse Kinematics - context</title>
   
 
   
   
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Jacobian Matrix">
-  <meta name="twitter:description" content="Derivation of linear velocity and the Jacobian matrix for a manipulator, covering both prismatic and revolute joints and their relation to angular velocity.">
+  <meta name="twitter:title" content="Inverse Kinematics">
+  <meta name="twitter:description" content="This post explores inverse kinematics (IK), contrasting it with forward kinematics, and delves into numerical methods like Differential Inverse Kinematics (DIK) using error functions, rotation vectors, and the Newton-Raphson iteration to solve for joint configurations.">
 
 
   
@@ -173,13 +173,13 @@
 <main id="main" class="post">
   
   <div class="post-heading">
-    <h1 class="post-title">Jacobian Matrix</h1>
+    <h1 class="post-title">Inverse Kinematics</h1>
     <div class="publish-metadata">
       
       <svg width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M3 9H21M7 3V5M17 3V5M6 13H8M6 17H8M11 13H13M11 17H13M16 13H18M16 17H18M6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      8 February 2026
+      22 March 2026
       
       
         &nbsp;
@@ -187,7 +187,7 @@
           <svg width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M15.4998 5.49994L18.3282 8.32837M3 20.9997L3.04745 20.6675C3.21536 19.4922 3.29932 18.9045 3.49029 18.3558C3.65975 17.8689 3.89124 17.4059 4.17906 16.9783C4.50341 16.4963 4.92319 16.0765 5.76274 15.237L17.4107 3.58896C18.1918 2.80791 19.4581 2.80791 20.2392 3.58896C21.0202 4.37001 21.0202 5.63634 20.2392 6.41739L8.37744 18.2791C7.61579 19.0408 7.23497 19.4216 6.8012 19.7244C6.41618 19.9932 6.00093 20.2159 5.56398 20.3879C5.07171 20.5817 4.54375 20.6882 3.48793 20.9012L3 20.9997Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          1466 words
+          1003 words
         </span>
       
       
@@ -200,7 +200,7 @@
           <svg width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 7V12L14.5 13.5M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          ~7 mins
+          ~5 mins
         </span>
       
     </div>
@@ -220,8 +220,9 @@
     </summary>
     <div class="toc numbered-subtitles"><nav id="TableOfContents">
   <ul>
-    <li><a href="#linear-velocity">Linear velocity</a></li>
-    <li><a href="#jacobian-matrix">Jacobian Matrix</a></li>
+    <li><a href="#error-function-in-ik">error function in IK</a></li>
+    <li><a href="#relative-error-of-rotation">relative error of rotation</a></li>
+    <li><a href="#newton-raphson-method-for-dik">Newton-Raphson method for DIK</a></li>
   </ul>
 </nav></div>
   </details>
@@ -229,183 +230,85 @@
   
   <article class="content numbered-subtitles">
     
-    <p>As shown in <a href="/posts/homogeneous_transformation">Homogeneous Transformation Matrices</a>, the spatial configuration of the end effector can be expressed as
+    <p>Forward kinematics is a problem that, given a set of joint configurations of a robot, infers the position and orientation of the end-effector. On the contrary, given the desired position and orientation of the end-effector to infer an acceptable joint configuration is another problem called the Inverse Kinematics (IK) problem. In this essay, a simple approach will be introduced based on the position and orientation error between the target pose and the initial pose.</p>
+<p>There are many approaches proposed for solving the IK problem over the decades, which can be split into two classical categories: analytical IK and numerical IK.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> Although analytical IK provides a closed-form expression that is really fast to compute without the initial joint configuration $\mathbf q_0$, it depends on the specific robot that has distinct kinematic structures and is often tedious or difficult to derive using sine and cosine, especially for robots with a high degree of freedom.</p>
+<h2 id="error-function-in-ik">error function in IK</h2>
+<p>Thus, numerical IK approaches are widely studied and used, which also have many particular methods. The main part of numerical IK is Differential Inverse Kinematics (DIK), sometimes called Closed-Loop Inverse Kinematics (CLIK). At first, DIK was proposed for solving the following equation,
 </p>
 $$
-T = \begin{bmatrix}R^n_0& \mathbf p^n_0\\ \mathbf 0& 1\end{bmatrix} = A^1_0A^2_1\cdots A^n_{n - 1}.
+\mathbf e(\mathbf q) = \mathbf 0
 $$<p>
-Hence, angular velocity can be obtained from the time derivative of $R^n_0$<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> (see <a href="/posts/angular_velocity">Angular Velocity</a>), giving
+where $\mathbf e(\cdot)$ is an error function that is defined as
 </p>
 $$
-\begin{aligned}
-\omega^n_0 &= \omega^1_0 + R^1_0\omega^2_1 + R^2_0\omega^3_2 + \cdots R^{n - 1}_0 \omega^n_{n-1}\\
-&= \mathbf k \frac{d \theta_1}{d t} + R^1_0 \mathbf k \frac{d\theta_2}{dt} + R^2_0\mathbf k \frac{d\theta_3}{d t} + \cdots R^{n - 1}_0 \mathbf k \frac{d\theta_n}{dt} \\
-&= \begin{bmatrix}\mathbf \rho_1k,& \rho_2R^1_0\mathbf k,& \rho_3R^2_0\mathbf k,& \cdots,& \rho_nR^{n - 1}_0\mathbf k \end{bmatrix}\dot{\mathbf q}
-\end{aligned}
-$$<p>
-where $\dot {\mathbf q} = \begin{bmatrix}\frac{d\theta_1}{dt},&amp; \frac{d\theta_2}{dt},&amp; \frac{d\theta_3}{dt},&amp; \cdots,&amp; \frac{d\theta_n}{dt}\end{bmatrix}^T$. $\rho_i = 1$ if the $i$th joint is revolute, otherwise $\rho_i = 0$.</p>
-<p>In the following, linear velocity is derived from the time derivative of $\mathbf p^n_0$<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, and the Jacobian matrix is constructed from the angular and linear velocities.</p>
-<h2 id="linear-velocity">Linear velocity</h2>
-<p>Using the chain rule, the end effector&rsquo;s linear velocity can be expressed as
-</p>
-$$
-\begin{aligned}
-\dot {\mathbf p}^n_0 &= \sum^n_{i = 1} \frac{\partial {\mathbf p}^n_0}{\partial q_i}\dot q_i \\
-&= \begin{bmatrix}\frac{\partial \mathbf p^n_0}{\partial q_1},& \frac{\partial \mathbf p^n_0}{\partial q_2},& \frac{\partial \mathbf p^n_0}{\partial q_3},& \cdots,&\frac{\partial \mathbf p^n_0}{\partial q_n}\end{bmatrix}\dot{\mathbf q}
-\end{aligned}
-$$<p>
-where $\dot {\mathbf q}$ depends on the joint types. We therefore start from the general expression
-</p>
-$$\mathbf p^n_0 = R^i_0\mathbf p^n_i + R^{i-1}_0 {\mathbf p}^i_{i-1} + {\mathbf p}^{i - 1}_0$$<p>
-with motion produced by prismatic or revolute joints, derived from
-</p>
-$$
-\begin{aligned}
-T &= A^{i - 1}_0A^{i}_{i - 1}A^n_{i} \\
-&= \begin{bmatrix}R^{i-1}_0& \mathbf p^{i - 1}_0 \\ \mathbf 0& 1\end{bmatrix} \begin{bmatrix}R^{i}_{i - 1}& \mathbf p^{i}_{i - 1} \\ \mathbf 0& 1\end{bmatrix} \begin{bmatrix}R^{n}_{i}& \mathbf p^{n}_{i} \\ \mathbf 0& 1\end{bmatrix} \\
-&= \begin{bmatrix}R^{i}_0& R^{i-1}_0\mathbf p^i_{i-1} + \mathbf p^{i - 1}_0 \\ \mathbf 0& 1\end{bmatrix}\begin{bmatrix}R^{n}_{i}& \mathbf p^{n}_{i} \\ \mathbf 0& 1\end{bmatrix}  \\
-&= \begin{bmatrix}R^n_0& R^i_0\mathbf p^n_i + R^{i-1}_0\mathbf p^i_{i-1} + \mathbf p^{i - 1}_0 \\ \mathbf 0& 1\end{bmatrix}.
-\end{aligned}
-$$<p>
-First, consider the $i$th joint to be prismatic. The rotation matrix and position vector of the $(i-1)$th frame are:
-</p>
-$$
-\begin{aligned}
-&R^i_{i - 1} = \begin{bmatrix}
-1& 0& 0\\ 0& 1& 0 \\ 0& 0& 1
-\end{bmatrix}, \\
-&
-\mathbf p^i_{i - 1} = \begin{bmatrix}a_i \\0\\ d_i\end{bmatrix}.
-\end{aligned}
-$$<blockquote>
-<p>HINT:</p>
-<p>According to the definition of homogeneous transformation matrix, $A^i_{i -1}$ is
-</p>
-$$ \begin{aligned} A^{i}_{i - 1}  &= Rot(z, 0)Trans(0, 0,d_i)Trans(a_i, 0, 0)Rot(x, 0) \\ &= \begin{bmatrix}1& 0& 0& 0\\ 0& 1& 0& 0 \\ 0& 0& 1& 0\\ 0& 0& 0& 1\end{bmatrix} \begin{bmatrix}1& 0& 0& 0 \\ 0& 1& 0& 0\\ 0& 0& 1& d_i\\ 0& 0& 0& 1\end{bmatrix} \begin{bmatrix}1& 0& 0& a_i \\ 0& 1& 0& 0\\ 0& 0& 1& 0\\ 0& 0& 0& 1\end{bmatrix} \begin{bmatrix}1& 0& 0& 0\\ 0& 1& 0& 0 \\ 0& 0& 1& 0\\ 0& 0& 0& 1\end{bmatrix} \\ &= \begin{bmatrix} 1& 0& 0& a_i \\0& 1& 0& 0 \\ 0& 0& 1& d_i \\ 0& 0& 0& 1 \end{bmatrix} = \begin{bmatrix}R^i_{i - 1}& \mathbf p^i_{i - 1} \\ \mathbf 0& 1\end{bmatrix}. \end{aligned} $$</blockquote>
-<p>Let $q_i = d_i$. The partial derivative of $\mathbf p^n_0$ can then be written as
-</p>
-$$
-\begin{aligned}
-\frac{\partial \mathbf p^n_0}{\partial q_i} &= \frac{\partial R^i_0\mathbf p^n_i}{\partial q_i} + \frac{\partial R^{i - 1}_0\mathbf p^i_{i - 1}}{\partial q_i} + \frac{\partial \mathbf p^{i - 1}_0}{\partial q_i} \\
-&= R^{i - 1}_0 \frac{\partial \mathbf p^i_{i - 1}}{\partial q_i} \\
-&= R^{i - 1}_0 \begin{bmatrix}0 \\ 0 \\ \dot q_i\end{bmatrix} \\
-&= R^{i - 1}_0 \mathbf k \dot q_i
-\end{aligned}
-$$<p>
-where the partial derivatives of $R^i_0\mathbf p^n_i$ and $\mathbf p^{i - 1}_0$ vanish because these quantities are constant and not affected by $q_i$.</p>
-<p>Next, consider the $i$th joint to be revolute, which yields
-</p>
-$$
-\begin{aligned}
-&R^i_{i - 1} = \begin{bmatrix}
-\cos\theta_i& -\sin\theta_i& 0\\ \sin\theta_i& \cos\theta_i& 0 \\ 0& 0& 1
-\end{bmatrix},
-\\
-&\mathbf p^i_{i - 1} = \begin{bmatrix}a_i \cos \theta_i \\ a_i \sin \theta_i \\ 0\end{bmatrix}.
-\end{aligned}
-$$<blockquote>
-<p>HINT:</p>
-<p>$A^i_{i - 1}$ is
-</p>
-$$ \begin{aligned} A^{i}_{i - 1}  &= Rot(z, \theta_i)Trans(0, 0, 0)Trans(a_i, 0, 0)Rot(x, 0) \\ &= \begin{bmatrix}\cos \theta_i& -\sin\theta_i& 0& 0\\ \sin \theta_i& \cos \theta_i& 0& 0 \\ 0& 0& 1& 0\\ 0& 0& 0& 1\end{bmatrix} \begin{bmatrix}1& 0& 0& 0 \\ 0& 1& 0& 0\\ 0& 0& 1& 0\\ 0& 0& 0& 1\end{bmatrix} \begin{bmatrix}1& 0& 0& a_i \\ 0& 1& 0& 0\\ 0& 0& 1& 0\\ 0& 0& 0& 1\end{bmatrix} \begin{bmatrix}1& 0& 0& 0\\ 0& 1& 0& 0 \\ 0& 0& 1& 0\\ 0& 0& 0& 1\end{bmatrix} \\ &= \begin{bmatrix} \cos\theta_i& -\sin\theta_i& 0& a_i\cos\theta_i \\ \sin\theta_i& \cos\theta_i& 0& a_i\sin\theta_i \\ 0& 0& 1& 0 \\ 0& 0& 0& 1 \end{bmatrix}. \end{aligned} $$</blockquote>
-<p>Thus, setting $q_i = \theta_i$ leads to:
-</p>
-$$
-\begin{aligned}
-\frac{\partial \mathbf p^n_0}{\partial q_i} &= \frac{\partial R^i_0\mathbf p^n_i}{\partial q_i} + \frac{\partial R^{i - 1}_0\mathbf p^i_{i - 1}}{\partial q_i} + \frac{\partial \mathbf p^{i - 1}_0}{\partial q_i} \\
-&= \frac{\partial R^i_0\mathbf p^n_i}{\partial q_i} + \frac{\partial R^{i - 1}_0\mathbf p^i_{i - 1}}{\partial q_i}.
-\end{aligned}
-$$<p>
-Using the definition of angular velocity for the $i$th link, the first term becomes
-</p>
-$$
-\frac{\partial R^i_0\mathbf p^n_i}{\partial q_i} = S(R^{i - 1}_0 \dot q_i \mathbf k)R^i_0 \mathbf p^n_i.
-$$<p>
-The second term is
-</p>
-$$
-\begin{aligned}
-\frac{\partial R^{i - 1}_0 \mathbf p^i_{i - 1}}{\partial q_i} &= R^{i - 1}_0 \frac{\partial }{\partial q_i}\begin{bmatrix}a_i\cos\theta_i \\ a_i\sin \theta_i \\ 0 \end{bmatrix}\\
-&= R^{i - 1}_0\begin{bmatrix}-a_i\sin\theta_i \\ a_i\cos \theta_i \\ 0 \end{bmatrix} \dot q_i \\
-&= R^{i - 1}_0 \dot q_i (\mathbf k \times \mathbf p^i_{i -1})\\
-&= R^{i - 1}_0 (\dot q_i \mathbf k \times \mathbf p^i_{i -1}) \\
-&= R^{i - 1}_0 S(\dot q_i \mathbf k)\mathbf p^i_{i - 1} \\
-&= S(R^{i - 1}_0\dot q_i \mathbf k)R^{i - 1}_0 \mathbf p^i_{i - 1}.
-\end{aligned}
-$$<blockquote>
-<p>HINTs:</p>
-<ol>
-<li>$[-a_i \sin \theta_i,\ a_i \cos\theta_i,\ 0]^T$ is the result of the cross product.</li>
-</ol>
-$$ \begin{aligned} \mathbf k \times \mathbf p^i_{i - 1} &= \begin{bmatrix}0 \\ 0\\ 1\end{bmatrix} \times \begin{bmatrix}a_i \cos \theta_i \\ a_i \sin \theta_i \\ 0\end{bmatrix} \\ &= \begin{bmatrix}0 * 0 - 1 * a_i\sin\theta_i \\ 1 * a_i \cos\theta_i - 0 * 0 \\ 0 * a_i \sin \theta_i - 0 * a_i \cos\theta_i \end{bmatrix} \\ &= \begin{bmatrix}-a_i \sin \theta_i \\ a_i \cos\theta_i \\ 0\end{bmatrix}. \end{aligned} $$<ol start="2">
-<li>
-<p>According to the property of skew symmetric matrix, $S(\mathbf a)\mathbf p = \mathbf a \times \mathbf p, \forall \mathbf p = [p_x, p_y, p_z]$ where $\times$ means the cross product, we have  $\dot q_i \mathbf k \times \mathbf p^i_{i - 1} = S(\dot q_i \mathbf k) \mathbf p^i_{i - 1}$.</p>
-</li>
-<li>
-<p>By using the property of skew symmetric matrix again, that is $RS(\mathbf a)R^T\mathbf b = S(R\mathbf a)\mathbf b$, we have
-</p>
-$$ \begin{aligned}R^{i - 1}_0 S(\dot q_i \mathbf k)\mathbf p^i_{i - 1} &= R^{i - 1}_0 S(\dot q_i \mathbf k) {R^{i - 1}_0}^TR^{i - 1}_0\mathbf p^i_{i - 1} \\ &= S(R^{i - 1}_0\dot q_i \mathbf k)R^{i - 1}_0 \mathbf p^i_{i - 1}. \end{aligned}$$</li>
-</ol></blockquote>
-<p>Combining the two terms gives
-</p>
-$$
-\begin{aligned}
-\frac{\partial \mathbf p^n_0}{\partial q_i} &= \frac{\partial R^i_0\mathbf p^n_i}{\partial q_i} + \frac{\partial R^{i - 1}_0\mathbf p^i_{i - 1}}{\partial q_i} \\
-&= S(R^{i - 1}_0 \dot q_i \mathbf k) R^i_0 \mathbf p^n_i + S(R^{i - 1}_0\dot q_i \mathbf k)R^{i - 1}_0 \mathbf p^i_{i - 1} \\
-&= S(R^{i - 1}_0\dot q_i \mathbf k) (R^i_0 \mathbf p^n_i + R^{i - 1}_0 \mathbf p^i_{i - 1}) \\
-&= \dot q_i R^{i - 1}_0 \mathbf k \times (\mathbf p^n_0 - \mathbf p^{i - 1}_0)
-\end{aligned}
-$$<p>
-based on the skew-symmetric property $S(\mathbf a)\mathbf p = \mathbf a \times \mathbf p$.</p>
-<p>In summary, the linear velocity is given by
-</p>
-$$
-\begin{aligned}
-\dot {\mathbf p}^n_0 &= \begin{bmatrix}\frac{\partial \mathbf p^n_0}{\partial q_1},& \frac{\partial \mathbf p^n_0}{\partial q_2},& \frac{\partial \mathbf p^n_0}{\partial q_3},& \cdots,&\frac{\partial \mathbf p^n_0}{\partial q_n}\end{bmatrix}\dot{\mathbf q}, \\
-\frac{\partial \mathbf p^n_0}{\partial q_i}&= \begin{cases}
-R^{i - 1}_0\mathbf k \times (\mathbf p^n_0 - \mathbf p^{i - 1}_0)& \text{revolute joint,} \\
-R^{i - 1}_0\mathbf k& \text{prismatic}.
+\mathbf e(\mathbf q) = \begin{cases}^d\mathbf p - \mathbf p(\mathbf q),&\text{for position}, \\
+a(^dRR^T(\mathbf q)),& \text{for orientation}.
 \end{cases}
-\end{aligned}
-$$<h2 id="jacobian-matrix">Jacobian Matrix</h2>
-<p>The Jacobian matrix maps joint velocities to the end effector&rsquo;s velocities and is denoted by $J$. From the angular and linear velocity expressions, the relationship between the two spaces becomes
+$$<p>
+The desired position and the position are represented as $^d\mathbf p$ and $\mathbf p(\mathbf q)$, respectively. In addition, $R(\mathbf q)$ and $^dR$ are the orientation and its desired value of the link of interest. The result of $^dRR^T(\mathbf q)$ means transforming the pose rotated by $R$ into the desired pose.</p>
+<blockquote>
+<p>HINT:</p>
+<p>The current pose is $\mathbf o = R \mathbf p_{base}$ after rotation in the base frame, while the target pose is $^dR \mathbf p_{base}$. Thus, the target pose can be expressed as $^dR R^{-1} \mathbf o = ^dR R^T \mathbf o$ where $^dR R^T$ is also a rotation matrix transforming from $\mathbf o$ to the target pose.</p></blockquote>
+<h2 id="relative-error-of-rotation">relative error of rotation</h2>
+<p>In order to calculate the error $\mathbf e(\mathbf q)$, the position error can be directly calculated, while calculating the orientation error $^dR R^T(\mathbf q)$ depends on the $a(\cdot)$ that maps the rotation matrix to a rotation vector. As shown in <a href="/posts/angular_velocity">angular velocity</a>, rotation vector $\phi$ is presented as a product of  an axis $\mathbf u$ and its magnitude $\theta$ (radians per unit time).</p>
+<p>The rotation axis is expressed as a vector $\mathbf u$ that is expressed using these elements of the rotation matrix
+</p>
+$$
+\begin{aligned}\Delta R =\ ^dRR^T(\mathbf q) &= \begin{bmatrix}r_{11}& r_{12}& r_{13} \\ r_{21}& r_{22}& r_{23} \\ r_{31}& r_{32}& r_{33}\end{bmatrix} \\ \mathbf u &= \begin{bmatrix}r_{32} - r_{23} \\ r_{13} - r_{31} \\ r_{21} - r_{12}\end{bmatrix}\end{aligned}$$<blockquote>
+<p>HINT<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>:</p>
+<p>Since the vector $\mathbf u$ after rotation is itself, there is $\Delta R \mathbf u = \mathbf u = I\mathbf u$ that implies $(\Delta R - I)\mathbf u = 0$. Then, we have
+</p>
+$$\begin{aligned}\Delta R^T(\Delta R - I)\mathbf u + (\Delta R - I)\mathbf u &= (\Delta R^T \Delta R - \Delta R^T)\mathbf u + (\Delta R - I)\mathbf u \\&= (I - \Delta R^T) \mathbf u + (\Delta R - I)\mathbf u \\&= (\Delta R - \Delta R^T)\mathbf u \\& = 0\end{aligned}$$<p>
+In addition, a cross product of a vector with itself is equal to $0$, that is $\mathbf u \times \mathbf u = 0$, while the cross product can becomes the product for a vector $\mathbf u$ and its skew-symmetric matrix $S(\mathbf u)$ as shown in angular velocity. So we have
+</p>
+$$(\Delta R - \Delta R^T)\mathbf u = S(\mathbf u)\mathbf u = \mathbf u \times \mathbf u = 0$$<p>
+and $\mathbf u$ is derived from $S(\mathbf u)$ that is $\mathbf u = [r_{32} - r_{23}, r_{13} - r_{31}, r_{21} - r_{12}]^T$.</p></blockquote>
+<p>While there are some special cases when $\Delta R$ is a diagonal matrix. Thus, for example, the rotation vector is calculated in a published paper<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>, that is
+</p>
+$$
+a(\Delta R) = \begin{cases}
+\frac{\pi}{2} \begin{bmatrix}r_{11} + 1 \\ r_{22} + 1 \\ r_{33} + 1 \end{bmatrix},& (r_{11}, r_{22}, r_{33}) = (1, -1, -1) \text{ or }(-1, 1, -1)\text{ or }(-1, -1, 1) \\
+\mathbf 0,& (r_{11}, r_{22}, r_{33}) = (1, 1, 1) \\
+\frac{atan2(\|\mathbf u\|, r_{11} + r_{22} + r_{33} - 1)}{\|\mathbf u\|} \mathbf u,& \text{otherwise}
+\end{cases}
+$$<p>But, we should also notice that the position and orientation are commonly expressed using quaternions in computer programming, so the definition of $a(\cdot)$ may be different, like <a href="https://math.stackexchange.com/questions/3572459/how-to-compute-the-orientation-error-between-two-3d-coordinate-frames">this</a>. Also, using some predefined tools is an alternative way to calculate the rotation vector, like <code>Rotation</code> in <code>scipy.spatial.transform</code>.</p>
+<h2 id="newton-raphson-method-for-dik">Newton-Raphson method for DIK</h2>
+<p>After defining $\mathbf e(\mathbf q)$, solving the equation $\mathbf e(\mathbf q) = 0$ is viewed as a root finding problem. Thus, <a href="https://personal.math.ubc.ca/~anstee/math104/104newtonmethod.pdf">Newton-Raphson method</a> can be used. As the initial joint configuration is known, the error function can be expressed as
 </p>
 $$
 \begin{aligned}
-\begin{bmatrix}
-\mathbf v^n_0 \\
-\mathbf \omega^n_0
-\end{bmatrix} &= 
-\begin{bmatrix}
-J_{\mathbf v} \\
-J_{\mathbf \omega}
-\end{bmatrix} \dot {\mathbf q}, \\
-J_{\mathbf v} &= \begin{bmatrix}\frac{\partial \mathbf p^n_0}{\partial q_1},& \frac{\partial \mathbf p^n_0}{\partial q_2},& \frac{\partial \mathbf p^n_0}{\partial q_3},& \cdots,&\frac{\partial \mathbf p^n_0}{\partial q_n}\end{bmatrix}, \\
-J_{\omega} &= \begin{bmatrix}\rho_1\mathbf k,& \rho_2R^1_0\mathbf k,& \rho_3R^2_0\mathbf k,& \cdots,& \rho_nR^{n - 1}_0\mathbf k \end{bmatrix}.
+\mathbf 0 &= \mathbf e(\mathbf q) \\
+&= \mathbf e(\mathbf q_0 + \Delta \mathbf q)\\
+&\approx  \mathbf e(\mathbf q_0) +\nabla \mathbf e(\mathbf q_0)\Delta \mathbf q
 \end{aligned}
 $$<p>
-For a revolute $i$th joint,
-</p>
+by using the Taylor series expansion. The first derivative $\nabla \mathbf e(\mathbf q_0)$ is the Jacobian matrix $J(\mathbf q_0)$ with respect to the joint configuration<sup id="fnref1:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>. So we have the $\Delta q = J^{-1}(\mathbf q_0)\mathbf e(\mathbf q_0)$ and the solution of $\mathbf q$ is</p>
 $$
 \begin{aligned}
-J_{\mathbf v_i} &= R^{i - 1}_0\mathbf k \times (\mathbf p^n_0 - \mathbf p^{i - 1}_0), \\
-J_{\omega_i} &= R^{i - 1}_0\mathbf k.
+\mathbf q &\approx \mathbf q_0 + \Delta \mathbf q \\
+&= \mathbf q_0 + J^{-1}(\mathbf q_0)\mathbf e(\mathbf q_0)
 \end{aligned}
 $$<p>
-For a prismatic $i$th joint,
-</p>
-$$
-\begin{aligned}
-J_{\mathbf v_i} &= R^{i - 1}_0\mathbf k, \\
-J_{\omega_i} &= 0.
-\end{aligned}
-$$<p>
-In principle, given a desired change in end‑effector position and orientation one could compute a corresponding change in joint configuration by inverting $J$, i.e. $J^{-1}[\Delta \mathbf v^n_0, \Delta \omega^n_0]^T$. However, in practice this inversion is often difficult for various reasons.</p>
+Actually, we widely use the Newton-Raphson iteration $\mathbf q_{k + 1} = \mathbf q_k + J^{-1}(\mathbf q_k)\mathbf e(\mathbf q_k)$ to find the desired joint configuration until $\mathbf e(q_{k + 1}) \le \epsilon$ where $\epsilon$ is a small positive constant.</p>
+<p>Obviously, there are some drawbacks, for example,</p>
+<ol>
+<li>The Jacobian matrix is not always nonsingular.</li>
+<li>The error $\mathbf e(\mathbf q)$ is not always equal to $\mathbf 0$, because the robot cannot reach the target pose.</li>
+</ol>
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn:1">
-<p><a href="https://thydzik.com/academic/robotics-315/chap5.pdf">https://thydzik.com/academic/robotics-315/chap5.pdf</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p><a href="https://www.rosroboticslearning.com/inverse-kinematics">Inverse kinematics</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://motion.cs.illinois.edu/RoboticSystems/InverseKinematics.html">Different approaches for solving inverse kinematics</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://en.wikipedia.org/wiki/Rotation_matrix#Determining_the_angle">Rotation Matrix determining the angle</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>Solvability-Unconcerned Inverse Kinematics by the Levenberg–Marquardt Method. Tomomichi Sugihara.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
@@ -428,7 +331,7 @@ In principle, given a desired change in end‑effector position and orientation 
     
 
     
-      <div class="graph-square" data-current-page="/posts/jacobian_matrix/" data-url="/search.json">
+      <div class="graph-square" data-current-page="/posts/ik/" data-url="/search.json">
     <canvas id="graph-canvas"></canvas>
 </div>
 
@@ -442,7 +345,7 @@ In principle, given a desired change in end‑effector position and orientation 
 <div id="sharingbuttons">
     
     
-    <a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fherding.github.io%2fposts%2fjacobian_matrix%2f" target="_blank" rel="noopener" aria-label="">
+    <a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fherding.github.io%2fposts%2fik%2f" target="_blank" rel="noopener" aria-label="">
       <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z"/></svg>
         </div>
@@ -452,7 +355,7 @@ In principle, given a desired change in end‑effector position and orientation 
 
     
     
-    <a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=Jacobian%20Matrix&amp;url=https%3a%2f%2fherding.github.io%2fposts%2fjacobian_matrix%2f" target="_blank" rel="noopener" aria-label="">
+    <a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=Inverse%20Kinematics&amp;url=https%3a%2f%2fherding.github.io%2fposts%2fik%2f" target="_blank" rel="noopener" aria-label="">
       <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
         <svg t="1762686222605" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5506" width="256" height="256"><path d="M683.776 213.333333h91.605333l-200.106666 230.016L810.666667 756.352h-184.32l-144.384-189.824-165.205334 189.866667H225.152l214.016-246.058667L213.333333 213.333333h189.013334l130.474666 173.525334L683.776 213.333333z m-32.170667 487.893334h50.773334L374.784 265.6H320.298667l331.306666 435.626667z" p-id="5507" fill="black"></path></svg>
         
@@ -463,7 +366,7 @@ In principle, given a desired change in end‑effector position and orientation 
 
     
     
-    <a class="resp-sharing-button__link" href="mailto:?subject=Jacobian%20Matrix&amp;body=https%3a%2f%2fherding.github.io%2fposts%2fjacobian_matrix%2f" target="_self" rel="noopener" aria-label="">
+    <a class="resp-sharing-button__link" href="mailto:?subject=Inverse%20Kinematics&amp;body=https%3a%2f%2fherding.github.io%2fposts%2fik%2f" target="_self" rel="noopener" aria-label="">
       <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 4H2C.9 4 0 4.9 0 6v12c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM7.25 14.43l-3.5 2c-.08.05-.17.07-.25.07-.17 0-.34-.1-.43-.25-.14-.24-.06-.55.18-.68l3.5-2c.24-.14.55-.06.68.18.14.24.06.55-.18.68zm4.75.07c-.1 0-.2-.03-.27-.08l-8.5-5.5c-.23-.15-.3-.46-.15-.7.15-.22.46-.3.7-.14L12 13.4l8.23-5.32c.23-.15.54-.08.7.15.14.23.07.54-.16.7l-8.5 5.5c-.08.04-.17.07-.27.07zm8.93 1.75c-.1.16-.26.25-.43.25-.08 0-.17-.02-.25-.07l-3.5-2c-.24-.13-.32-.44-.18-.68s.44-.32.68-.18l3.5 2c.24.13.32.44.18.68z"/></svg>
         </div>
@@ -473,7 +376,7 @@ In principle, given a desired change in end‑effector position and orientation 
 
     
     
-    <a class="resp-sharing-button__link" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2fherding.github.io%2fposts%2fjacobian_matrix%2f" target="_blank" rel="noopener" aria-label="">
+    <a class="resp-sharing-button__link" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2fherding.github.io%2fposts%2fik%2f" target="_blank" rel="noopener" aria-label="">
       <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.5 21.5h-5v-13h5v13zM4 6.5C2.5 6.5 1.5 5.3 1.5 4s1-2.4 2.5-2.4c1.6 0 2.5 1 2.6 2.5 0 1.4-1 2.5-2.6 2.5zm11.5 6c-1 0-2 1-2 2v7h-5v-13h5V10s1.6-1.5 4-1.5c3 0 5 2.2 5 6.3v6.7h-5v-7c0-1-1-2-2-2z"/></svg>
         </div>
@@ -483,7 +386,7 @@ In principle, given a desired change in end‑effector position and orientation 
 
     
     
-    <a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=https%3a%2f%2fherding.github.io%2fposts%2fjacobian_matrix%2f&amp;resubmit=true&amp;title=Jacobian%20Matrix" target="_blank" rel="noopener" aria-label="">
+    <a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=https%3a%2f%2fherding.github.io%2fposts%2fik%2f&amp;resubmit=true&amp;title=Inverse%20Kinematics" target="_blank" rel="noopener" aria-label="">
       <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 11.5c0-1.65-1.35-3-3-3-.96 0-1.86.48-2.42 1.24-1.64-1-3.75-1.64-6.07-1.72.08-1.1.4-3.05 1.52-3.7.72-.4 1.73-.24 3 .5C17.2 6.3 18.46 7.5 20 7.5c1.65 0 3-1.35 3-3s-1.35-3-3-3c-1.38 0-2.54.94-2.88 2.22-1.43-.72-2.64-.8-3.6-.25-1.64.94-1.95 3.47-2 4.55-2.33.08-4.45.7-6.1 1.72C4.86 8.98 3.96 8.5 3 8.5c-1.65 0-3 1.35-3 3 0 1.32.84 2.44 2.05 2.84-.03.22-.05.44-.05.66 0 3.86 4.5 7 10 7s10-3.14 10-7c0-.22-.02-.44-.05-.66 1.2-.4 2.05-1.54 2.05-2.84zM2.3 13.37C1.5 13.07 1 12.35 1 11.5c0-1.1.9-2 2-2 .64 0 1.22.32 1.6.82-1.1.85-1.92 1.9-2.3 3.05zm3.7.13c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9.8 4.8c-1.08.63-2.42.96-3.8.96-1.4 0-2.74-.34-3.8-.95-.24-.13-.32-.44-.2-.68.15-.24.46-.32.7-.18 1.83 1.06 4.76 1.06 6.6 0 .23-.13.53-.05.67.2.14.23.06.54-.18.67zm.2-2.8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm5.7-2.13c-.38-1.16-1.2-2.2-2.3-3.05.38-.5.97-.82 1.6-.82 1.1 0 2 .9 2 2 0 .84-.53 1.57-1.3 1.87z"/></svg>
         </div>
@@ -504,10 +407,10 @@ In principle, given a desired change in end‑effector position and orientation 
 
   <div class="paginator">
     
-    <a class="link" href="https://herding.github.io/posts/angular_velocity/" title="Angular Velocity">← prev</a>
+    <a class="link" href="https://herding.github.io/posts/jacobian_matrix/" title="Jacobian Matrix">← prev</a>
     
     
-    <a class="link" href="https://herding.github.io/posts/ik/" title="Inverse Kinematics">next →</a>
+    <a></a>
     
   </div>
   <div class="comment">
