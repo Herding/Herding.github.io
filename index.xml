@@ -1,11 +1,72 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>context</title>
+    <title>FloCal</title>
     <link>https://herding.github.io/</link>
-    <description>Recent content on context</description>
+    <description>Recent content on FloCal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language><atom:link href="https://herding.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Euler Angles</title>
+      <link>https://herding.github.io/posts/euler_angle/</link>
+      <pubDate>Sun, 19 Apr 2026 20:46:22 +0800</pubDate>
+      
+      <guid>https://herding.github.io/posts/euler_angle/</guid>
+      <description>&lt;p&gt;Rotation is used for describing the pose in a base frame and is expressed as a rotation matrix that has been introduced in previous articles. Actually, there are several ways to numerically express the rotation, except for the rotation matrix, including Euler angles, axis-angle, and unit quaternions. Of course, one representation can be directly or indirectly transformed into another representation. Next, this article will introduce Euler angles and their relationship to the rotation matrix.&lt;/p&gt;
+&lt;h2 id=&#34;rotation-matrix&#34;&gt;Rotation matrix&lt;/h2&gt;
+&lt;p&gt;Rotation matrix was introduced previously, which is constructed by parameters derived from &lt;a href=&#34;https://herding.github.io/posts/dh_convention/&#34;&gt;Denavit Hartenberg Convention&lt;/a&gt;. Consequently, a rotation can be expressed as a sequence of three elementary rotations, $Rot(x, \alpha), Rot(y, \beta)$ and $Rot(z, \gamma)$. Thus, intuitively, the minimal representation of rotations is only three independent parameters, rather than 9 parameters in the rotation matrix. According to the property of rotation, $RR^T=I$, three independent parameters is enough to represent a rotation, such as Euler angles&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;euler-angles&#34;&gt;Euler angles&lt;/h2&gt;
+&lt;p&gt;There are many ways to represent rotations resulting in a rotation matrix, such as ZYX Euler angles (intrinsic rotation), XYZ Euler angles (extrinsic rotation), and so on&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;. ZYX Euler angles are also known as Tait-Bryan angles (or yaw-pitch-roll) and are used for flying vehicles, while XYZ Euler angles are often used for robotics, also called Cardan angles. They have a similar construction, so XYZ Euler angles are taken as an example here and are collected as
+&lt;/p&gt;
+$$
+[\alpha, \beta, \gamma]^T
+$$&lt;p&gt;
+where $\alpha, \beta$ and $\gamma$ rotate around $x, y$ and $z$ axes, respectively.&lt;/p&gt;
+&lt;h3 id=&#34;euler-angles-to-rotation-matrix&#34;&gt;Euler angles to rotation matrix&lt;/h3&gt;
+&lt;p&gt;From the Euler angles, the rotation can be naturally expressed as
+&lt;/p&gt;
+$$
+\begin{aligned}
+R &amp;= Rot(x, \alpha)Rot(y, \beta)Rot(z, \gamma) \\
+&amp;= \begin{bmatrix}\cos\beta\cos\gamma&amp; -\cos\beta\sin\gamma&amp; \sin\beta \\
+\cos\alpha\sin\gamma + \cos\gamma\sin\alpha\sin\beta&amp; \cos\alpha\cos\gamma-\sin\alpha\sin\beta\sin\gamma&amp; -\cos\beta\sin\alpha \\
+\sin\alpha\sin\gamma - \cos\alpha\cos\gamma\sin\beta&amp; \cos\gamma\sin\alpha+\cos\alpha\sin\beta\sin\gamma&amp; \cos\alpha\cos\beta
+\end{bmatrix}
+\end{aligned}
+$$&lt;h3 id=&#34;rotation-matrix-to-euler-angles&#34;&gt;Rotation matrix to Euler angles&lt;/h3&gt;
+&lt;p&gt;Thus, assuming $\beta \in (-\pi/2, \pi / 2)$ and $\cos\alpha \neq 0$, then $\tan\alpha = -R_{23} / R_{33}$ according to the definition of $\tan\alpha = \sin\alpha / \cos\alpha$, where $R_{ij}$ is the element at $i$th row and $j$th column of rotation matrix $R$.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Hint:
+&lt;/p&gt;
+$$\frac{-R_{23}}{R_{33}} = \frac{-(-\cos\beta\sin\alpha)}{\cos\alpha\cos\beta} = \frac{\sin\alpha}{\cos\alpha} = \tan\alpha$$&lt;p&gt; when $\cos \alpha \neq 0$ and $\cos \beta \in (0, 1]$ because of $\beta \in (-\pi / 2, \pi/2)$.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;In order to accurately infer the angle $\alpha$, the function $atan2(\sin \alpha, \cos\alpha)$ is a good choice, which returns the angle between $-\pi$ and $\pi$ based on $\sin\alpha$, $\cos \alpha$ and their signs ($+$ or $-$). So, $\alpha$ is derived as $atan2(-R_{23}, R_{33})$.
+Similarly, $\tan\beta = R_{13} / \sqrt{R^2_{11} + R^2_{12}}$ and $\tan \gamma = -R_{12} / R_{11}$ ($R_{11} \neq 0$). In the end, the inverse solution from a rotation matrix to Euler angles is
+&lt;/p&gt;
+$$
+\begin{bmatrix}
+\alpha \\
+\beta \\
+\gamma \\
+\end{bmatrix} = \begin{bmatrix}
+atan2(-R_{23}, R_{33}) \\
+atan2(R_{13}, \sqrt{R^2_{11} + R^2_{12}}) \\
+atan2(-R_{12}, R_{11})
+\end{bmatrix}.
+$$&lt;p&gt;We have to notice that the above result is derived from an assumption that $\cos \beta &amp;gt; 0$. The above transformation from rotation matrix to Euler angles cannot deal with $\beta$ belonging to $[-\pi, -\pi/2]$ or $[\pi/2, \pi]$. Especially, $\beta = \pm \pi /2$ causes the other axes to overlap, which is called Gimbal lock.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;2.4.5 Representation of Rotations. Robot Dynamics Lecture Notes.&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Euler_angles&#34;&gt;Euler angles&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
     <item>
       <title>Inverse Kinematics</title>
       <link>https://herding.github.io/posts/ik/</link>
@@ -581,57 +642,6 @@ $$</description>
 $$
 A_{i-1}^i = Rot(z, \theta_i)Trans(0, 0, d_i)Trans(a_i, 0, 0)Rot(x, \alpha_i)
 $$&lt;p&gt;where $Rot(z, \theta)$ and $Rot(x, \alpha_i)$ are rotation matrices, and $Trans(0, 0, d_i)$ and $Trans(a_i, 0, 0)$ are translation matrices. The construction and meaning of these two matrices will be detailed in the article on Homogenous Transformation Matrix.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Managing Information Sources</title>
-      <link>https://herding.github.io/posts/managing_information_sources/</link>
-      <pubDate>Sun, 14 Dec 2025 19:56:56 +0800</pubDate>
-      
-      <guid>https://herding.github.io/posts/managing_information_sources/</guid>
-      <description>&lt;p&gt;This workflow helps you manage the flood of information you encounter when working on research projects.&lt;/p&gt;
-&lt;p&gt;First, recognize the different types and channels of information: videos, papers, books, social-media posts, web pages, recommendations from colleagues, and content from streaming platforms. Much of this arrives passively through subscriptions or RSS feeds, while other material is found actively via search engines or AI tools. The key is to select information based on your purpose instead of trying to consume everything that appears.&lt;/p&gt;
-&lt;p&gt;Second, consolidate relevant items in one place so they can support your projects and thinking. Web pages can be clipped, while papers and books are better stored as local files. I use Obsidian Web Clipper for web pages and Zotero for local files and references. Plugins can import metadata from local files into the same repository that holds clipped web pages. This consolidated library helps you focus on the most relevant material.&lt;/p&gt;
-&lt;p&gt;Finally, review the items you selected. I link each item to a project note and tag its review status (e.g., unread, reading, reviewed). This makes it easy to track progress and to see how much remains to be read. The figure below shows the review state for a particular project:
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure class=&#34;site-figure center&#34;&gt;
-  
-    
-    
-      
-      
-      
-      
-      
-        
-        
-      
-        
-        
-      
-      
-      
-      
-      
-      
-      &lt;img src=&#34;https://herding.github.io/posts/managing_information_sources/List_of_info_hu_74f06c1512d4546a.png&#34; srcset=&#34;https://herding.github.io/posts/managing_information_sources/List_of_info_hu_49af3f8e2c783c9c.png 450w, https://herding.github.io/posts/managing_information_sources/List_of_info_hu_74f06c1512d4546a.png 900w&#34; sizes=&#34;(max-width: 450px) 100vw, 450px&#34; alt=&#34;&#34; ZgotmplZ&gt;
-    
-  
-    &lt;figcaption&gt;The list of information&lt;/figcaption&gt;
-&lt;/figure&gt;
-&lt;/p&gt;
-&lt;p&gt;In conclusion, stay selective when you are surrounded by countless information: choose relevant web pages, messages, papers, books, and videos; consolidate them in one place; and set aside time to review them systematically.&lt;/p&gt;
 </description>
     </item>
     

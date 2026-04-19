@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on context</title>
+    <title>Categories on FloCal</title>
     <link>https://herding.github.io/categories/</link>
-    <description>Recent content in Categories on context</description>
+    <description>Recent content in Categories on FloCal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 22 Mar 2026 19:35:32 +0800</lastBuildDate><atom:link href="https://herding.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Apr 2026 20:46:22 +0800</lastBuildDate><atom:link href="https://herding.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
